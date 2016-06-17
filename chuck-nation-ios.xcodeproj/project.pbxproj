@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DB2D71D1D13EE36005E2A03 /* ChuckNation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2D71C1D13EE36005E2A03 /* ChuckNation.m */; };
+		4DB2D7231D13EEA1005E2A03 /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2D7221D13EEA1005E2A03 /* Patch.m */; };
 		ADE4565E1D13704A00F046DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE4565D1D13704A00F046DD /* main.m */; };
 		ADE456611D13704A00F046DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456601D13704A00F046DD /* AppDelegate.m */; };
 		ADE456641D13704A00F046DD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456631D13704A00F046DD /* ViewController.m */; };
@@ -22,6 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4DB2D71C1D13EE36005E2A03 /* ChuckNation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChuckNation.m; path = "chuck-nation/ChuckNation.m"; sourceTree = "<group>"; };
+		4DB2D71E1D13EE55005E2A03 /* ChuckNation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChuckNation.h; path = "chuck-nation/ChuckNation.h"; sourceTree = "<group>"; };
+		4DB2D71F1D13EE79005E2A03 /* Patch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Patch.h; path = "chuck-nation/Patch.h"; sourceTree = "<group>"; };
+		4DB2D7221D13EEA1005E2A03 /* Patch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Patch.m; path = "chuck-nation/Patch.m"; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* chuck-nation-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chuck-nation-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE4565D1D13704A00F046DD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ADE4565F1D13704A00F046DD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +64,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DB2D71B1D13EE04005E2A03 /* chuck-nation */ = {
+			isa = PBXGroup;
+			children = (
+				4DB2D71E1D13EE55005E2A03 /* ChuckNation.h */,
+				4DB2D71C1D13EE36005E2A03 /* ChuckNation.m */,
+				4DB2D71F1D13EE79005E2A03 /* Patch.h */,
+				4DB2D7221D13EEA1005E2A03 /* Patch.m */,
+			);
+			name = "chuck-nation";
+			sourceTree = "<group>";
+		};
 		ADE456501D13704A00F046DD = {
 			isa = PBXGroup;
 			children = (
@@ -78,14 +95,15 @@
 			isa = PBXGroup;
 			children = (
 				ADE456771D1376D100F046DD /* AFNetworking */,
+				4DB2D71B1D13EE04005E2A03 /* chuck-nation */,
 				ADE4565F1D13704A00F046DD /* AppDelegate.h */,
-				ADE456621D13704A00F046DD /* ViewController.h */,
 				ADE456601D13704A00F046DD /* AppDelegate.m */,
-				ADE456631D13704A00F046DD /* ViewController.m */,
 				ADE4566D1D13704A00F046DD /* Info.plist */,
-				ADE456681D13704A00F046DD /* Assets.xcassets */,
 				ADE4566A1D13704A00F046DD /* LaunchScreen.storyboard */,
 				ADE456651D13704A00F046DD /* Main.storyboard */,
+				ADE456621D13704A00F046DD /* ViewController.h */,
+				ADE456631D13704A00F046DD /* ViewController.m */,
+				ADE456681D13704A00F046DD /* Assets.xcassets */,
 				ADE4565C1D13704A00F046DD /* Supporting Files */,
 			);
 			path = "chuck-nation-ios";
@@ -197,6 +215,8 @@
 				ADE456881D1376D100F046DD /* AFURLRequestSerialization.m in Sources */,
 				ADE456891D1376D100F046DD /* AFURLResponseSerialization.m in Sources */,
 				ADE456851D1376D100F046DD /* AFHTTPSessionManager.m in Sources */,
+				4DB2D7231D13EEA1005E2A03 /* Patch.m in Sources */,
+				4DB2D71D1D13EE36005E2A03 /* ChuckNation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +367,7 @@
 				ADE456721D13704A00F046DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
