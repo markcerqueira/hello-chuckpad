@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AFNetworking.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view, typically from a nib.
+    
+    NSURL *url = [[NSURL alloc] initWithString:@"https://chuck-sinatra.herokuapp.com/patch/json/documentation"];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
