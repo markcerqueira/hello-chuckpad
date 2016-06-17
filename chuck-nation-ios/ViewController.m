@@ -20,8 +20,9 @@ NSMutableArray *patchArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+        
     // Do any additional setup after loading the view, typically from a nib.
+    self.patchTableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
 
     // NSURL *url = [[NSURL alloc] initWithString:@"https://chuck-nation.herokuapp.com/patch/json/documentation"];
     NSURL *url = [[NSURL alloc] initWithString:@"https://chuck-nation.herokuapp.com/patch/json/all"];

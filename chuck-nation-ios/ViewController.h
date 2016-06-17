@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 
-@property (weak, nonatomic) IBOutlet UITableView *contentView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *patchTableView;
 
 @end
