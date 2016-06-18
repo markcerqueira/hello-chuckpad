@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "Patch.h"
 
-@implementation Patch : NSObject {
+@implementation Patch {
 
-@private
-    NSInteger *_patchId;
-    BOOL *_isFeatured;
-    BOOL *_isDocumentation;
+    @private
+    NSInteger _patchId;
+    BOOL _isFeatured;
+    BOOL _isDocumentation;
     NSString *_contentType;
     NSString *_resourceUrl;
     NSString *_filename;
@@ -43,7 +43,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat: @"patchId = %d; name = %@; isDocumentation = %d", self.patchId, self.name, self.isDocumentation];
+    return [NSString stringWithFormat:@"patchId = %ld; name = %@; documentation = %d, featured = %d", (long)self.patchId, self.name, self.isDocumentation, self.isFeatured];
 }
 
 

@@ -15,5 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *patchTableView;
 
+- (IBAction)documentationPressed:(id)sender;
+- (IBAction)featuredPressed:(id)sender;
+- (IBAction)allPressed:(id)sender;
+
 @end
 

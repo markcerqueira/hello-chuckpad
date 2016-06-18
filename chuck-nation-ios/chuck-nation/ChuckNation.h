@@ -9,5 +9,20 @@
 #ifndef ChuckNation_h
 #define ChuckNation_h
 
+#import <objc/NSObject.h>
+
+typedef void(^GetPatchesCallback)(NSArray *patchesArray, NSError *error);
+
+@interface ChuckNation : NSObject
+
++ (ChuckNation *)sharedInstance;
+
+- (void)getDocumentationPatches:(GetPatchesCallback)callback;
+
+- (void)getAllPatches:(GetPatchesCallback)callback;
+
+- (void)getFeaturedPatches:(GetPatchesCallback)callback;
+
+@end
 
 #endif /* ChuckNation_h */

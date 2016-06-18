@@ -12,13 +12,12 @@
 @interface Patch : NSObject
 
 @property(nonatomic, retain) NSString *name;
-@property(nonatomic, assign) NSInteger *patchId;
-@property(nonatomic, assign) BOOL *isFeatured;
-@property(nonatomic, assign) BOOL *isDocumentation;
+@property(nonatomic, assign) NSInteger patchId;
+@property(nonatomic, assign) BOOL isFeatured;
+@property(nonatomic, assign) BOOL isDocumentation;
 @property(nonatomic, retain) NSString *filename;
 @property(nonatomic, retain) NSString *contentType;
 @property(nonatomic, retain) NSString *resourceUrl;
-
 
 - (Patch *)initWithDictionary:(NSDictionary *)dictionary;
 
