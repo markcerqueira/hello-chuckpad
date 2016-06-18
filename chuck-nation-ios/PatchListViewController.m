@@ -103,4 +103,34 @@
     }];
 }
 
+- (IBAction)uploadOneDemo:(id)sender {
+    NSString *filename = @"demo0.ck";
+    
+    NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename];
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    
+    [[ChuckNation sharedInstance] uploadPatchWithPatchName:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
+}
+
+- (IBAction)uploadAllDemos:(id)sender {
+    NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
+    NSError *error;
+    NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:chuckSamplesPath error:&error];
+    
+    for (NSString *filename in directoryContents) {
+        // Skip files that do not end in .ck
+        if (![filename hasSuffix:@".ck"]) {
+            continue;
+        }
+        
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename];
+        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+        
+        NSLog(@"Filename = %@; data length = %lu", filename, [fileData length]);
+        
+        [[ChuckNation sharedInstance] uploadPatchWithPatchName:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
+    }
+}
+
 @end

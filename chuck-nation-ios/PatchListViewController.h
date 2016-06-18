@@ -18,6 +18,8 @@
 - (IBAction)documentationPressed:(id)sender;
 - (IBAction)featuredPressed:(id)sender;
 - (IBAction)allPressed:(id)sender;
+- (IBAction)uploadOneDemo:(id)sender;
+- (IBAction)uploadAllDemos:(id)sender;
 
 @end
 
