@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		4DB2D71D1D13EE36005E2A03 /* ChuckNation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2D71C1D13EE36005E2A03 /* ChuckNation.m */; };
 		4DB2D7231D13EEA1005E2A03 /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2D7221D13EEA1005E2A03 /* Patch.m */; };
-		AD6A63511D14A3ED009B027E /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD6A63501D14A3ED009B027E /* ViewController.xib */; };
+		AD6A63511D14A3ED009B027E /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD6A63501D14A3ED009B027E /* PatchListViewController.xib */; };
 		ADE4565E1D13704A00F046DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE4565D1D13704A00F046DD /* main.m */; };
 		ADE456611D13704A00F046DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456601D13704A00F046DD /* AppDelegate.m */; };
-		ADE456641D13704A00F046DD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456631D13704A00F046DD /* ViewController.m */; };
+		ADE456641D13704A00F046DD /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456631D13704A00F046DD /* PatchListViewController.m */; };
 		ADE456691D13704A00F046DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE456681D13704A00F046DD /* Assets.xcassets */; };
 		ADE456851D1376D100F046DD /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456791D1376D100F046DD /* AFHTTPSessionManager.m */; };
 		ADE456861D1376D100F046DD /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE4567C1D1376D100F046DD /* AFNetworkReachabilityManager.m */; };
@@ -27,13 +27,13 @@
 		4DB2D71E1D13EE55005E2A03 /* ChuckNation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChuckNation.h; path = "chuck-nation/ChuckNation.h"; sourceTree = "<group>"; };
 		4DB2D71F1D13EE79005E2A03 /* Patch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Patch.h; path = "chuck-nation/Patch.h"; sourceTree = "<group>"; };
 		4DB2D7221D13EEA1005E2A03 /* Patch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Patch.m; path = "chuck-nation/Patch.m"; sourceTree = "<group>"; };
-		AD6A63501D14A3ED009B027E /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		AD6A63501D14A3ED009B027E /* PatchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatchListViewController.xib; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* chuck-nation-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chuck-nation-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE4565D1D13704A00F046DD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ADE4565F1D13704A00F046DD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ADE456601D13704A00F046DD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ADE456621D13704A00F046DD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ADE456631D13704A00F046DD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		ADE456621D13704A00F046DD /* PatchListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
+		ADE456631D13704A00F046DD /* PatchListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatchListViewController.m; sourceTree = "<group>"; };
 		ADE456681D13704A00F046DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADE4566D1D13704A00F046DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADE456781D1376D100F046DD /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -97,9 +97,9 @@
 				ADE4565F1D13704A00F046DD /* AppDelegate.h */,
 				ADE456601D13704A00F046DD /* AppDelegate.m */,
 				ADE4566D1D13704A00F046DD /* Info.plist */,
-				ADE456621D13704A00F046DD /* ViewController.h */,
-				ADE456631D13704A00F046DD /* ViewController.m */,
-				AD6A63501D14A3ED009B027E /* ViewController.xib */,
+				ADE456621D13704A00F046DD /* PatchListViewController.h */,
+				ADE456631D13704A00F046DD /* PatchListViewController.m */,
+				AD6A63501D14A3ED009B027E /* PatchListViewController.xib */,
 				ADE456681D13704A00F046DD /* Assets.xcassets */,
 				ADE4565C1D13704A00F046DD /* Supporting Files */,
 			);
@@ -190,7 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD6A63511D14A3ED009B027E /* ViewController.xib in Resources */,
+				AD6A63511D14A3ED009B027E /* PatchListViewController.xib in Resources */,
 				ADE456691D13704A00F046DD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,7 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADE4568A1D1376D100F046DD /* AFURLSessionManager.m in Sources */,
-				ADE456641D13704A00F046DD /* ViewController.m in Sources */,
+				ADE456641D13704A00F046DD /* PatchListViewController.m in Sources */,
 				ADE456611D13704A00F046DD /* AppDelegate.m in Sources */,
 				ADE456861D1376D100F046DD /* AFNetworkReachabilityManager.m in Sources */,
 				ADE4565E1D13704A00F046DD /* main.m in Sources */,

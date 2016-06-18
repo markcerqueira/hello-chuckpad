@@ -1,21 +1,21 @@
 //
-//  ViewController.m
+//  PatchListViewController.m
 //  chuck-nation-ios
 //
 //  Created by Mark Cerqueira on 6/16/16.
 //
 //
 
-#import "ViewController.h"
+#import "PatchListViewController.h"
 #import "AFNetworking.h"
 #import "Patch.h"
 #import "ChuckNation.h"
 
-@interface ViewController ()
+@interface PatchListViewController ()
 
 @end
 
-@implementation ViewController {
+@implementation PatchListViewController {
     @private
     NSArray *patchArray;
 }
@@ -26,6 +26,7 @@
     // Do any additional setup after loading the view, typically from a nib.
 
     // Push stuff below status bar
+    // TODO There must be a better way to do this (and Table View bleeds off right edge too)
     self.patchTableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
 
     [self.loadingView setHidden:YES];

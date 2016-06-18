@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PatchListViewController">
             <connections>
                 <outlet property="contentView" destination="ngW-1h-8lZ" id="OrO-XZ-Oum"/>
                 <outlet property="loadingView" destination="32T-WZ-w1B" id="PJK-2H-8gy"/>

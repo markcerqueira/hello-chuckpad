@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "PatchListViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,8 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // TODO: PatchListViewController is also declared in Info.plist as launch xib. Is that okay?
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    self.viewController = [[PatchListViewController alloc] initWithNibName:@"PatchListViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
 
     [self.window makeKeyAndVisible];
