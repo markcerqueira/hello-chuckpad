@@ -40,7 +40,11 @@ NSString *const CREATE_PATCH_URL = @"/patch/create_patch/";
 - (void)initializeNetworkManager {
     httpSessionManager = [AFHTTPSessionManager manager];
     
-    baseUrl = CHUCK_NATION_DEV_BASE_URL;
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"debugEnvironment"]) {
+        baseUrl = CHUCK_NATION_DEV_BASE_URL;
+    } else {
+        baseUrl = CHUCK_NATION_BASE_URL;
+    }
 }
 
 - (NSString *)getBaseUrl {
@@ -48,11 +52,16 @@ NSString *const CREATE_PATCH_URL = @"/patch/create_patch/";
 }
 
 - (void)toggleEnvironment {
+    BOOL isDebugEnvironment;
     if ([baseUrl isEqualToString:CHUCK_NATION_BASE_URL]) {
         baseUrl = CHUCK_NATION_DEV_BASE_URL;
+        isDebugEnvironment = YES;
     } else {
         baseUrl = CHUCK_NATION_BASE_URL;
+        isDebugEnvironment = NO;
     }
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isDebugEnvironment forKey:@"debugEnvironment"];
 }
 
 - (void)getDocumentationPatches:(GetPatchesCallback)callback {
@@ -70,6 +79,8 @@ NSString *const CREATE_PATCH_URL = @"/patch/create_patch/";
 - (void)getPatchesInternal:(NSString *)urlPath withCallback:(GetPatchesCallback)callback {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@", baseUrl, urlPath]];
 
+    NSLog(@"getPatchesInternal: %@", url.absoluteString);
+    
     [httpSessionManager GET:url.absoluteString parameters:nil progress:nil
          success:^(NSURLSessionTask *task, id responseObject) {
              NSMutableArray *patchesArray = [[NSMutableArray alloc] init];
@@ -94,6 +105,8 @@ NSString *const FILE_DATA_MIME_TYPE = @"application/octet-stream";
                         filename:(NSString *)filename fileData:(NSData *)fileData {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@", baseUrl, CREATE_PATCH_URL]];
 
+    NSLog(@"uploadPatchWithPatchName: %@", url.absoluteString);
+    
     NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
 
     if (patchName != nil) {

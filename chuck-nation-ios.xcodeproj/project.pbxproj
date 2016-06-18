@@ -14,7 +14,6 @@
 		ADE4565E1D13704A00F046DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE4565D1D13704A00F046DD /* main.m */; };
 		ADE456611D13704A00F046DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456601D13704A00F046DD /* AppDelegate.m */; };
 		ADE456641D13704A00F046DD /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456631D13704A00F046DD /* PatchListViewController.m */; };
-		ADE456691D13704A00F046DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE456681D13704A00F046DD /* Assets.xcassets */; };
 		ADE456851D1376D100F046DD /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE456791D1376D100F046DD /* AFHTTPSessionManager.m */; };
 		ADE456861D1376D100F046DD /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE4567C1D1376D100F046DD /* AFNetworkReachabilityManager.m */; };
 		ADE456871D1376D100F046DD /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE4567E1D1376D100F046DD /* AFSecurityPolicy.m */; };
@@ -36,7 +35,6 @@
 		ADE456601D13704A00F046DD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		ADE456621D13704A00F046DD /* PatchListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
 		ADE456631D13704A00F046DD /* PatchListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatchListViewController.m; sourceTree = "<group>"; };
-		ADE456681D13704A00F046DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADE4566D1D13704A00F046DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADE456781D1376D100F046DD /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		ADE456791D1376D100F046DD /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 				ADE456621D13704A00F046DD /* PatchListViewController.h */,
 				ADE456631D13704A00F046DD /* PatchListViewController.m */,
 				AD6A63501D14A3ED009B027E /* PatchListViewController.xib */,
-				ADE456681D13704A00F046DD /* Assets.xcassets */,
 				ADE4565C1D13704A00F046DD /* Supporting Files */,
 			);
 			path = "chuck-nation-ios";
@@ -194,7 +191,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD6A63511D14A3ED009B027E /* PatchListViewController.xib in Resources */,
-				ADE456691D13704A00F046DD /* Assets.xcassets in Resources */,
 				AD6A63591D14DE33009B027E /* chuck-samples in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
