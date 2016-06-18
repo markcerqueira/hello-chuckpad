@@ -31,6 +31,12 @@
 
     [self.loadingView setHidden:YES];
     [self.contentView setHidden:YES];
+    
+    [self refreshEnvironmentLabel];
+}
+
+- (void)refreshEnvironmentLabel {
+    self.environmentLabel.text = [[ChuckNation sharedInstance] getBaseUrl];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,6 +137,11 @@
         
         [[ChuckNation sharedInstance] uploadPatchWithPatchName:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
     }
+}
+
+- (IBAction)environmentValueChanged:(id)sender {
+    [[ChuckNation sharedInstance] toggleEnvironment];
+    [self refreshEnvironmentLabel];
 }
 
 @end

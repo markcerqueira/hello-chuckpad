@@ -17,6 +17,10 @@ typedef void(^GetPatchesCallback)(NSArray *patchesArray, NSError *error);
 
 + (ChuckNation *)sharedInstance;
 
+- (NSString *)getBaseUrl;
+
+- (void)toggleEnvironment;
+
 - (void)getDocumentationPatches:(GetPatchesCallback)callback;
 
 - (void)getAllPatches:(GetPatchesCallback)callback;

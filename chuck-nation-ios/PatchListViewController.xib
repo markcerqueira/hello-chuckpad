@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PatchListViewController">
             <connections>
                 <outlet property="contentView" destination="ngW-1h-8lZ" id="OrO-XZ-Oum"/>
+                <outlet property="environmentLabel" destination="P6S-6Q-25v" id="Vrg-Xw-8KX"/>
+                <outlet property="environmentSwitch" destination="KRN-S7-nq0" id="8YN-Zr-MaK"/>
                 <outlet property="loadingView" destination="32T-WZ-w1B" id="PJK-2H-8gy"/>
                 <outlet property="patchTableView" destination="uDj-RC-IAy" id="qfU-Hb-11g"/>
                 <outlet property="view" destination="iN0-l3-epB" id="gVy-jg-l5O"/>
@@ -26,19 +28,19 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32T-WZ-w1B" userLabel="Loading View">
-                    <rect key="frame" x="0.0" y="121" width="600" height="615"/>
+                    <rect key="frame" x="0.0" y="167" width="600" height="433"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7bf-nB-iCs">
-                            <rect key="frame" x="290" y="237" width="20" height="20"/>
+                            <rect key="frame" x="290" y="191" width="20" height="20"/>
                         </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ngW-1h-8lZ" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="89" width="600" height="543"/>
+                    <rect key="frame" x="0.0" y="167" width="600" height="465"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uDj-RC-IAy">
-                            <rect key="frame" x="0.0" y="5" width="592" height="471"/>
+                            <rect key="frame" x="0.0" y="0.0" width="592" height="417"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="Sww-aq-6so"/>
@@ -63,7 +65,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ehd-KO-5ke">
-                    <rect key="frame" x="31" y="51" width="126" height="30"/>
+                    <rect key="frame" x="8" y="51" width="149" height="30"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Upload One Demo"/>
                     <connections>
                         <action selector="uploadOneDemo:" destination="-1" eventType="touchUpInside" id="hY5-R1-5dg"/>
@@ -76,6 +79,18 @@
                         <action selector="uploadAllDemos:" destination="-1" eventType="touchUpInside" id="Nbg-qw-OP8"/>
                     </connections>
                 </button>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KRN-S7-nq0">
+                    <rect key="frame" x="31" y="98" width="51" height="31"/>
+                    <connections>
+                        <action selector="environmentValueChanged:" destination="-1" eventType="valueChanged" id="BRH-Cy-j4i"/>
+                    </connections>
+                </switch>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6S-6Q-25v">
+                    <rect key="frame" x="93" y="103" width="205" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <point key="canvasLocation" x="816" y="277"/>

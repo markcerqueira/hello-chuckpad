@@ -40,8 +40,19 @@ NSString *const CREATE_PATCH_URL = @"/patch/create_patch/";
 - (void)initializeNetworkManager {
     httpSessionManager = [AFHTTPSessionManager manager];
     
-    // Change this based on what environment you want to point to
     baseUrl = CHUCK_NATION_DEV_BASE_URL;
+}
+
+- (NSString *)getBaseUrl {
+    return baseUrl;
+}
+
+- (void)toggleEnvironment {
+    if ([baseUrl isEqualToString:CHUCK_NATION_BASE_URL]) {
+        baseUrl = CHUCK_NATION_DEV_BASE_URL;
+    } else {
+        baseUrl = CHUCK_NATION_BASE_URL;
+    }
 }
 
 - (void)getDocumentationPatches:(GetPatchesCallback)callback {
