@@ -1,0 +1,352 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4D2231B61D199281006F75DF /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D22319D1D199281006F75DF /* AFHTTPSessionManager.m */; };
+		4D2231B71D199281006F75DF /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231A01D199281006F75DF /* AFNetworkReachabilityManager.m */; };
+		4D2231B81D199281006F75DF /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231A21D199281006F75DF /* AFSecurityPolicy.m */; };
+		4D2231B91D199281006F75DF /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231A41D199281006F75DF /* AFURLRequestSerialization.m */; };
+		4D2231BA1D199281006F75DF /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231A61D199281006F75DF /* AFURLResponseSerialization.m */; };
+		4D2231BB1D199281006F75DF /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231A81D199281006F75DF /* AFURLSessionManager.m */; };
+		4D2231BC1D199281006F75DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231AA1D199281006F75DF /* AppDelegate.m */; };
+		4D2231BD1D199281006F75DF /* ChuckPadSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231AD1D199281006F75DF /* ChuckPadSocial.m */; };
+		4D2231BE1D199281006F75DF /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231AF1D199281006F75DF /* Patch.m */; };
+		4D2231BF1D199281006F75DF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D2231B01D199281006F75DF /* Info.plist */; };
+		4D2231C01D199281006F75DF /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231B21D199281006F75DF /* PatchListViewController.m */; };
+		4D2231C11D199281006F75DF /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D2231B31D199281006F75DF /* PatchListViewController.xib */; };
+		4D2231C41D19928A006F75DF /* chuck-samples in Resources */ = {isa = PBXBuildFile; fileRef = 4D2231C31D19928A006F75DF /* chuck-samples */; };
+		4D2231C71D1992B8006F75DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231C61D1992B8006F75DF /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4D22319C1D199281006F75DF /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		4D22319D1D199281006F75DF /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		4D22319E1D199281006F75DF /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		4D22319F1D199281006F75DF /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		4D2231A01D199281006F75DF /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		4D2231A11D199281006F75DF /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		4D2231A21D199281006F75DF /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		4D2231A31D199281006F75DF /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		4D2231A41D199281006F75DF /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		4D2231A51D199281006F75DF /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		4D2231A61D199281006F75DF /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		4D2231A71D199281006F75DF /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		4D2231A81D199281006F75DF /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		4D2231A91D199281006F75DF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4D2231AA1D199281006F75DF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4D2231AC1D199281006F75DF /* ChuckPadSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadSocial.h; sourceTree = "<group>"; };
+		4D2231AD1D199281006F75DF /* ChuckPadSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSocial.m; sourceTree = "<group>"; };
+		4D2231AE1D199281006F75DF /* Patch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Patch.h; sourceTree = "<group>"; };
+		4D2231AF1D199281006F75DF /* Patch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Patch.m; sourceTree = "<group>"; };
+		4D2231B01D199281006F75DF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D2231B11D199281006F75DF /* PatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
+		4D2231B21D199281006F75DF /* PatchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchListViewController.m; sourceTree = "<group>"; };
+		4D2231B31D199281006F75DF /* PatchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatchListViewController.xib; sourceTree = "<group>"; };
+		4D2231C31D19928A006F75DF /* chuck-samples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "chuck-samples"; path = "chuck-nation/chuck-samples"; sourceTree = "<group>"; };
+		4D2231C61D1992B8006F75DF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ADE456591D13704A00F046DD /* chuckpad-social-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chuckpad-social-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADE456561D13704A00F046DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4D22319B1D199281006F75DF /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				4D22319C1D199281006F75DF /* AFHTTPSessionManager.h */,
+				4D22319D1D199281006F75DF /* AFHTTPSessionManager.m */,
+				4D22319E1D199281006F75DF /* AFNetworking.h */,
+				4D22319F1D199281006F75DF /* AFNetworkReachabilityManager.h */,
+				4D2231A01D199281006F75DF /* AFNetworkReachabilityManager.m */,
+				4D2231A11D199281006F75DF /* AFSecurityPolicy.h */,
+				4D2231A21D199281006F75DF /* AFSecurityPolicy.m */,
+				4D2231A31D199281006F75DF /* AFURLRequestSerialization.h */,
+				4D2231A41D199281006F75DF /* AFURLRequestSerialization.m */,
+				4D2231A51D199281006F75DF /* AFURLResponseSerialization.h */,
+				4D2231A61D199281006F75DF /* AFURLResponseSerialization.m */,
+				4D2231A71D199281006F75DF /* AFURLSessionManager.h */,
+				4D2231A81D199281006F75DF /* AFURLSessionManager.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		4D2231AB1D199281006F75DF /* chuck-nation */ = {
+			isa = PBXGroup;
+			children = (
+				4D2231AC1D199281006F75DF /* ChuckPadSocial.h */,
+				4D2231AD1D199281006F75DF /* ChuckPadSocial.m */,
+				4D2231AE1D199281006F75DF /* Patch.h */,
+				4D2231AF1D199281006F75DF /* Patch.m */,
+			);
+			path = "chuck-nation";
+			sourceTree = "<group>";
+		};
+		4D2231C51D1992B8006F75DF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4D2231C61D1992B8006F75DF /* main.m */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADE456501D13704A00F046DD = {
+			isa = PBXGroup;
+			children = (
+				ADE4565B1D13704A00F046DD /* chuckpad-social-ios */,
+				ADE4565A1D13704A00F046DD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ADE4565A1D13704A00F046DD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADE456591D13704A00F046DD /* chuckpad-social-ios.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADE4565B1D13704A00F046DD /* chuckpad-social-ios */ = {
+			isa = PBXGroup;
+			children = (
+				4D22319B1D199281006F75DF /* AFNetworking */,
+				4D2231AB1D199281006F75DF /* chuck-nation */,
+				4D2231C31D19928A006F75DF /* chuck-samples */,
+				4D2231C51D1992B8006F75DF /* Supporting Files */,
+				4D2231A91D199281006F75DF /* AppDelegate.h */,
+				4D2231AA1D199281006F75DF /* AppDelegate.m */,
+				4D2231B01D199281006F75DF /* Info.plist */,
+				4D2231B11D199281006F75DF /* PatchListViewController.h */,
+				4D2231B21D199281006F75DF /* PatchListViewController.m */,
+				4D2231B31D199281006F75DF /* PatchListViewController.xib */,
+			);
+			path = "chuckpad-social-ios";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ADE456581D13704A00F046DD /* chuckpad-social-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE456701D13704A00F046DD /* Build configuration list for PBXNativeTarget "chuckpad-social-ios" */;
+			buildPhases = (
+				ADE456551D13704A00F046DD /* Sources */,
+				ADE456561D13704A00F046DD /* Frameworks */,
+				ADE456571D13704A00F046DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "chuckpad-social-ios";
+			productName = "chuckpad-social-ios";
+			productReference = ADE456591D13704A00F046DD /* chuckpad-social-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADE456511D13704A00F046DD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				TargetAttributes = {
+					ADE456581D13704A00F046DD = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = ADE456541D13704A00F046DD /* Build configuration list for PBXProject "chuckpad-social-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ADE456501D13704A00F046DD;
+			productRefGroup = ADE4565A1D13704A00F046DD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADE456581D13704A00F046DD /* chuckpad-social-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADE456571D13704A00F046DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2231BF1D199281006F75DF /* Info.plist in Resources */,
+				4D2231C11D199281006F75DF /* PatchListViewController.xib in Resources */,
+				4D2231C41D19928A006F75DF /* chuck-samples in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADE456551D13704A00F046DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2231B71D199281006F75DF /* AFNetworkReachabilityManager.m in Sources */,
+				4D2231BD1D199281006F75DF /* ChuckPadSocial.m in Sources */,
+				4D2231B81D199281006F75DF /* AFSecurityPolicy.m in Sources */,
+				4D2231B61D199281006F75DF /* AFHTTPSessionManager.m in Sources */,
+				4D2231BB1D199281006F75DF /* AFURLSessionManager.m in Sources */,
+				4D2231B91D199281006F75DF /* AFURLRequestSerialization.m in Sources */,
+				4D2231BE1D199281006F75DF /* Patch.m in Sources */,
+				4D2231C01D199281006F75DF /* PatchListViewController.m in Sources */,
+				4D2231BA1D199281006F75DF /* AFURLResponseSerialization.m in Sources */,
+				4D2231C71D1992B8006F75DF /* main.m in Sources */,
+				4D2231BC1D199281006F75DF /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ADE4566E1D13704A00F046DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ADE4566F1D13704A00F046DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ADE456711D13704A00F046DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "chuckpad-social-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios";
+				PRODUCT_NAME = "chuckpad-social-ios";
+			};
+			name = Debug;
+		};
+		ADE456721D13704A00F046DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "chuckpad-social-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios";
+				PRODUCT_NAME = "chuckpad-social-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADE456541D13704A00F046DD /* Build configuration list for PBXProject "chuckpad-social-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE4566E1D13704A00F046DD /* Debug */,
+				ADE4566F1D13704A00F046DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADE456701D13704A00F046DD /* Build configuration list for PBXNativeTarget "chuckpad-social-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE456711D13704A00F046DD /* Debug */,
+				ADE456721D13704A00F046DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADE456511D13704A00F046DD /* Project object */;
+}
