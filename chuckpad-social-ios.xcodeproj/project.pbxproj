@@ -14,13 +14,16 @@
 		4D2231BA1D199281006F75DF /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231A61D199281006F75DF /* AFURLResponseSerialization.m */; };
 		4D2231BB1D199281006F75DF /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231A81D199281006F75DF /* AFURLSessionManager.m */; };
 		4D2231BC1D199281006F75DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231AA1D199281006F75DF /* AppDelegate.m */; };
-		4D2231BD1D199281006F75DF /* ChuckPadSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231AD1D199281006F75DF /* ChuckPadSocial.m */; };
-		4D2231BE1D199281006F75DF /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231AF1D199281006F75DF /* Patch.m */; };
-		4D2231BF1D199281006F75DF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D2231B01D199281006F75DF /* Info.plist */; };
 		4D2231C01D199281006F75DF /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231B21D199281006F75DF /* PatchListViewController.m */; };
 		4D2231C11D199281006F75DF /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D2231B31D199281006F75DF /* PatchListViewController.xib */; };
-		4D2231C41D19928A006F75DF /* chuck-samples in Resources */ = {isa = PBXBuildFile; fileRef = 4D2231C31D19928A006F75DF /* chuck-samples */; };
 		4D2231C71D1992B8006F75DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2231C61D1992B8006F75DF /* main.m */; };
+		4D2300351D19CF1600E75BD1 /* ChuckPadSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2300021D19CF1600E75BD1 /* ChuckPadSocial.m */; };
+		4D2300361D19CF1600E75BD1 /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2300041D19CF1600E75BD1 /* Patch.m */; };
+		4D2300381D19CF2000E75BD1 /* chuck-samples in Resources */ = {isa = PBXBuildFile; fileRef = 4D2300371D19CF2000E75BD1 /* chuck-samples */; };
+		4D2300CA1D19EF3300E75BD1 /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D2300C81D19EF3300E75BD1 /* face.png */; };
+		4D2300CB1D19EF3300E75BD1 /* pineapple.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D2300C91D19EF3300E75BD1 /* pineapple.png */; };
+		4D2300CF1D19F17F00E75BD1 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2300CD1D19F17F00E75BD1 /* UserViewController.m */; };
+		4D2300D01D19F17F00E75BD1 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D2300CE1D19F17F00E75BD1 /* UserViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,16 +42,21 @@
 		4D2231A81D199281006F75DF /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		4D2231A91D199281006F75DF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4D2231AA1D199281006F75DF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4D2231AC1D199281006F75DF /* ChuckPadSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadSocial.h; sourceTree = "<group>"; };
-		4D2231AD1D199281006F75DF /* ChuckPadSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSocial.m; sourceTree = "<group>"; };
-		4D2231AE1D199281006F75DF /* Patch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Patch.h; sourceTree = "<group>"; };
-		4D2231AF1D199281006F75DF /* Patch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Patch.m; sourceTree = "<group>"; };
 		4D2231B01D199281006F75DF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D2231B11D199281006F75DF /* PatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
 		4D2231B21D199281006F75DF /* PatchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchListViewController.m; sourceTree = "<group>"; };
 		4D2231B31D199281006F75DF /* PatchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatchListViewController.xib; sourceTree = "<group>"; };
-		4D2231C31D19928A006F75DF /* chuck-samples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "chuck-samples"; path = "chuck-nation/chuck-samples"; sourceTree = "<group>"; };
 		4D2231C61D1992B8006F75DF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4D2300011D19CF1600E75BD1 /* ChuckPadSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadSocial.h; sourceTree = "<group>"; };
+		4D2300021D19CF1600E75BD1 /* ChuckPadSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSocial.m; sourceTree = "<group>"; };
+		4D2300031D19CF1600E75BD1 /* Patch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Patch.h; sourceTree = "<group>"; };
+		4D2300041D19CF1600E75BD1 /* Patch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Patch.m; sourceTree = "<group>"; };
+		4D2300371D19CF2000E75BD1 /* chuck-samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "chuck-samples"; sourceTree = "<group>"; };
+		4D2300C81D19EF3300E75BD1 /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
+		4D2300C91D19EF3300E75BD1 /* pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineapple.png; sourceTree = "<group>"; };
+		4D2300CC1D19F17F00E75BD1 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		4D2300CD1D19F17F00E75BD1 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		4D2300CE1D19F17F00E75BD1 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* chuckpad-social-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chuckpad-social-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -83,23 +91,32 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
-		4D2231AB1D199281006F75DF /* chuck-nation */ = {
-			isa = PBXGroup;
-			children = (
-				4D2231AC1D199281006F75DF /* ChuckPadSocial.h */,
-				4D2231AD1D199281006F75DF /* ChuckPadSocial.m */,
-				4D2231AE1D199281006F75DF /* Patch.h */,
-				4D2231AF1D199281006F75DF /* Patch.m */,
-			);
-			path = "chuck-nation";
-			sourceTree = "<group>";
-		};
 		4D2231C51D1992B8006F75DF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				4D2231C61D1992B8006F75DF /* main.m */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4D2300C71D19EF3300E75BD1 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				4D2300C81D19EF3300E75BD1 /* face.png */,
+				4D2300C91D19EF3300E75BD1 /* pineapple.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		4D23FFCF1D19CF1600E75BD1 /* chuckpad-social */ = {
+			isa = PBXGroup;
+			children = (
+				4D2300011D19CF1600E75BD1 /* ChuckPadSocial.h */,
+				4D2300021D19CF1600E75BD1 /* ChuckPadSocial.m */,
+				4D2300031D19CF1600E75BD1 /* Patch.h */,
+				4D2300041D19CF1600E75BD1 /* Patch.m */,
+			);
+			path = "chuckpad-social";
 			sourceTree = "<group>";
 		};
 		ADE456501D13704A00F046DD = {
@@ -121,16 +138,20 @@
 		ADE4565B1D13704A00F046DD /* chuckpad-social-ios */ = {
 			isa = PBXGroup;
 			children = (
+				4D2300C71D19EF3300E75BD1 /* assets */,
 				4D22319B1D199281006F75DF /* AFNetworking */,
-				4D2231AB1D199281006F75DF /* chuck-nation */,
-				4D2231C31D19928A006F75DF /* chuck-samples */,
+				4D23FFCF1D19CF1600E75BD1 /* chuckpad-social */,
 				4D2231C51D1992B8006F75DF /* Supporting Files */,
+				4D2300371D19CF2000E75BD1 /* chuck-samples */,
 				4D2231A91D199281006F75DF /* AppDelegate.h */,
 				4D2231AA1D199281006F75DF /* AppDelegate.m */,
 				4D2231B01D199281006F75DF /* Info.plist */,
 				4D2231B11D199281006F75DF /* PatchListViewController.h */,
 				4D2231B21D199281006F75DF /* PatchListViewController.m */,
 				4D2231B31D199281006F75DF /* PatchListViewController.xib */,
+				4D2300CC1D19F17F00E75BD1 /* UserViewController.h */,
+				4D2300CD1D19F17F00E75BD1 /* UserViewController.m */,
+				4D2300CE1D19F17F00E75BD1 /* UserViewController.xib */,
 			);
 			path = "chuckpad-social-ios";
 			sourceTree = "<group>";
@@ -191,9 +212,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D2231BF1D199281006F75DF /* Info.plist in Resources */,
+				4D2300D01D19F17F00E75BD1 /* UserViewController.xib in Resources */,
+				4D2300CA1D19EF3300E75BD1 /* face.png in Resources */,
+				4D2300CB1D19EF3300E75BD1 /* pineapple.png in Resources */,
 				4D2231C11D199281006F75DF /* PatchListViewController.xib in Resources */,
-				4D2231C41D19928A006F75DF /* chuck-samples in Resources */,
+				4D2300381D19CF2000E75BD1 /* chuck-samples in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,15 +228,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D2231B71D199281006F75DF /* AFNetworkReachabilityManager.m in Sources */,
-				4D2231BD1D199281006F75DF /* ChuckPadSocial.m in Sources */,
 				4D2231B81D199281006F75DF /* AFSecurityPolicy.m in Sources */,
 				4D2231B61D199281006F75DF /* AFHTTPSessionManager.m in Sources */,
+				4D2300351D19CF1600E75BD1 /* ChuckPadSocial.m in Sources */,
 				4D2231BB1D199281006F75DF /* AFURLSessionManager.m in Sources */,
 				4D2231B91D199281006F75DF /* AFURLRequestSerialization.m in Sources */,
-				4D2231BE1D199281006F75DF /* Patch.m in Sources */,
 				4D2231C01D199281006F75DF /* PatchListViewController.m in Sources */,
 				4D2231BA1D199281006F75DF /* AFURLResponseSerialization.m in Sources */,
 				4D2231C71D1992B8006F75DF /* main.m in Sources */,
+				4D2300CF1D19F17F00E75BD1 /* UserViewController.m in Sources */,
+				4D2300361D19CF1600E75BD1 /* Patch.m in Sources */,
 				4D2231BC1D199281006F75DF /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,9 +333,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = "chuckpad-social-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios";
 				PRODUCT_NAME = "chuckpad-social-ios";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -319,9 +345,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = "chuckpad-social-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios";
 				PRODUCT_NAME = "chuckpad-social-ios";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PatchListViewController.h"
+#import "UserViewController.h"
 
 @interface AppDelegate ()
 
@@ -15,17 +16,32 @@
 
 @implementation AppDelegate
 
+- (UIImage *)imagePreparedForTabBarItem:(NSString *)assetName {
+    UIImage *tabBarImage = [UIImage imageNamed:assetName];
+    tabBarImage = [tabBarImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return tabBarImage;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    // TODO: PatchListViewController is also declared in Info.plist as launch xib. Is that okay?
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.viewController = [[PatchListViewController alloc] initWithNibName:@"PatchListViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+
+    PatchListViewController *patchListViewController = [[PatchListViewController alloc] initWithNibName:@"PatchListViewController" bundle:nil];
+    patchListViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patches" image:[self imagePreparedForTabBarItem:@"pineapple.png"] tag:1];
+
+    UserViewController *userViewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
+    userViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"User" image:[self imagePreparedForTabBarItem:@"face.png"] tag:1];
+
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:patchListViewController, userViewController, nil];
+
+    self.window = [UIWindow new];
 
     [self.window makeKeyAndVisible];
-    
+
+    self.window.frame = [[UIScreen mainScreen] bounds];
+
+    self.window.rootViewController = self.tabBarController;
+
     return YES;
 }
 

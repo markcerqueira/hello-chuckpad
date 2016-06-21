@@ -115,8 +115,8 @@
     NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
     NSString *filePath = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename];
     NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-    
-    [[ChuckPadSocial sharedInstance] uploadPatchWithPatchName:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
+
+    [[ChuckPadSocial sharedInstance] uploadPatch:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
 }
 
 - (IBAction)uploadAllDemos:(id)sender {
@@ -133,9 +133,9 @@
         NSString *filePath = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename];
         NSData *fileData = [NSData dataWithContentsOfFile:filePath];
         
-        NSLog(@"Filename = %@; data length = %lu", filename, [fileData length]);
-        
-        [[ChuckPadSocial sharedInstance] uploadPatchWithPatchName:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
+        NSLog(@"Filename = %@; data length = %lu", filename, (unsigned long)[fileData length]);
+
+        [[ChuckPadSocial sharedInstance] uploadPatch:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
     }
 }
 

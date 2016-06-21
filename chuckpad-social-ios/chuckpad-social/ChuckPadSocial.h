@@ -27,7 +27,9 @@ typedef void(^GetPatchesCallback)(NSArray *patchesArray, NSError *error);
 
 - (void)getFeaturedPatches:(GetPatchesCallback)callback;
 
-- (void)uploadPatchWithPatchName:(NSString *)patchName isFeatured:(BOOL)isFeatured isDocumentation:(BOOL)isDocumentation filename:(NSString *)filename fileData:(NSData *)fileData;
+- (void)uploadPatch:(NSString *)patchName filename:(NSString *)filename fileData:(NSData *)fileData;
+
+- (void)uploadPatch:(NSString *)patchName isFeatured:(BOOL)isFeatured isDocumentation:(BOOL)isDocumentation filename:(NSString *)filename fileData:(NSData *)fileData;
 
 @end
 

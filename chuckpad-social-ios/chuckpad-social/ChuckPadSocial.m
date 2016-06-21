@@ -27,6 +27,8 @@ NSString *const GET_ALL_URL = @"/patch/json/all";
 
 NSString *const CREATE_PATCH_URL = @"/patch/create_patch/";
 
+NSString *const CHUCKPAD_SOCIAL_IOS_USER_AGENT = @"chuckpad-social-ios";
+
 + (ChuckPadSocial *)sharedInstance {
     static ChuckPadSocial *sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -39,6 +41,11 @@ NSString *const CREATE_PATCH_URL = @"/patch/create_patch/";
 
 - (void)initializeNetworkManager {
     httpSessionManager = [AFHTTPSessionManager manager];
+    
+    // So the service can uniquely identify iOS calls
+    NSString *userAgent = [httpSessionManager.requestSerializer  valueForHTTPHeaderField:@"User-Agent"];
+    userAgent = [userAgent stringByAppendingPathComponent:CHUCKPAD_SOCIAL_IOS_USER_AGENT];
+    [httpSessionManager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"debugEnvironment"]) {
         baseUrl = CHUCK_PAD_SOCIAL_DEV_BASE_URL;
@@ -101,8 +108,12 @@ NSString *const CREATE_PATCH_URL = @"/patch/create_patch/";
 NSString *const FILE_DATA_PARAM_NAME = @"patch[data]";
 NSString *const FILE_DATA_MIME_TYPE = @"application/octet-stream";
 
-- (void)uploadPatchWithPatchName:(NSString *)patchName isFeatured:(BOOL)isFeatured isDocumentation:(BOOL)isDocumentation
-                        filename:(NSString *)filename fileData:(NSData *)fileData {
+- (void)uploadPatch:(NSString *)patchName filename:(NSString *)filename fileData:(NSData *)fileData {
+    [self uploadPatch:patchName isFeatured:NO isDocumentation:NO filename:filename fileData:fileData];
+}
+
+- (void)uploadPatch:(NSString *)patchName isFeatured:(BOOL)isFeatured isDocumentation:(BOOL)isDocumentation
+           filename:(NSString *)filename fileData:(NSData *)fileData {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@", baseUrl, CREATE_PATCH_URL]];
 
     NSLog(@"uploadPatchWithPatchName: %@", url.absoluteString);
