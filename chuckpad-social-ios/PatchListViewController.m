@@ -23,12 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Do any additional setup after loading the view, typically from a nib.
-
-    // Push stuff below status bar
-    // TODO There must be a better way to do this (and Table View bleeds off right edge too)
-    self.patchTableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-
     [self.loadingView setHidden:YES];
     [self.contentView setHidden:YES];
     
@@ -37,12 +31,6 @@
 
 - (void)refreshEnvironmentLabel {
     self.environmentLabel.text = [[ChuckPadSocial sharedInstance] getBaseUrl];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

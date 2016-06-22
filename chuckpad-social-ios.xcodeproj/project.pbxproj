@@ -24,6 +24,9 @@
 		4D2300CB1D19EF3300E75BD1 /* pineapple.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D2300C91D19EF3300E75BD1 /* pineapple.png */; };
 		4D2300CF1D19F17F00E75BD1 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2300CD1D19F17F00E75BD1 /* UserViewController.m */; };
 		4D2300D01D19F17F00E75BD1 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D2300CE1D19F17F00E75BD1 /* UserViewController.xib */; };
+		4DBA017B1D1A0D4A00292EB9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA017A1D1A0D4A00292EB9 /* User.m */; };
+		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
+		4DBA01891D1A432300292EB9 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA01881D1A432300292EB9 /* FXKeychain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,11 @@
 		4D2300CC1D19F17F00E75BD1 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		4D2300CD1D19F17F00E75BD1 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		4D2300CE1D19F17F00E75BD1 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
+		4DBA017A1D1A0D4A00292EB9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		4DBA017C1D1A0D5D00292EB9 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		4DBA017D1D1A410D00292EB9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4DBA01871D1A432300292EB9 /* FXKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXKeychain.h; sourceTree = "<group>"; };
+		4DBA01881D1A432300292EB9 /* FXKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXKeychain.m; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* chuckpad-social-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chuckpad-social-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -65,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,13 +124,25 @@
 				4D2300021D19CF1600E75BD1 /* ChuckPadSocial.m */,
 				4D2300031D19CF1600E75BD1 /* Patch.h */,
 				4D2300041D19CF1600E75BD1 /* Patch.m */,
+				4DBA017C1D1A0D5D00292EB9 /* User.h */,
+				4DBA017A1D1A0D4A00292EB9 /* User.m */,
 			);
 			path = "chuckpad-social";
+			sourceTree = "<group>";
+		};
+		4DBA01861D1A432300292EB9 /* FXKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				4DBA01871D1A432300292EB9 /* FXKeychain.h */,
+				4DBA01881D1A432300292EB9 /* FXKeychain.m */,
+			);
+			path = FXKeychain;
 			sourceTree = "<group>";
 		};
 		ADE456501D13704A00F046DD = {
 			isa = PBXGroup;
 			children = (
+				4DBA017D1D1A410D00292EB9 /* Security.framework */,
 				ADE4565B1D13704A00F046DD /* chuckpad-social-ios */,
 				ADE4565A1D13704A00F046DD /* Products */,
 			);
@@ -140,6 +161,7 @@
 			children = (
 				4D2300C71D19EF3300E75BD1 /* assets */,
 				4D22319B1D199281006F75DF /* AFNetworking */,
+				4DBA01861D1A432300292EB9 /* FXKeychain */,
 				4D23FFCF1D19CF1600E75BD1 /* chuckpad-social */,
 				4D2231C51D1992B8006F75DF /* Supporting Files */,
 				4D2300371D19CF2000E75BD1 /* chuck-samples */,
@@ -227,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DBA017B1D1A0D4A00292EB9 /* User.m in Sources */,
 				4D2231B71D199281006F75DF /* AFNetworkReachabilityManager.m in Sources */,
 				4D2231B81D199281006F75DF /* AFSecurityPolicy.m in Sources */,
 				4D2231B61D199281006F75DF /* AFHTTPSessionManager.m in Sources */,
@@ -239,6 +262,7 @@
 				4D2300CF1D19F17F00E75BD1 /* UserViewController.m in Sources */,
 				4D2300361D19CF1600E75BD1 /* Patch.m in Sources */,
 				4D2231BC1D199281006F75DF /* AppDelegate.m in Sources */,
+				4DBA01891D1A432300292EB9 /* FXKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +361,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios";
 				PRODUCT_NAME = "chuckpad-social-ios";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -349,7 +373,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios";
 				PRODUCT_NAME = "chuckpad-social-ios";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
