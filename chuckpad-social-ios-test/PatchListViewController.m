@@ -104,7 +104,9 @@
     NSString *filePath = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename];
     NSData *fileData = [NSData dataWithContentsOfFile:filePath];
 
-    [[ChuckPadSocial sharedInstance] uploadPatch:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
+    [[ChuckPadSocial sharedInstance] uploadPatch:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch) {
+
+    }];
 }
 
 - (IBAction)uploadAllDemos:(id)sender {
@@ -123,7 +125,9 @@
         
         NSLog(@"Filename = %@; data length = %lu", filename, (unsigned long)[fileData length]);
 
-        [[ChuckPadSocial sharedInstance] uploadPatch:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData];
+        [[ChuckPadSocial sharedInstance] uploadPatch:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch) {
+
+        }];
     }
 }
 
