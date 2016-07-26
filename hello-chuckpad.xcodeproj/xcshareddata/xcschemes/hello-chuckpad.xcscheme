@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ADE456581D13704A00F046DD"
-               BuildableName = "chuckpad-social-ios-test.app"
-               BlueprintName = "chuckpad-social-ios-test"
-               ReferencedContainer = "container:chuckpad-social-ios-test.xcodeproj">
+               BuildableName = "hello-chuckpad.app"
+               BlueprintName = "hello-chuckpad"
+               ReferencedContainer = "container:hello-chuckpad.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4DB1D5041D46E4BC00C2F62E"
-               BuildableName = "chuckpad-unit-tests.xctest"
-               BlueprintName = "chuckpad-unit-tests"
-               ReferencedContainer = "container:chuckpad-social-ios-test.xcodeproj">
+               BuildableName = "unit-tests.xctest"
+               BlueprintName = "unit-tests"
+               ReferencedContainer = "container:hello-chuckpad.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ADE456581D13704A00F046DD"
-            BuildableName = "chuckpad-social-ios-test.app"
-            BlueprintName = "chuckpad-social-ios-test"
-            ReferencedContainer = "container:chuckpad-social-ios-test.xcodeproj">
+            BuildableName = "hello-chuckpad.app"
+            BlueprintName = "hello-chuckpad"
+            ReferencedContainer = "container:hello-chuckpad.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ADE456581D13704A00F046DD"
-            BuildableName = "chuckpad-social-ios-test.app"
-            BlueprintName = "chuckpad-social-ios-test"
-            ReferencedContainer = "container:chuckpad-social-ios-test.xcodeproj">
+            BuildableName = "hello-chuckpad.app"
+            BlueprintName = "hello-chuckpad"
+            ReferencedContainer = "container:hello-chuckpad.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ADE456581D13704A00F046DD"
-            BuildableName = "chuckpad-social-ios-test.app"
-            BlueprintName = "chuckpad-social-ios-test"
-            ReferencedContainer = "container:chuckpad-social-ios-test.xcodeproj">
+            BuildableName = "hello-chuckpad.app"
+            BlueprintName = "hello-chuckpad"
+            ReferencedContainer = "container:hello-chuckpad.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

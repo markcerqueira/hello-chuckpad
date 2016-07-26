@@ -27,6 +27,8 @@
 		4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00571D46CFFE001FC755 /* FXKeychain.m */; };
 		4D4A00641D46CFFE001FC755 /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00591D46CFFE001FC755 /* Patch.m */; };
 		4D4A00651D46CFFE001FC755 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A005B1D46CFFE001FC755 /* User.m */; };
+		4D80F5901D481D82009E5346 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4D80F58E1D481D82009E5346 /* LICENSE */; };
+		4D80F5911D481D82009E5346 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4D80F58F1D481D82009E5346 /* README.md */; };
 		4DB1D5101D46E4D500C2F62E /* ChuckPadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -78,11 +80,13 @@
 		4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4D4AFFCD1D46CFCF001FC755 /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
 		4D4AFFCE1D46CFCF001FC755 /* pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineapple.png; sourceTree = "<group>"; };
-		4DB1D5051D46E4BC00C2F62E /* chuckpad-unit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "chuckpad-unit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D80F58E1D481D82009E5346 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4D80F58F1D481D82009E5346 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4DB1D5051D46E4BC00C2F62E /* unit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "unit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB1D50F1D46E4D500C2F62E /* ChuckPadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadTests.m; sourceTree = "<group>"; };
 		4DBA017D1D1A410D00292EB9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		ADE456591D13704A00F046DD /* chuckpad-social-ios-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chuckpad-social-ios-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE456591D13704A00F046DD /* hello-chuckpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-chuckpad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +162,7 @@
 			path = FXKeychain;
 			sourceTree = "<group>";
 		};
-		4D4AFFC91D46CFCF001FC755 /* chuckpad-social-ios-test */ = {
+		4D4AFFC91D46CFCF001FC755 /* hello-chuckpad */ = {
 			isa = PBXGroup;
 			children = (
 				4D4AFFCC1D46CFCF001FC755 /* assets */,
@@ -175,7 +179,7 @@
 				4D4A00071D46CFD0001FC755 /* UserViewController.m */,
 				4D4A00081D46CFD0001FC755 /* UserViewController.xib */,
 			);
-			path = "chuckpad-social-ios-test";
+			path = "hello-chuckpad";
 			sourceTree = "<group>";
 		};
 		4D4AFFCC1D46CFCF001FC755 /* assets */ = {
@@ -187,21 +191,23 @@
 			path = assets;
 			sourceTree = "<group>";
 		};
-		4DB1D5061D46E4BC00C2F62E /* chuckpad-unit-tests */ = {
+		4DB1D5061D46E4BC00C2F62E /* unit-tests */ = {
 			isa = PBXGroup;
 			children = (
 				4DB1D50F1D46E4D500C2F62E /* ChuckPadTests.m */,
 				4DB1D5091D46E4BC00C2F62E /* Info.plist */,
 			);
-			path = "chuckpad-unit-tests";
+			path = "unit-tests";
 			sourceTree = "<group>";
 		};
 		ADE456501D13704A00F046DD = {
 			isa = PBXGroup;
 			children = (
 				4DBA017D1D1A410D00292EB9 /* Security.framework */,
-				4D4AFFC91D46CFCF001FC755 /* chuckpad-social-ios-test */,
-				4DB1D5061D46E4BC00C2F62E /* chuckpad-unit-tests */,
+				4D80F58E1D481D82009E5346 /* LICENSE */,
+				4D80F58F1D481D82009E5346 /* README.md */,
+				4D4AFFC91D46CFCF001FC755 /* hello-chuckpad */,
+				4DB1D5061D46E4BC00C2F62E /* unit-tests */,
 				ADE4565A1D13704A00F046DD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -209,8 +215,8 @@
 		ADE4565A1D13704A00F046DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ADE456591D13704A00F046DD /* chuckpad-social-ios-test.app */,
-				4DB1D5051D46E4BC00C2F62E /* chuckpad-unit-tests.xctest */,
+				ADE456591D13704A00F046DD /* hello-chuckpad.app */,
+				4DB1D5051D46E4BC00C2F62E /* unit-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,9 +224,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4DB1D5041D46E4BC00C2F62E /* chuckpad-unit-tests */ = {
+		4DB1D5041D46E4BC00C2F62E /* unit-tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4DB1D50E1D46E4BC00C2F62E /* Build configuration list for PBXNativeTarget "chuckpad-unit-tests" */;
+			buildConfigurationList = 4DB1D50E1D46E4BC00C2F62E /* Build configuration list for PBXNativeTarget "unit-tests" */;
 			buildPhases = (
 				4DB1D5011D46E4BC00C2F62E /* Sources */,
 				4DB1D5021D46E4BC00C2F62E /* Frameworks */,
@@ -231,14 +237,14 @@
 			dependencies = (
 				4DB1D50B1D46E4BC00C2F62E /* PBXTargetDependency */,
 			);
-			name = "chuckpad-unit-tests";
-			productName = "chuckpad-unit-tests";
-			productReference = 4DB1D5051D46E4BC00C2F62E /* chuckpad-unit-tests.xctest */;
+			name = "unit-tests";
+			productName = "unit-tests";
+			productReference = 4DB1D5051D46E4BC00C2F62E /* unit-tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		ADE456581D13704A00F046DD /* chuckpad-social-ios-test */ = {
+		ADE456581D13704A00F046DD /* hello-chuckpad */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ADE456701D13704A00F046DD /* Build configuration list for PBXNativeTarget "chuckpad-social-ios-test" */;
+			buildConfigurationList = ADE456701D13704A00F046DD /* Build configuration list for PBXNativeTarget "hello-chuckpad" */;
 			buildPhases = (
 				ADE456551D13704A00F046DD /* Sources */,
 				ADE456561D13704A00F046DD /* Frameworks */,
@@ -248,9 +254,9 @@
 			);
 			dependencies = (
 			);
-			name = "chuckpad-social-ios-test";
+			name = "hello-chuckpad";
 			productName = "chuckpad-social-ios";
-			productReference = ADE456591D13704A00F046DD /* chuckpad-social-ios-test.app */;
+			productReference = ADE456591D13704A00F046DD /* hello-chuckpad.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -270,7 +276,7 @@
 					};
 				};
 			};
-			buildConfigurationList = ADE456541D13704A00F046DD /* Build configuration list for PBXProject "chuckpad-social-ios-test" */;
+			buildConfigurationList = ADE456541D13704A00F046DD /* Build configuration list for PBXProject "hello-chuckpad" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -283,8 +289,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ADE456581D13704A00F046DD /* chuckpad-social-ios-test */,
-				4DB1D5041D46E4BC00C2F62E /* chuckpad-unit-tests */,
+				ADE456581D13704A00F046DD /* hello-chuckpad */,
+				4DB1D5041D46E4BC00C2F62E /* unit-tests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,6 +307,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D80F5901D481D82009E5346 /* LICENSE in Resources */,
 				4D4A003E1D46CFD0001FC755 /* PatchListViewController.xib in Resources */,
 				4D4A00411D46CFD0001FC755 /* UserViewController.xib in Resources */,
 				4D4A000B1D46CFD0001FC755 /* pineapple.png in Resources */,
@@ -330,6 +337,7 @@
 				4D4A00401D46CFD0001FC755 /* UserViewController.m in Sources */,
 				4D4A005C1D46CFFE001FC755 /* AFHTTPSessionManager.m in Sources */,
 				4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */,
+				4D80F5911D481D82009E5346 /* README.md in Sources */,
 				4D4A00611D46CFFE001FC755 /* AFURLSessionManager.m in Sources */,
 				4D4A00621D46CFFE001FC755 /* ChuckPadSocial.m in Sources */,
 				4D4A00651D46CFFE001FC755 /* User.m in Sources */,
@@ -347,7 +355,7 @@
 /* Begin PBXTargetDependency section */
 		4DB1D50B1D46E4BC00C2F62E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = ADE456581D13704A00F046DD /* chuckpad-social-ios-test */;
+			target = ADE456581D13704A00F046DD /* hello-chuckpad */;
 			targetProxy = 4DB1D50A1D46E4BC00C2F62E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -357,11 +365,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "chuckpad-unit-tests/Info.plist";
+				INFOPLIST_FILE = "unit-tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "gg.chuckpad-unit-tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "gg.unit-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chuckpad-social-ios-test.app/chuckpad-social-ios-test";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hello-chuckpad.app/hello-chuckpad";
 			};
 			name = Debug;
 		};
@@ -369,11 +377,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "chuckpad-unit-tests/Info.plist";
+				INFOPLIST_FILE = "unit-tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "gg.chuckpad-unit-tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "gg.unit-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chuckpad-social-ios-test.app/chuckpad-social-ios-test";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hello-chuckpad.app/hello-chuckpad";
 			};
 			name = Release;
 		};
@@ -464,11 +472,11 @@
 		ADE456711D13704A00F046DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(SRCROOT)/chuckpad-social-ios-test/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios-test";
-				PRODUCT_NAME = "chuckpad-social-ios-test";
+				PRODUCT_NAME = "hello-chuckpad";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -476,11 +484,11 @@
 		ADE456721D13704A00F046DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "$(SRCROOT)/chuckpad-social-ios-test/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios-test";
-				PRODUCT_NAME = "chuckpad-social-ios-test";
+				PRODUCT_NAME = "hello-chuckpad";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -488,7 +496,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4DB1D50E1D46E4BC00C2F62E /* Build configuration list for PBXNativeTarget "chuckpad-unit-tests" */ = {
+		4DB1D50E1D46E4BC00C2F62E /* Build configuration list for PBXNativeTarget "unit-tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4DB1D50C1D46E4BC00C2F62E /* Debug */,
@@ -497,7 +505,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ADE456541D13704A00F046DD /* Build configuration list for PBXProject "chuckpad-social-ios-test" */ = {
+		ADE456541D13704A00F046DD /* Build configuration list for PBXProject "hello-chuckpad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADE4566E1D13704A00F046DD /* Debug */,
@@ -506,7 +514,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ADE456701D13704A00F046DD /* Build configuration list for PBXNativeTarget "chuckpad-social-ios-test" */ = {
+		ADE456701D13704A00F046DD /* Build configuration list for PBXNativeTarget "hello-chuckpad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADE456711D13704A00F046DD /* Debug */,
