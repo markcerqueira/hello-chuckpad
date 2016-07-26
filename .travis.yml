@@ -17,10 +17,18 @@ before_install:
     
 xcode_project: 
     - chuckpad-social-ios-test.xcodeproj
-    
+
 xcode_scheme: 
     - chuckpad-social-ios
-    
+
 xcode_sdk:
     - iphonesimulator9.3
-        
+
+before_install:
+    - echo "before_install"
+
+after_success:
+    - echo "after_success"
+
+after_failure:
+    - echo "after_failure"
