@@ -10,7 +10,6 @@
 		4D4A00091D46CFD0001FC755 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */; };
 		4D4A000A1D46CFD0001FC755 /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCD1D46CFCF001FC755 /* face.png */; };
 		4D4A000B1D46CFD0001FC755 /* pineapple.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCE1D46CFCF001FC755 /* pineapple.png */; };
-		4D4A003C1D46CFD0001FC755 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A00001D46CFCF001FC755 /* Info.plist */; };
 		4D4A003D1D46CFD0001FC755 /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00021D46CFD0001FC755 /* PatchListViewController.m */; };
 		4D4A003E1D46CFD0001FC755 /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A00031D46CFD0001FC755 /* PatchListViewController.xib */; };
 		4D4A003F1D46CFD0001FC755 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00051D46CFD0001FC755 /* main.m */; };
@@ -27,8 +26,19 @@
 		4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00571D46CFFE001FC755 /* FXKeychain.m */; };
 		4D4A00641D46CFFE001FC755 /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00591D46CFFE001FC755 /* Patch.m */; };
 		4D4A00651D46CFFE001FC755 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A005B1D46CFFE001FC755 /* User.m */; };
+		4DB1D5101D46E4D500C2F62E /* HelloTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* HelloTest.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4DB1D50A1D46E4BC00C2F62E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADE456511D13704A00F046DD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADE456581D13704A00F046DD;
+			remoteInfo = "chuckpad-social-ios-test";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4D4A00001D46CFCF001FC755 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,11 +75,21 @@
 		4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4D4AFFCD1D46CFCF001FC755 /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
 		4D4AFFCE1D46CFCF001FC755 /* pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineapple.png; sourceTree = "<group>"; };
+		4DB1D5051D46E4BC00C2F62E /* chuckpad-unit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "chuckpad-unit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DB1D50F1D46E4D500C2F62E /* HelloTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloTest.m; sourceTree = "<group>"; };
 		4DBA017D1D1A410D00292EB9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		ADE456591D13704A00F046DD /* chuckpad-social-ios-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chuckpad-social-ios-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4DB1D5021D46E4BC00C2F62E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADE456561D13704A00F046DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,11 +182,21 @@
 			path = assets;
 			sourceTree = "<group>";
 		};
+		4DB1D5061D46E4BC00C2F62E /* chuckpad-unit-tests */ = {
+			isa = PBXGroup;
+			children = (
+				4DB1D50F1D46E4D500C2F62E /* HelloTest.m */,
+				4DB1D5091D46E4BC00C2F62E /* Info.plist */,
+			);
+			path = "chuckpad-unit-tests";
+			sourceTree = "<group>";
+		};
 		ADE456501D13704A00F046DD = {
 			isa = PBXGroup;
 			children = (
 				4DBA017D1D1A410D00292EB9 /* Security.framework */,
 				4D4AFFC91D46CFCF001FC755 /* chuckpad-social-ios-test */,
+				4DB1D5061D46E4BC00C2F62E /* chuckpad-unit-tests */,
 				ADE4565A1D13704A00F046DD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -175,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				ADE456591D13704A00F046DD /* chuckpad-social-ios-test.app */,
+				4DB1D5051D46E4BC00C2F62E /* chuckpad-unit-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,6 +213,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4DB1D5041D46E4BC00C2F62E /* chuckpad-unit-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DB1D50E1D46E4BC00C2F62E /* Build configuration list for PBXNativeTarget "chuckpad-unit-tests" */;
+			buildPhases = (
+				4DB1D5011D46E4BC00C2F62E /* Sources */,
+				4DB1D5021D46E4BC00C2F62E /* Frameworks */,
+				4DB1D5031D46E4BC00C2F62E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4DB1D50B1D46E4BC00C2F62E /* PBXTargetDependency */,
+			);
+			name = "chuckpad-unit-tests";
+			productName = "chuckpad-unit-tests";
+			productReference = 4DB1D5051D46E4BC00C2F62E /* chuckpad-unit-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		ADE456581D13704A00F046DD /* chuckpad-social-ios-test */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADE456701D13704A00F046DD /* Build configuration list for PBXNativeTarget "chuckpad-social-ios-test" */;
@@ -207,6 +256,10 @@
 			attributes = {
 				LastUpgradeCheck = 0730;
 				TargetAttributes = {
+					4DB1D5041D46E4BC00C2F62E = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = ADE456581D13704A00F046DD;
+					};
 					ADE456581D13704A00F046DD = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -226,11 +279,19 @@
 			projectRoot = "";
 			targets = (
 				ADE456581D13704A00F046DD /* chuckpad-social-ios-test */,
+				4DB1D5041D46E4BC00C2F62E /* chuckpad-unit-tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4DB1D5031D46E4BC00C2F62E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADE456571D13704A00F046DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,7 +299,6 @@
 				4D4A003E1D46CFD0001FC755 /* PatchListViewController.xib in Resources */,
 				4D4A00411D46CFD0001FC755 /* UserViewController.xib in Resources */,
 				4D4A000B1D46CFD0001FC755 /* pineapple.png in Resources */,
-				4D4A003C1D46CFD0001FC755 /* Info.plist in Resources */,
 				4D4A000A1D46CFD0001FC755 /* face.png in Resources */,
 				4D4A00431D46CFDB001FC755 /* chuck-samples in Resources */,
 			);
@@ -247,6 +307,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4DB1D5011D46E4BC00C2F62E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DB1D5101D46E4D500C2F62E /* HelloTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADE456551D13704A00F046DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,7 +338,39 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4DB1D50B1D46E4BC00C2F62E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADE456581D13704A00F046DD /* chuckpad-social-ios-test */;
+			targetProxy = 4DB1D50A1D46E4BC00C2F62E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		4DB1D50C1D46E4BC00C2F62E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "chuckpad-unit-tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "gg.chuckpad-unit-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chuckpad-social-ios-test.app/chuckpad-social-ios-test";
+			};
+			name = Debug;
+		};
+		4DB1D50D1D46E4BC00C2F62E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "chuckpad-unit-tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "gg.chuckpad-unit-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chuckpad-social-ios-test.app/chuckpad-social-ios-test";
+			};
+			name = Release;
+		};
 		ADE4566E1D13704A00F046DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -382,6 +482,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4DB1D50E1D46E4BC00C2F62E /* Build configuration list for PBXNativeTarget "chuckpad-unit-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DB1D50C1D46E4BC00C2F62E /* Debug */,
+				4DB1D50D1D46E4BC00C2F62E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		ADE456541D13704A00F046DD /* Build configuration list for PBXProject "chuckpad-social-ios-test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
