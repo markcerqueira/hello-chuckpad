@@ -3,17 +3,6 @@ osx_image:
     
 language: 
     - objective-c
-
-# http://stackoverflow.com/a/24600210/265791
-# Handle git submodules yourself
-git:
-    submodules: false
-
-# http://stackoverflow.com/a/24600210/265791
-# Use sed to replace the SSH URL with the public URL, then initialize submodules
-before_install:
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-    - git submodule update --init --recursive
     
 xcode_project: 
     - chuckpad-social-ios-test.xcodeproj
