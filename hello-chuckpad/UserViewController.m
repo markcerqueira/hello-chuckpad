@@ -39,7 +39,7 @@
 }
 
 - (IBAction)changePasswordSubmitPressed:(id)sender {
-    [[ChuckPadSocial sharedInstance] changePassword:self.changePasswordTextField.text withCallback:^(BOOL succeeded, NSError *error) {
+    [[ChuckPadSocial sharedInstance] changePassword:self.changePasswordTextField.text callback:^(BOOL succeeded, NSError *error) {
         NSLog(@"%@", [NSString stringWithFormat:@"changePassword - callback with success = %d", succeeded]);
     }];
 }
@@ -53,8 +53,8 @@
     NSString *username = self.createUserUsernameField.text;
     NSString *email = self.createUserEmailField.text;
     NSString *password = self.createUserPasswordField.text;
-    
-    [[ChuckPadSocial sharedInstance] createUser:username withEmail:email withPassword:password withCallback:^(BOOL success, NSError *error) {
+
+    [[ChuckPadSocial sharedInstance] createUser:username email:email password:password callback:^(BOOL success, NSError *error) {
         NSLog(@"%@", [NSString stringWithFormat:@"createUser - callback with success = %d", success]);
         [self refreshCurrentUserLabel];
     }];
@@ -63,8 +63,8 @@
 - (IBAction)loginSubmitPressed:(id)sender {
     NSString *usernameOrEmail = self.loginUsernameEmailField.text;
     NSString *password = self.loginPasswordField.text;
-    
-    [[ChuckPadSocial sharedInstance] logIn:usernameOrEmail withPassword:password withCallback:^(BOOL success, NSError *error) {
+
+    [[ChuckPadSocial sharedInstance] logIn:usernameOrEmail password:password callback:^(BOOL success, NSError *error) {
         NSLog(@"%@", [NSString stringWithFormat:@"logIn - callback with success = %d", success]);
         [self refreshCurrentUserLabel];
     }];

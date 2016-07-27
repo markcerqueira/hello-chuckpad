@@ -55,21 +55,21 @@
     _username = [[[[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@"iOS"] substringToIndex:12] lowercaseString];
     _password = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
     _email = [NSString stringWithFormat:@"%@@%@.com", _username, _username];
-    
-    [[ChuckPadSocial sharedInstance] createUser:_username withEmail:_email withPassword:_password withCallback:^(BOOL succeeded, NSError *error) {
+
+    [[ChuckPadSocial sharedInstance] createUser:_username email:_email password:_password callback:^(BOOL succeeded, NSError *error) {
         [self postAuthCallAssertsChecks:succeeded];
-        
+
         [expectation1 fulfill];
 
-        [[ChuckPadSocial sharedInstance] logIn:_username withPassword:_password withCallback:^(BOOL succeeded, NSError *error) {
+        [[ChuckPadSocial sharedInstance] logIn:_username password:_password callback:^(BOOL succeeded, NSError *error) {
             // TODO Once logIn supports sending username/email, we can call this method and test logging in with email
             // [self postAuthCallAssertsChecks:succeeded];
-            
+
             XCTAssertTrue([[ChuckPadSocial sharedInstance] isLoggedIn]);
-            
+
             [[ChuckPadSocial sharedInstance] logOut];
             [self doPostLogOutAssertChecks];
-            
+
             [expectation2 fulfill];
         }];
     }];
@@ -86,29 +86,30 @@
     XCTestExpectation *expectation2 = [self expectationWithDescription:@"uploadPatch timed out"];
     XCTestExpectation *expectation3 = [self expectationWithDescription:@"getMyPatches timed out"];
     XCTestExpectation *expectation4 = [self expectationWithDescription:@"getAllPatches timed out"];
-    XCTestExpectation *expectation5 = [self expectationWithDescription:@"getPatchesForUserId timed out"];
+    XCTestExpectation *expectation5 = [self expectationWithDescription:@"updatePatch timed out"];
+    XCTestExpectation *expectation6 = [self expectationWithDescription:@"getPatchesForUserId timed out"];
 
     _username = [[[[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@"iOS"] substringToIndex:12] lowercaseString];
     _password = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
     _email = [NSString stringWithFormat:@"%@@%@.com", _username, _username];
-    
-    [[ChuckPadSocial sharedInstance] createUser:_username withEmail:_email withPassword:_password withCallback:^(BOOL succeeded, NSError *error) {
+
+    [[ChuckPadSocial sharedInstance] createUser:_username email:_email password:_password callback:^(BOOL succeeded, NSError *error) {
         NSString *filename = @"demo0.ck";
         NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
         NSString *filePath = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename];
         NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-        
+
         [expectation1 fulfill];
 
-        [[ChuckPadSocial sharedInstance] uploadPatch:filename isFeatured:NO isDocumentation:YES filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch) {
+        [[ChuckPadSocial sharedInstance] uploadPatch:filename filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
             XCTAssertTrue(succeeded);
 
             XCTAssertTrue(patch != nil);
-            
+
             XCTAssertTrue([patch.name isEqualToString:filename]);
             XCTAssertTrue([patch.creatorUsername isEqualToString:_username]);
             XCTAssertFalse(patch.isFeatured);
-            XCTAssertTrue(patch.isDocumentation);
+            XCTAssertFalse(patch.isDocumentation);
 
             [expectation2 fulfill];
 
@@ -117,26 +118,35 @@
                 XCTAssertTrue([patchesArray count] >= 1);
 
                 [expectation3 fulfill];
-                
+
                 [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
                     XCTAssertTrue(patchesArray != nil);
                     XCTAssertTrue([patchesArray count] >= 1);
-                    
+
                     [expectation4 fulfill];
-                    
+
                     Patch *patch = [patchesArray objectAtIndex:0];
                     _userId = patch.creatorId;
-                
-                    [[ChuckPadSocial sharedInstance] getPatchesForUserId:_userId withCallback:^(NSArray *patchesArray, NSError *error) {
-                        XCTAssertTrue(patchesArray != nil);
-                        XCTAssertTrue([patchesArray count] >= 1);
-                        
-                        for (Patch *patch in patchesArray) {
-                            XCTAssertTrue(patch.creatorId == _userId);
-                            XCTAssertTrue([patch.creatorUsername isEqualToString:_username]);
-                        }
-                        
+
+                    [[ChuckPadSocial sharedInstance] updatePatch:patch hidden:[NSNumber numberWithBool:YES] patchName:@"NewName" filename:nil fileData:nil callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+                        XCTAssertTrue(succeeded);
+                        XCTAssertTrue(patch != nil);
+                        XCTAssertTrue(patch.hidden);
+                        XCTAssertTrue([patch.name isEqualToString:@"NewName"]);
+
                         [expectation5 fulfill];
+                        
+                        [[ChuckPadSocial sharedInstance] getPatchesForUserId:_userId callback:^(NSArray *patchesArray, NSError *error) {
+                            XCTAssertTrue(patchesArray != nil);
+                            XCTAssertTrue([patchesArray count] >= 1);
+                            
+                            for (Patch *patch in patchesArray) {
+                                XCTAssertTrue(patch.creatorId == _userId);
+                                XCTAssertTrue([patch.creatorUsername isEqualToString:_username]);
+                            }
+                            
+                            [expectation6 fulfill];
+                        }];
                     }];
                 }];
             }];
