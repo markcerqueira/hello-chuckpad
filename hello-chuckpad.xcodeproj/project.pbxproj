@@ -29,6 +29,7 @@
 		4D4A00651D46CFFE001FC755 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A005B1D46CFFE001FC755 /* User.m */; };
 		4DB1D5101D46E4D500C2F62E /* ChuckPadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
+		4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC087161D493ED9005F9F70 /* PatchCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB1D50F1D46E4D500C2F62E /* ChuckPadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadTests.m; sourceTree = "<group>"; };
 		4DBA017D1D1A410D00292EB9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4DC087151D493ED9005F9F70 /* PatchCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchCache.h; sourceTree = "<group>"; };
+		4DC087161D493ED9005F9F70 /* PatchCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchCache.m; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* hello-chuckpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-chuckpad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,6 +128,8 @@
 				247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */,
 				4D4A00581D46CFFE001FC755 /* Patch.h */,
 				4D4A00591D46CFFE001FC755 /* Patch.m */,
+				4DC087151D493ED9005F9F70 /* PatchCache.h */,
+				4DC087161D493ED9005F9F70 /* PatchCache.m */,
 				4D4A005A1D46CFFE001FC755 /* User.h */,
 				4D4A005B1D46CFFE001FC755 /* User.m */,
 			);
@@ -339,6 +344,7 @@
 				4D4A00651D46CFFE001FC755 /* User.m in Sources */,
 				4D4A003F1D46CFD0001FC755 /* main.m in Sources */,
 				4D4A005D1D46CFFE001FC755 /* AFNetworkReachabilityManager.m in Sources */,
+				4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */,
 				4D4A003D1D46CFD0001FC755 /* PatchListViewController.m in Sources */,
 				4D4A00641D46CFFE001FC755 /* Patch.m in Sources */,
 				4D4A005F1D46CFFE001FC755 /* AFURLRequestSerialization.m in Sources */,

@@ -11,6 +11,7 @@
 #import "ChuckPadKeychain.h"
 #import "ChuckPadSocial.h"
 #import "Patch.h"
+#import "PatchCache.h"
 
 @interface ChuckPadTests : XCTestCase {
     NSString *_username;
@@ -158,6 +159,23 @@
             NSLog(@"testPatchAPI - error: %@", error);
         }
     }];
+}
+
+- (void)testPatchCache {
+    [[PatchCache sharedInstance] setObject:@"World" forKey:@"Hello" expire:2];
+    [[PatchCache sharedInstance] setObject:@"World" forKey:@"HelloLonger" expire:6];
+
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"Non-existent key"]);
+    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"Hello"]);
+    
+    [NSThread sleepForTimeInterval:4];
+    
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"Hello"]);
+    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"HelloLonger"]);
+
+    [NSThread sleepForTimeInterval:4];
+
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"HelloLonger"]);
 }
 
 - (void)postAuthCallAssertsChecks:(BOOL)succeeded {
