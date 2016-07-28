@@ -89,6 +89,7 @@
     XCTestExpectation *expectation4 = [self expectationWithDescription:@"getAllPatches timed out"];
     XCTestExpectation *expectation5 = [self expectationWithDescription:@"updatePatch timed out"];
     XCTestExpectation *expectation6 = [self expectationWithDescription:@"getPatchesForUserId timed out"];
+    XCTestExpectation *expectation7 = [self expectationWithDescription:@"uploadPatch timed out"];
 
     _username = [[[[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@"iOS"] substringToIndex:12] lowercaseString];
     _password = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
@@ -97,12 +98,13 @@
     [[ChuckPadSocial sharedInstance] createUser:_username email:_email password:_password callback:^(BOOL succeeded, NSError *error) {
         NSString *filename = @"demo0.ck";
         NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
+        NSString *patchDescription = [[NSUUID UUID] UUIDString];
         NSString *filePath = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename];
         NSData *fileData = [NSData dataWithContentsOfFile:filePath];
 
         [expectation1 fulfill];
 
-        [[ChuckPadSocial sharedInstance] uploadPatch:filename filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        [[ChuckPadSocial sharedInstance] uploadPatch:filename description:patchDescription parent:-1 filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
             XCTAssertTrue(succeeded);
 
             XCTAssertTrue(patch != nil);
@@ -111,6 +113,8 @@
             XCTAssertTrue([patch.creatorUsername isEqualToString:_username]);
             XCTAssertFalse(patch.isFeatured);
             XCTAssertFalse(patch.isDocumentation);
+            XCTAssertTrue([patch.patchDescription isEqualToString:patchDescription]);
+            XCTAssertFalse([patch hasParentPatch]);
 
             [expectation2 fulfill];
 
@@ -129,24 +133,42 @@
                     Patch *patch = [patchesArray objectAtIndex:0];
                     _userId = patch.creatorId;
 
-                    [[ChuckPadSocial sharedInstance] updatePatch:patch hidden:[NSNumber numberWithBool:YES] patchName:@"NewName" filename:nil fileData:nil callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+                    [[ChuckPadSocial sharedInstance] updatePatch:patch hidden:[NSNumber numberWithBool:YES] name:@"NewName" description:@"NewDescription" filename:nil fileData:nil callback:^(BOOL succeeded, Patch *patch, NSError *error) {
                         XCTAssertTrue(succeeded);
                         XCTAssertTrue(patch != nil);
                         XCTAssertTrue(patch.hidden);
                         XCTAssertTrue([patch.name isEqualToString:@"NewName"]);
+                        XCTAssertTrue([patch.patchDescription isEqualToString:@"NewDescription"]);
+                        XCTAssertFalse([patch hasParentPatch]);
 
                         [expectation5 fulfill];
-                        
+
                         [[ChuckPadSocial sharedInstance] getPatchesForUserId:_userId callback:^(NSArray *patchesArray, NSError *error) {
                             XCTAssertTrue(patchesArray != nil);
                             XCTAssertTrue([patchesArray count] >= 1);
-                            
+
                             for (Patch *patch in patchesArray) {
                                 XCTAssertTrue(patch.creatorId == _userId);
                                 XCTAssertTrue([patch.creatorUsername isEqualToString:_username]);
                             }
-                            
+
                             [expectation6 fulfill];
+                            
+                            NSString *filename2 = @"alarm.ck";
+                            NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
+                            NSString *filePath2 = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename2];
+                            NSData *fileData2 = [NSData dataWithContentsOfFile:filePath2];
+                            
+                            [[ChuckPadSocial sharedInstance] uploadPatch:nil description:@"DESCT" parent:patch.patchId filename:filename2 fileData:fileData2 callback:^(BOOL succeeded, Patch *patch2, NSError *error) {
+                                XCTAssertTrue(succeeded);
+                                
+                                XCTAssertTrue([patch2.name isEqualToString:@"alarm.ck"]);
+                                XCTAssertTrue([patch2.patchDescription isEqualToString:@"DESCT"]);
+                                XCTAssertTrue([patch2 hasParentPatch]);
+                                XCTAssertTrue(patch2.parentPatchId == patch.patchId);
+                                
+                                [expectation7 fulfill];
+                            }];
                         }];
                     }];
                 }];
