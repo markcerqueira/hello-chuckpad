@@ -50,6 +50,7 @@
 @property(nonatomic, strong) NSData *fileData;
 @property(nonatomic, assign) BOOL hasParent;
 @property(nonatomic, assign) BOOL isHidden;
+@property(nonatomic, assign) NSInteger downloadCount;
 
 @property(nonatomic, strong) Patch *lastServerPatch;
 
@@ -71,6 +72,7 @@
     
     patch.hasParent = NO;
     patch.isHidden = NO;
+    patch.downloadCount = 0;
     
     return patch;
 }
@@ -197,6 +199,9 @@
     // data we uploaded during step 2.
     XCTestExpectation *expectation4 = [self expectationWithDescription:@"downloadPatchResource timed out (4)"];
     [[ChuckPadSocial sharedInstance] downloadPatchResource:localPatch.lastServerPatch callback:^(NSData *patchData, NSError *error) {
+        // We downloaded the patch so we expect subsequent calls to get the patch to have an updated download count
+        localPatch.downloadCount++;
+        
         XCTAssert([localPatch.fileData isEqualToData:patchData]);
         [expectation4 fulfill];
     }];
@@ -293,7 +298,9 @@
     
     XCTAssertTrue(localPatch.isHidden == patch.hidden);
     XCTAssertTrue(localPatch.hasParent == [patch hasParentPatch]);
-
+    
+    XCTAssertTrue(localPatch.downloadCount == patch.downloadCount);
+    
     XCTAssertFalse(patch.isFeatured);
     XCTAssertFalse(patch.isDocumentation);
     
