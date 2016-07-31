@@ -231,7 +231,6 @@
     }];
     [self waitForExpectations];
     
-    
     // 7 - Get all patches API.
     XCTestExpectation *expectation7 = [self expectationWithDescription:@"getAllPatches timed out (7)"];
     [[ChuckPadSocial sharedInstance] getAllPatches:^(NSArray *patchesArray, NSError *error) {
@@ -244,6 +243,41 @@
         [expectation7 fulfill];
     }];
     [self waitForExpectations];
+}
+
+- (void)testPatchCache {
+    [[PatchCache sharedInstance] setObject:@"World" forKey:@"1-seconds" expire:1];
+    [[PatchCache sharedInstance] setObject:@"World" forKey:@"4-seconds" expire:4];
+    [[PatchCache sharedInstance] setObject:@"World" forKey:@"60-seconds" expire:60];
+    
+    // A key that does not map to anything should return nil
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"Non-existent key"]);
+    
+    // No time has advanced so all these should return valid, non-nil objects
+    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
+    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
+    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
+    
+    [NSThread sleepForTimeInterval:2];
+    
+    // Our object for "1-seconds" should have expired because 2 seconds have passed
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
+    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
+    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
+    
+    [NSThread sleepForTimeInterval:3];
+    
+    // Now our object for "4-seconds" should also have expired because 5 seconds have passed
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
+    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
+    
+    [[PatchCache sharedInstance] removeAllObjects];
+    
+    // All objects removed so everything should return nil
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
+    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
 }
 
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {
@@ -267,41 +301,12 @@
     // have the option of mutating the server patch in subsequent tests. NOTE: lastServerPatch should NEVER be
     // mutated locally. It should simply be used to pass into API calls.
     localPatch.lastServerPatch = patch;
-}
-
-- (void)testPatchCache {
-    [[PatchCache sharedInstance] setObject:@"World" forKey:@"1-seconds" expire:1];
-    [[PatchCache sharedInstance] setObject:@"World" forKey:@"4-seconds" expire:4];
-    [[PatchCache sharedInstance] setObject:@"World" forKey:@"60-seconds" expire:60];
-
-    // A key that does not map to anything should return nil
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"Non-existent key"]);
     
-    // No time has advanced so all these should return valid, non-nil objects
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
-
-    [NSThread sleepForTimeInterval:2];
-    
-    // Our object for "1-seconds" should have expired because 2 seconds have passed
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
-
-    [NSThread sleepForTimeInterval:3];
-    
-    // Now our object for "4-seconds" should also have expired because 5 seconds have passed
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
-    
-    [[PatchCache sharedInstance] removeAllObjects];
-    
-    // All objects removed so everything should return nil
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
+    // For every assert patch operation convert that patch to a dictionary and then initialize a new patch with that
+    // dictionary. Assert both patches are equal.
+    NSDictionary *patchAsDictionary = [localPatch.lastServerPatch asDictionary];
+    Patch *patchFromDictionary = [[Patch alloc] initWithDictionary:patchAsDictionary];
+    XCTAssertTrue([patchFromDictionary isEqual:localPatch.lastServerPatch]);
 }
 
 // Verifies logged in user state is consistent, logs out the user, and verifies logged out state is consistent.
