@@ -20,6 +20,7 @@
 @property(nonatomic, strong) NSString *username;
 @property(nonatomic, strong) NSString *password;
 @property(nonatomic, strong) NSString *email;
+@property(nonatomic, assign) NSInteger totalPatches;
 
 @end
 
@@ -31,6 +32,7 @@
     user.username = [[[[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@"iOS"] substringToIndex:12] lowercaseString];
     user.password = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
     user.email = [NSString stringWithFormat:@"%@@%@.com", user.username, user.username];
+    user.totalPatches = 0;
     
     return user;
 }
@@ -132,14 +134,15 @@
     }];
 }
 
-- (void)testUserRegisterAndLoginAPI {
+- (void)testUserAPI {
     // Generate a user with credentials locally. We will register a new user and log in using these credentials.
     ChuckPadUser *user = [ChuckPadUser generateUser];
 
     // 1 - Register a user
     XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
-        [self postAuthCallAssertsChecks:succeeded user:user];
+        // Log out in this check so we can test logging in next
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
         [expectation1 fulfill];
     }];
     [self waitForExpectations];
@@ -147,8 +150,24 @@
     // 2 - Log in as the user we created
     XCTestExpectation *expectation2 = [self expectationWithDescription:@"logIn timed out (2)"];
     [[ChuckPadSocial sharedInstance] logIn:user.username password:user.password callback:^(BOOL succeeded, NSError *error) {
-        [self postAuthCallAssertsChecks:succeeded user:user];
+        // Do not log in because we are going to change the password in the next call
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
         [expectation2 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // 3 - Change the user's password
+    NSString *newPassword = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    XCTestExpectation *expectation3 = [self expectationWithDescription:@"changePassword timed out (3)"];
+    [[ChuckPadSocial sharedInstance] changePassword:newPassword callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        
+        // Update the local user
+        user.password = newPassword;
+        
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
+        
+        [expectation3 fulfill];
     }];
     [self waitForExpectations];
 }
@@ -168,6 +187,8 @@
     ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
     XCTestExpectation *expectation2 = [self expectationWithDescription:@"uploadPatch timed out (2)"];
     [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        user.totalPatches++;
+        
         XCTAssertTrue(succeeded);
         
         // Assert our username and owner username of patch match and once we confirm that is the case, update our local
@@ -187,7 +208,7 @@
     XCTestExpectation *expectation3 = [self expectationWithDescription:@"getMyPatches timed out (3)"];
     [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
         XCTAssertTrue(patchesArray != nil);
-        XCTAssertTrue([patchesArray count] == 1);
+        XCTAssertTrue([patchesArray count] == user.totalPatches);
         
         [self assertPatch:[patchesArray objectAtIndex:0] localPatch:localPatch isConsistentForUser:user];
         
@@ -228,7 +249,7 @@
     XCTestExpectation *expectation6 = [self expectationWithDescription:@"getPatchesForUserId timed out (6)"];
     [[ChuckPadSocial sharedInstance] getPatchesForUserId:[user.userId integerValue] callback:^(NSArray *patchesArray, NSError *error) {
         XCTAssertTrue(patchesArray != nil);
-        XCTAssertTrue([patchesArray count] == 1);
+        XCTAssertTrue([patchesArray count] == user.totalPatches);
         
         [self assertPatch:[patchesArray objectAtIndex:0] localPatch:localPatch isConsistentForUser:user];
 
@@ -248,6 +269,26 @@
         [expectation7 fulfill];
     }];
     [self waitForExpectations];
+
+    // 8 - Delete the patch we uploaded in step 2.
+    XCTestExpectation *expectation8 = [self expectationWithDescription:@"deletePatch timed out (8)"];
+    [[ChuckPadSocial sharedInstance] deletePatch:localPatch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        
+        // We deleted a patch so decrease our local count of our total patch count
+        user.totalPatches--;
+        
+        // Assert our patch count is correct
+        [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
+            XCTAssertTrue(patchesArray != nil);
+            XCTAssertTrue([patchesArray count] == user.totalPatches);
+            
+            [expectation8 fulfill];
+        }];
+    }];
+
+    [self waitForExpectations];
+
 }
 
 - (void)testPatchCache {
@@ -317,12 +358,15 @@
 }
 
 // Verifies logged in user state is consistent, logs out the user, and verifies logged out state is consistent.
-- (void)postAuthCallAssertsChecks:(BOOL)succeeded user:(ChuckPadUser *)user {
+- (void)postAuthCallAssertsChecks:(BOOL)succeeded user:(ChuckPadUser *)user logOut:(BOOL)logOut {
     XCTAssertTrue(succeeded);
 
     [self doPostAuthAssertChecks:user];
-    [[ChuckPadSocial sharedInstance] logOut];
-    [self doPostLogOutAssertChecks];
+
+    if (logOut) {
+        [[ChuckPadSocial sharedInstance] logOut];
+        [self doPostLogOutAssertChecks];
+    }
 }
 
 // Once a user logs in this asserts that ChuckPadSocial is in a consistent state for the user that just logged in.
