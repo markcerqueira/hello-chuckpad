@@ -92,7 +92,7 @@
 - (IBAction)allPressed:(id)sender {
     [self showLoadingPatchesView];
 
-    [[ChuckPadSocial sharedInstance] getAllPatches:^(NSArray *patchesArray, NSError *error) {
+    [[ChuckPadSocial sharedInstance] getRecentPatches:^(NSArray *patchesArray, NSError *error) {
         [self patchLoadingCompletion:patchesArray withError:error];
     }];
 }

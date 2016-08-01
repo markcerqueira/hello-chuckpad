@@ -267,15 +267,15 @@
     }];
     [self waitForExpectations];
     
-    // 7 - Get all patches API.
+    // 7 - Get recent patches API.
     XCTestExpectation *expectation7 = [self expectationWithDescription:@"getAllPatches timed out (7)"];
-    [[ChuckPadSocial sharedInstance] getAllPatches:^(NSArray *patchesArray, NSError *error) {
+    [[ChuckPadSocial sharedInstance] getRecentPatches:^(NSArray *patchesArray, NSError *error) {
         XCTAssertTrue(patchesArray != nil);
-        
+
         // We do greater than or equal to 1 because unless the environment has been wiped clean, we will likely have
         // more than one patch.
         XCTAssertTrue([patchesArray count] >= 1);
-        
+
         [expectation7 fulfill];
     }];
     [self waitForExpectations];
