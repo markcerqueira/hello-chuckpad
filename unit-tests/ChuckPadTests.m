@@ -11,6 +11,7 @@
 
 #import "ChuckPadKeychain.h"
 #import "ChuckPadSocial.h"
+#import "NSDate+Helper.h"
 #import "Patch.h"
 #import "PatchCache.h"
 
@@ -191,6 +192,13 @@
         
         XCTAssertTrue(succeeded);
         
+        // Verify times are accurate on patch created
+        NSString *now = [NSDate stringFromDate:[NSDate date] withFormat:@"h:mm a"];
+        NSString *timeCreated = [patch getTimeCreatedWithPrefix:NO];
+        NSString *timeUpdated = [patch getTimeLastUpdatedWithPrefix:NO];
+        XCTAssertTrue([now isEqualToString:timeCreated]);
+        XCTAssertTrue([now isEqualToString:timeUpdated]);
+
         // Assert our username and owner username of patch match and once we confirm that is the case, update our local
         // user object with its user id.
         XCTAssertTrue([patch.creatorUsername isEqualToString:user.username]);
@@ -238,6 +246,8 @@
         XCTAssertTrue(succeeded);
 
         [self assertPatch:patch localPatch:localPatch isConsistentForUser:user];
+        
+        XCTAssertTrue([[NSDate stringFromDate:[NSDate date] withFormat:@"h:mm a"] isEqualToString:[patch getTimeLastUpdatedWithPrefix:NO]]);
         
         [expectation5 fulfill];
     }];

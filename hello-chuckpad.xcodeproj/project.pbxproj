@@ -27,6 +27,7 @@
 		4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00571D46CFFE001FC755 /* FXKeychain.m */; };
 		4D4A00641D46CFFE001FC755 /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00591D46CFFE001FC755 /* Patch.m */; };
 		4D4A00651D46CFFE001FC755 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A005B1D46CFFE001FC755 /* User.m */; };
+		4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */; };
 		4DB1D5101D46E4D500C2F62E /* ChuckPadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
 		4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC087161D493ED9005F9F70 /* PatchCache.m */; };
@@ -81,6 +82,8 @@
 		4D4AFFCE1D46CFCF001FC755 /* pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineapple.png; sourceTree = "<group>"; };
 		4D80F58E1D481D82009E5346 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4D80F58F1D481D82009E5346 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		4D817D5D1D4F1A67001FE6F2 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
+		4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		4DB1D5051D46E4BC00C2F62E /* unit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "unit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB1D50F1D46E4D500C2F62E /* ChuckPadTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadTests.m; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 			children = (
 				4D4A00451D46CFFE001FC755 /* AFNetworking */,
 				4D4A00551D46CFFE001FC755 /* FXKeychain */,
+				4D817D5B1D4F1A67001FE6F2 /* NSDate+Helper */,
 				4D4A00531D46CFFE001FC755 /* ChuckPadSocial.h */,
 				4D4A00541D46CFFE001FC755 /* ChuckPadSocial.m */,
 				247AEA5395F87953FB3F1A7A /* ChuckPadKeychain.h */,
@@ -194,6 +198,15 @@
 				4D4AFFCE1D46CFCF001FC755 /* pineapple.png */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		4D817D5B1D4F1A67001FE6F2 /* NSDate+Helper */ = {
+			isa = PBXGroup;
+			children = (
+				4D817D5D1D4F1A67001FE6F2 /* NSDate+Helper.h */,
+				4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */,
+			);
+			path = "NSDate+Helper";
 			sourceTree = "<group>";
 		};
 		4DB1D5061D46E4BC00C2F62E /* unit-tests */ = {
@@ -342,6 +355,7 @@
 				4D4A00611D46CFFE001FC755 /* AFURLSessionManager.m in Sources */,
 				4D4A00621D46CFFE001FC755 /* ChuckPadSocial.m in Sources */,
 				4D4A00651D46CFFE001FC755 /* User.m in Sources */,
+				4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */,
 				4D4A003F1D46CFD0001FC755 /* main.m in Sources */,
 				4D4A005D1D46CFFE001FC755 /* AFNetworkReachabilityManager.m in Sources */,
 				4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */,
