@@ -1,7 +1,6 @@
 //
-//  ChuckPadTests.m
-//  chuckpad-social-ios-test
-//
+//  ChuckPadServiceTests.m
+//  hello-chuckpad
 //  Created by Mark Cerqueira on 7/25/16.
 //
 //  NOTE: These tests run against the chuckpad-social server running locally on your machine. To run the chuckpad-social
@@ -92,17 +91,17 @@
 @end
 
 
-@interface ChuckPadTests : XCTestCase
+@interface ChuckPadServiceTests : XCTestCase
 
 @end
 
-@implementation ChuckPadTests
+@implementation ChuckPadServiceTests
 
 - (void)setUp {
     [super setUp];
     
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    [[ChuckPadSocial sharedInstance] setEnvironmentToDebug];
+    [[ChuckPadSocial sharedInstance] setEnvironment:Local];
     [[ChuckPadSocial sharedInstance] logOut];
 }
 
@@ -111,16 +110,6 @@
     [[ChuckPadSocial sharedInstance] logOut];
     
     [super tearDown];
-}
-
-- (void)testToggleEnvironmentUrl {
-    NSString *url = [[ChuckPadSocial sharedInstance] getBaseUrl];
-    
-    [[ChuckPadSocial sharedInstance] toggleEnvironment];
-
-    NSString *toggledUrl = [[ChuckPadSocial sharedInstance] getBaseUrl];
-    
-    XCTAssertFalse([url isEqualToString:toggledUrl], @"Base URL did not change after toggle environment call");
 }
 
 - (void)waitForExpectations {
@@ -217,8 +206,8 @@
     [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
         XCTAssertTrue(patchesArray != nil);
         XCTAssertTrue([patchesArray count] == user.totalPatches);
-        
-        [self assertPatch:[patchesArray objectAtIndex:0] localPatch:localPatch isConsistentForUser:user];
+
+        [self assertPatch:patchesArray[0] localPatch:localPatch isConsistentForUser:user];
         
         [expectation3 fulfill];
     }];
@@ -260,8 +249,8 @@
     [[ChuckPadSocial sharedInstance] getPatchesForUserId:[user.userId integerValue] callback:^(NSArray *patchesArray, NSError *error) {
         XCTAssertTrue(patchesArray != nil);
         XCTAssertTrue([patchesArray count] == user.totalPatches);
-        
-        [self assertPatch:[patchesArray objectAtIndex:0] localPatch:localPatch isConsistentForUser:user];
+
+        [self assertPatch:patchesArray[0] localPatch:localPatch isConsistentForUser:user];
 
         [expectation6 fulfill];
     }];
@@ -299,41 +288,6 @@
 
     [self waitForExpectations];
 
-}
-
-- (void)testPatchCache {
-    [[PatchCache sharedInstance] setObject:@"World" forKey:@"1-seconds" expire:1];
-    [[PatchCache sharedInstance] setObject:@"World" forKey:@"4-seconds" expire:4];
-    [[PatchCache sharedInstance] setObject:@"World" forKey:@"60-seconds" expire:60];
-    
-    // A key that does not map to anything should return nil
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"Non-existent key"]);
-    
-    // No time has advanced so all these should return valid, non-nil objects
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
-    
-    [NSThread sleepForTimeInterval:2];
-    
-    // Our object for "1-seconds" should have expired because 2 seconds have passed
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
-    
-    [NSThread sleepForTimeInterval:3];
-    
-    // Now our object for "4-seconds" should also have expired because 5 seconds have passed
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
-    XCTAssertNotNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
-    
-    [[PatchCache sharedInstance] removeAllObjects];
-    
-    // All objects removed so everything should return nil
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"1-seconds"]);
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"4-seconds"]);
-    XCTAssertNil([[PatchCache sharedInstance] objectForKey:@"60-seconds"]);
 }
 
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {
