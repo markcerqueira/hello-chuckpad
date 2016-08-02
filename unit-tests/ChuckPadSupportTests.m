@@ -12,6 +12,9 @@
 #import "ChuckPadKeychain.h"
 #import "ChuckPadSocial.h"
 #import "PatchCache.h"
+#import "User.h"
+
+#include <stdlib.h>
 
 @interface ChuckPadSupportTests : XCTestCase
 
@@ -36,9 +39,14 @@
         
         NSString *environmentUrl = (NSString *)[environmentUrls objectAtIndex:i];
         
-        [[ChuckPadKeychain sharedInstance] authComplete:[NSString stringWithFormat:@"%@%@", environmentUrl, @"username"]
-                                              withEmail:[NSString stringWithFormat:@"%@%@", environmentUrl, @"email"]
-                                           withPassword:[NSString stringWithFormat:@"%@%@", environmentUrl, @"password"]];
+        User *user = [[User alloc] init];
+        user.userId = arc4random_uniform(9001);
+        user.username = [NSString stringWithFormat:@"%@%@", environmentUrl, @"username"];
+        user.email = [NSString stringWithFormat:@"%@%@", environmentUrl, @"email"];
+
+        NSString *password = [NSString stringWithFormat:@"%@%@", environmentUrl, @"password"];
+        
+        [[ChuckPadKeychain sharedInstance] authSucceededWithUser:user password:password];
         
         XCTAssertTrue([[ChuckPadSocial sharedInstance] isLoggedIn]);
     }
