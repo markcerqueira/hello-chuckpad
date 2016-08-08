@@ -160,6 +160,38 @@
         [expectation3 fulfill];
     }];
     [self waitForExpectations];
+
+    // 4 - Log in again with the updated password
+    XCTestExpectation *expectation4 = [self expectationWithDescription:@"logIn timed out (4)"];
+    [[ChuckPadSocial sharedInstance] logIn:user.username password:user.password callback:^(BOOL succeeded, NSError *error) {
+        // Do not log in because we are going to change the password in the next call
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
+        [expectation4 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // Log out of our existing user
+    [[ChuckPadSocial sharedInstance] logOut];
+    
+    // 5 - Try to create another user with the same email. Note we purposefully use user.email below instead of user2.email
+    ChuckPadUser *user2 = [ChuckPadUser generateUser];
+    XCTestExpectation *expectation5 = [self expectationWithDescription:@"createUser timed out (5)"];
+    [[ChuckPadSocial sharedInstance] createUser:user2.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email`"]);
+        [expectation5 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // 6 - Try to create another user with the same username. Note we purposefully use user.username below instead of user2.username
+    [[ChuckPadSocial sharedInstance] logOut];
+    XCTestExpectation *expectation6 = [self expectationWithDescription:@"createUser timed out (6)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user2.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
+        [expectation6 fulfill];
+    }];
+    [self waitForExpectations];
 }
 
 - (void)testPatchAPI {
