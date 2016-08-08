@@ -178,18 +178,29 @@
     XCTestExpectation *expectation5 = [self expectationWithDescription:@"createUser timed out (5)"];
     [[ChuckPadSocial sharedInstance] createUser:user2.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email`"]);
+        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
+        XCTAssertFalse([[error localizedDescription] containsString:@"username"]);
         [expectation5 fulfill];
     }];
     [self waitForExpectations];
     
     // 6 - Try to create another user with the same username. Note we purposefully use user.username below instead of user2.username
-    [[ChuckPadSocial sharedInstance] logOut];
     XCTestExpectation *expectation6 = [self expectationWithDescription:@"createUser timed out (6)"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user2.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
         XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
+        XCTAssertFalse([[error localizedDescription] containsString:@"email"]);
         [expectation6 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // 7 - Try to create another user with the same username and email. The returned error should mention both email and username
+    XCTestExpectation *expectation7 = [self expectationWithDescription:@"createUser timed out (7)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
+        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
+        [expectation7 fulfill];
     }];
     [self waitForExpectations];
 }
