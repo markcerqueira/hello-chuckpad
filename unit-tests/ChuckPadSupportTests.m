@@ -43,10 +43,9 @@
         user.userId = arc4random_uniform(9001);
         user.username = [NSString stringWithFormat:@"%@%@", environmentUrl, @"username"];
         user.email = [NSString stringWithFormat:@"%@%@", environmentUrl, @"email"];
-
-        NSString *password = [NSString stringWithFormat:@"%@%@", environmentUrl, @"password"];
+        user.authToken = [NSString stringWithFormat:@"%@%@", environmentUrl, @"authToken"];
         
-        [[ChuckPadKeychain sharedInstance] authSucceededWithUser:user password:password];
+        [[ChuckPadKeychain sharedInstance] authSucceededWithUser:user];
         
         XCTAssertTrue([[ChuckPadSocial sharedInstance] isLoggedIn]);
     }

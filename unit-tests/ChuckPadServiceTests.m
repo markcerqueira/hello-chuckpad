@@ -338,9 +338,9 @@
     XCTAssertTrue([[ChuckPadSocial sharedInstance] isLoggedIn]);
 
     XCTAssertTrue([user.username isEqualToString:[[ChuckPadSocial sharedInstance] getLoggedInUserName]]);
-
     XCTAssertTrue([user.username isEqualToString:[[ChuckPadKeychain sharedInstance] getLoggedInUserName]]);
-    XCTAssertTrue([user.password isEqualToString:[[ChuckPadKeychain sharedInstance] getLoggedInPassword]]);
+    
+    XCTAssertTrue([user.email isEqualToString:[[ChuckPadSocial sharedInstance] getLoggedInEmail]]);
     XCTAssertTrue([user.email isEqualToString:[[ChuckPadKeychain sharedInstance] getLoggedInEmail]]);
 }
 
@@ -349,7 +349,7 @@
     XCTAssertFalse([[ChuckPadSocial sharedInstance] isLoggedIn]);
 
     XCTAssertTrue([[ChuckPadKeychain sharedInstance] getLoggedInUserName] == nil);
-    XCTAssertTrue([[ChuckPadKeychain sharedInstance] getLoggedInPassword] == nil);
+    XCTAssertTrue([[ChuckPadKeychain sharedInstance] getLoggedInAuthToken] == nil);
     XCTAssertTrue([[ChuckPadKeychain sharedInstance] getLoggedInEmail] == nil);
 }
 

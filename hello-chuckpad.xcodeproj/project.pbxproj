@@ -92,6 +92,7 @@
 		4DC087151D493ED9005F9F70 /* PatchCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchCache.h; sourceTree = "<group>"; };
 		4DC087161D493ED9005F9F70 /* PatchCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchCache.m; sourceTree = "<group>"; };
 		4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSupportTests.m; sourceTree = "<group>"; };
+		ADD984B11DA898F50060B761 /* hello-chuckpad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "hello-chuckpad.entitlements"; path = "../hello-chuckpad.entitlements"; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* hello-chuckpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-chuckpad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -117,6 +118,7 @@
 		4D4A00041D46CFD0001FC755 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ADD984B11DA898F50060B761 /* hello-chuckpad.entitlements */,
 				4D4A00051D46CFD0001FC755 /* main.m */,
 			);
 			path = "Supporting Files";
@@ -292,6 +294,12 @@
 					};
 					ADE456581D13704A00F046DD = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 5R7XCYCEDG;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -492,6 +500,8 @@
 		ADE456711D13704A00F046DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "hello-chuckpad/hello-chuckpad.entitlements";
+				DEVELOPMENT_TEAM = 5R7XCYCEDG;
 				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -504,6 +514,8 @@
 		ADE456721D13704A00F046DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "hello-chuckpad/hello-chuckpad.entitlements";
+				DEVELOPMENT_TEAM = 5R7XCYCEDG;
 				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

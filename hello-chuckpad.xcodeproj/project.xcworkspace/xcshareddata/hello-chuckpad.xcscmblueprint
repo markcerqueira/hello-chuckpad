@@ -9,8 +9,8 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3D668F0C-89EF-46EA-BF08-77939661E20F",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "DDDE5888A064D60852488840DAEE37DB9B07E175" : "chuckpad-social-ios-test\/chuckpad-social-ios-test\/chuckpad-social-ios\/",
-    "A2AFCA43C8B33FC5A327127F89DEC7309FBA22E0" : "chuckpad-social-ios-test\/"
+    "DDDE5888A064D60852488840DAEE37DB9B07E175" : "hello-chuckpad\/hello-chuckpad\/chuckpad-social-ios\/",
+    "A2AFCA43C8B33FC5A327127F89DEC7309FBA22E0" : "hello-chuckpad\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "hello-chuckpad",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
