@@ -38,7 +38,7 @@
 }
 
 - (void)updateUserId:(NSInteger)userId {
-    self.userId = [NSNumber numberWithInt:userId];
+    self.userId = @(userId);
 }
 
 @end
@@ -52,6 +52,7 @@
 @property(nonatomic, strong) NSData *fileData;
 @property(nonatomic, assign) BOOL hasParent;
 @property(nonatomic, assign) BOOL isHidden;
+@property(nonatomic, assign) NSInteger abuseReportCount;
 @property(nonatomic, assign) NSInteger downloadCount;
 
 @property(nonatomic, strong) Patch *lastServerPatch;
@@ -75,6 +76,7 @@
     patch.hasParent = NO;
     patch.isHidden = NO;
     patch.downloadCount = 0;
+    patch.abuseReportCount = 0;
     
     return patch;
 }
@@ -300,20 +302,30 @@
     [self waitForExpectations];
     
     // 7 - Get recent patches API.
-    XCTestExpectation *expectation7 = [self expectationWithDescription:@"getAllPatches timed out (7)"];
+    XCTestExpectation *expectation7 = [self expectationWithDescription:@"getRecentPatches timed out (7)"];
     [[ChuckPadSocial sharedInstance] getRecentPatches:^(NSArray *patchesArray, NSError *error) {
         XCTAssertTrue(patchesArray != nil);
 
-        // We do greater than or equal to 1 because unless the environment has been wiped clean, we will likely have
-        // more than one patch.
-        XCTAssertTrue([patchesArray count] >= 1);
+        // If the environment was wiped clean recently we will have 0 patches returned by this API.
+        XCTAssertTrue([patchesArray count] >= 0);
 
         [expectation7 fulfill];
     }];
     [self waitForExpectations];
 
-    // 8 - Delete the patch we uploaded in step 2.
-    XCTestExpectation *expectation8 = [self expectationWithDescription:@"deletePatch timed out (8)"];
+    // 8 - Report a patch as abusive
+    XCTestExpectation *expectation8 = [self expectationWithDescription:@"reportAbuse timed out (8)"];
+    [[ChuckPadSocial sharedInstance] reportAbuse:localPatch.lastServerPatch isAbuse:YES callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        
+        localPatch.lastServerPatch.abuseReportCount++;
+        
+        [expectation8 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // 9 - Delete the patch we uploaded in step 2.
+    XCTestExpectation *expectation9 = [self expectationWithDescription:@"deletePatch timed out (9)"];
     [[ChuckPadSocial sharedInstance] deletePatch:localPatch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
         XCTAssertTrue(succeeded);
         
@@ -325,12 +337,10 @@
             XCTAssertTrue(patchesArray != nil);
             XCTAssertTrue([patchesArray count] == user.totalPatches);
             
-            [expectation8 fulfill];
+            [expectation9 fulfill];
         }];
     }];
-
     [self waitForExpectations];
-
 }
 
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {
@@ -348,6 +358,7 @@
     XCTAssertTrue(localPatch.hasParent == [patch hasParentPatch]);
     
     XCTAssertTrue(localPatch.downloadCount == patch.downloadCount);
+    XCTAssertTrue(localPatch.abuseReportCount == patch.abuseReportCount);
     
     XCTAssertFalse(patch.isFeatured);
     XCTAssertFalse(patch.isDocumentation);

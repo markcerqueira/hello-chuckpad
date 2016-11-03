@@ -32,6 +32,7 @@
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
 		4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC087161D493ED9005F9F70 /* PatchCache.m */; };
 		4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */; };
+		AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		4DC087151D493ED9005F9F70 /* PatchCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchCache.h; sourceTree = "<group>"; };
 		4DC087161D493ED9005F9F70 /* PatchCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchCache.m; sourceTree = "<group>"; };
 		4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSupportTests.m; sourceTree = "<group>"; };
+		AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ADD984B11DA898F50060B761 /* hello-chuckpad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "hello-chuckpad.entitlements"; path = "../hello-chuckpad.entitlements"; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* hello-chuckpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-chuckpad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -226,6 +228,7 @@
 		ADE456501D13704A00F046DD = {
 			isa = PBXGroup;
 			children = (
+				AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */,
 				4DBA017D1D1A410D00292EB9 /* Security.framework */,
 				4D4AFFC91D46CFCF001FC755 /* hello-chuckpad */,
 				4DB1D5061D46E4BC00C2F62E /* unit-tests */,
@@ -286,7 +289,7 @@
 		ADE456511D13704A00F046DD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				TargetAttributes = {
 					4DB1D5041D46E4BC00C2F62E = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -339,6 +342,7 @@
 				4D4A000B1D46CFD0001FC755 /* pineapple.png in Resources */,
 				4D4A000A1D46CFD0001FC755 /* face.png in Resources */,
 				4D4A00431D46CFDB001FC755 /* chuck-samples in Resources */,
+				AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,8 +431,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -472,8 +478,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
