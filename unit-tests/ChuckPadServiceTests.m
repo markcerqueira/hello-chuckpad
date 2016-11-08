@@ -324,8 +324,40 @@
     }];
     [self waitForExpectations];
     
-    // 9 - Delete the patch we uploaded in step 2.
-    XCTestExpectation *expectation9 = [self expectationWithDescription:@"deletePatch timed out (9)"];
+    // 9 - Check patch metadata to ensure abuse count has been incremented
+    XCTestExpectation *expectation9 = [self expectationWithDescription:@"getPatchInfo timed out (9)"];
+    [[ChuckPadSocial sharedInstance] getPatchInfo:localPatch.lastServerPatch.patchId callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertTrue(succeeded);
+
+        XCTAssertTrue(patch.abuseReportCount == 1);
+        
+        [expectation9 fulfill];
+    }];
+    
+    // 10 - Now unreport the patch as abusive
+    XCTestExpectation *expectation10 = [self expectationWithDescription:@"reportAbuse timed out (10)"];
+    [[ChuckPadSocial sharedInstance] reportAbuse:localPatch.lastServerPatch isAbuse:NO callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        
+        localPatch.lastServerPatch.abuseReportCount--;
+        
+        [expectation10 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // 11 - And now verify the patch metadata has been updated to have 0 abuse reports
+    XCTestExpectation *expectation11 = [self expectationWithDescription:@"getPatchInfo timed out (11)"];
+    [[ChuckPadSocial sharedInstance] getPatchInfo:localPatch.lastServerPatch.patchId callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertTrue(succeeded);
+        
+        XCTAssertTrue(patch.abuseReportCount == 0);
+        
+        [expectation11 fulfill];
+    }];
+    [self waitForExpectations];
+
+    // 12 - Delete the patch we uploaded in step 2.
+    XCTestExpectation *expectation12 = [self expectationWithDescription:@"deletePatch timed out (12)"];
     [[ChuckPadSocial sharedInstance] deletePatch:localPatch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
         XCTAssertTrue(succeeded);
         
@@ -337,7 +369,7 @@
             XCTAssertTrue(patchesArray != nil);
             XCTAssertTrue([patchesArray count] == user.totalPatches);
             
-            [expectation9 fulfill];
+            [expectation12 fulfill];
         }];
     }];
     [self waitForExpectations];
