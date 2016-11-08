@@ -318,7 +318,7 @@
     [[ChuckPadSocial sharedInstance] reportAbuse:localPatch.lastServerPatch isAbuse:YES callback:^(BOOL succeeded, NSError *error) {
         XCTAssertTrue(succeeded);
         
-        localPatch.lastServerPatch.abuseReportCount++;
+        localPatch.abuseReportCount++;
         
         [expectation8 fulfill];
     }];
@@ -329,7 +329,7 @@
     [[ChuckPadSocial sharedInstance] getPatchInfo:localPatch.lastServerPatch.patchId callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertTrue(succeeded);
 
-        XCTAssertTrue(patch.abuseReportCount == 1);
+        [self assertPatch:patch localPatch:localPatch isConsistentForUser:user];
         
         [expectation9 fulfill];
     }];
@@ -339,7 +339,7 @@
     [[ChuckPadSocial sharedInstance] reportAbuse:localPatch.lastServerPatch isAbuse:NO callback:^(BOOL succeeded, NSError *error) {
         XCTAssertTrue(succeeded);
         
-        localPatch.lastServerPatch.abuseReportCount--;
+        localPatch.abuseReportCount--;
         
         [expectation10 fulfill];
     }];
@@ -349,8 +349,8 @@
     XCTestExpectation *expectation11 = [self expectationWithDescription:@"getPatchInfo timed out (11)"];
     [[ChuckPadSocial sharedInstance] getPatchInfo:localPatch.lastServerPatch.patchId callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertTrue(succeeded);
-        
-        XCTAssertTrue(patch.abuseReportCount == 0);
+
+        [self assertPatch:patch localPatch:localPatch isConsistentForUser:user];
         
         [expectation11 fulfill];
     }];
