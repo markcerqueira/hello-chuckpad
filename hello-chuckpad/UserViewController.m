@@ -45,8 +45,9 @@
 }
 
 - (IBAction)logoutPressed:(id)sender {
-    [[ChuckPadSocial sharedInstance] logOut];
-    [self refreshCurrentUserLabel];
+    [[ChuckPadSocial sharedInstance] logOut:^(BOOL succeeded, NSError *error) {
+        [self refreshCurrentUserLabel];
+    }];
 }
 
 - (IBAction)createUserPressed:(id)sender {

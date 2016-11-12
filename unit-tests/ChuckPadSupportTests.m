@@ -53,7 +53,7 @@
     for (NSInteger i = 0; i < [environmentEnums count]; i++) {
         [[ChuckPadSocial sharedInstance] setEnvironment:(Environment)[[environmentEnums objectAtIndex:i] integerValue]];
         XCTAssertTrue([[ChuckPadSocial sharedInstance] isLoggedIn]);
-        [[ChuckPadSocial sharedInstance] logOut];
+        [[ChuckPadSocial sharedInstance] localLogOut];
     }
     
     for (NSInteger i = 0; i < [environmentEnums count]; i++) {

@@ -104,12 +104,12 @@
     
     // Put setup code here. This method is called before the invocation of each test method in the class.
     [[ChuckPadSocial sharedInstance] setEnvironment:Local];
-    [[ChuckPadSocial sharedInstance] logOut];
+    [[ChuckPadSocial sharedInstance] localLogOut];
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [[ChuckPadSocial sharedInstance] logOut];
+    [[ChuckPadSocial sharedInstance] localLogOut];
     
     [super tearDown];
 }
@@ -163,17 +163,25 @@
     }];
     [self waitForExpectations];
 
-    // 4 - Log in again with the updated password
+    // 4 - Log in again with the updated password and stay logged in after the test
     XCTestExpectation *expectation4 = [self expectationWithDescription:@"logIn timed out (4)"];
     [[ChuckPadSocial sharedInstance] logIn:user.username password:user.password callback:^(BOOL succeeded, NSError *error) {
         // Do not log in because we are going to change the password in the next call
-        [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
         [expectation4 fulfill];
     }];
     [self waitForExpectations];
     
     // Log out of our existing user
-    [[ChuckPadSocial sharedInstance] logOut];
+    // 8 - Log out using the logOut API which invalidates the auth token on the service
+    XCTestExpectation *expectation8 = [self expectationWithDescription:@"logOut timed out (8)"];
+    [[ChuckPadSocial sharedInstance] logOut:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        XCTAssertTrue(error == nil);
+        [self doPostLogOutAssertChecks];
+        [expectation8 fulfill];
+    }];
+    [self waitForExpectations];
     
     // 5 - Try to create another user with the same email. Note we purposefully use user.email below instead of user2.email
     ChuckPadUser *user2 = [ChuckPadUser generateUser];
@@ -414,7 +422,7 @@
     [self doPostAuthAssertChecks:user];
 
     if (logOut) {
-        [[ChuckPadSocial sharedInstance] logOut];
+        [[ChuckPadSocial sharedInstance] localLogOut];
         [self doPostLogOutAssertChecks];
     }
 }
