@@ -102,8 +102,16 @@
 - (void)setUp {
     [super setUp];
     
+    // Before unit tests run, the code in AppDelegate.m runs that bootstraps our ChuckPadSocail class to a particular
+    // instance. Call a special debug method to reset all that bootstrapping so we start tests from a clean slate.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [NSClassFromString(@"ChuckPadSocial") performSelector:NSSelectorFromString(@"resetSharedInstanceAndBoostrap")];
+#pragma clang diagnostic pop
+    
+    [ChuckPadSocial bootstrapForInstance:Local];
+    
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    [[ChuckPadSocial sharedInstance] setEnvironment:Local];
     [[ChuckPadSocial sharedInstance] localLogOut];
 }
 

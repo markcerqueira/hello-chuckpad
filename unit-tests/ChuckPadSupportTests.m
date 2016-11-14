@@ -24,6 +24,17 @@
 
 - (void)setUp {
     [super setUp];
+    
+    // Before unit tests run, the code in AppDelegate.m runs that bootstraps our ChuckPadSocail class to a particular
+    // instance. Call a special debug method to reset all that bootstrapping so we start tests from a clean slate.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [NSClassFromString(@"ChuckPadSocial") performSelector:NSSelectorFromString(@"resetSharedInstanceAndBoostrap")];
+#pragma clang diagnostic pop
+    
+    // Use MiniAudicle here because we want to test switching environment URLs and the Local instance uses the same
+    // URL (localhost:9292) for both environments.
+    [ChuckPadSocial bootstrapForInstance:MiniAudicle];
 }
 
 - (void)tearDown {
@@ -31,8 +42,8 @@
 }
 
 - (void)testChuckPadKeychain {
-    NSArray *environmentEnums = @[@(Production), @(Stage), @(Local)];
-    NSArray *environmentUrls = [[NSArray alloc] initWithObjects:EnvironmentHostUrls];
+    NSArray *environmentEnums = @[@(Production), @(Stage)];
+    NSArray *environmentUrls = [[ChuckPadSocial sharedInstance] instanceUrls];
     
     for (NSInteger i = 0; i < [environmentEnums count]; i++) {
         [[ChuckPadSocial sharedInstance] setEnvironment:(Environment)[[environmentEnums objectAtIndex:i] integerValue]];
@@ -63,18 +74,45 @@
 }
 
 - (void)testToggleEnvironmentUrl {
+    // urlOne is a production URL
     NSString *urlOne = [[ChuckPadSocial sharedInstance] getBaseUrl];
     [[ChuckPadSocial sharedInstance] toggleEnvironment];
     
+    // urlTwo is a stage URL
     NSString *urlTwo = [[ChuckPadSocial sharedInstance] getBaseUrl];
     [[ChuckPadSocial sharedInstance] toggleEnvironment];
     
+    // urlThree is a production URL
     NSString *urlThree = [[ChuckPadSocial sharedInstance] getBaseUrl];
     [[ChuckPadSocial sharedInstance] toggleEnvironment];
     
+    XCTAssertTrue([urlOne isEqualToString:urlThree]);
     XCTAssertFalse([urlOne isEqualToString:urlTwo]);
-    XCTAssertFalse([urlOne isEqualToString:urlThree]);
     XCTAssertFalse([urlTwo isEqualToString:urlThree]);
+}
+
+- (void)testChangingInstanceDisallowed {
+    // We are boostrapped to MiniAudicle. We should not be able to change that.
+    BOOL exceptionThrown1 = NO;
+    @try {
+        // In the setUp method we bootstrapped to MiniAudicle so this method should throw an exception.
+        [ChuckPadSocial bootstrapForInstance:Auraglyph];
+    } @catch (NSException *exception) {
+        exceptionThrown1 = YES;
+    } @finally {
+        XCTAssertTrue(exceptionThrown1);
+    }
+    
+    // If we try to bootstrap to what we're already bootstrapped (i.e. MiniAudicle) that is okay.
+    BOOL exceptionThrown2 = NO;
+    @try {
+        // In the setUp method we bootstrapped to MiniAudicle so this method should throw an exception.
+        [ChuckPadSocial bootstrapForInstance:MiniAudicle];
+    } @catch (NSException *exception) {
+        exceptionThrown2 = YES;
+    } @finally {
+        XCTAssertFalse(exceptionThrown2);
+    }
 }
 
 - (void)testPatchCache {

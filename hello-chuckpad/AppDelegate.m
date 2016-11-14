@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "PatchListViewController.h"
 #import "UserViewController.h"
+#import "ChuckPadSocial.h"
 
 @interface AppDelegate ()
 
@@ -25,6 +26,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    [ChuckPadSocial bootstrapForInstance:Local];
+    
     PatchListViewController *patchListViewController = [[PatchListViewController alloc] initWithNibName:@"PatchListViewController" bundle:nil];
     patchListViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patches" image:[self imagePreparedForTabBarItem:@"pineapple.png"] tag:1];
 
