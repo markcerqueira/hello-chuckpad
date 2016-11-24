@@ -34,7 +34,7 @@
     
     // Use MiniAudicle here because we want to test switching environment URLs and the Local instance uses the same
     // URL (localhost:9292) for both environments.
-    [ChuckPadSocial bootstrapForInstance:MiniAudicle];
+    [ChuckPadSocial bootstrapForPatchType:MiniAudicle];
 }
 
 - (void)tearDown {
@@ -42,8 +42,8 @@
 }
 
 - (void)testChuckPadKeychain {
-    NSArray *environmentEnums = @[@(Production), @(Stage)];
-    NSArray *environmentUrls = [[ChuckPadSocial sharedInstance] instanceUrls];
+    NSArray *environmentEnums = @[@(Production), @(Stage), @(Local)];
+    NSArray *environmentUrls = [[NSArray alloc] initWithObjects:EnvironmentHostUrls];
     
     for (NSInteger i = 0; i < [environmentEnums count]; i++) {
         [[ChuckPadSocial sharedInstance] setEnvironment:(Environment)[[environmentEnums objectAtIndex:i] integerValue]];
@@ -86,17 +86,17 @@
     NSString *urlThree = [[ChuckPadSocial sharedInstance] getBaseUrl];
     [[ChuckPadSocial sharedInstance] toggleEnvironment];
     
-    XCTAssertTrue([urlOne isEqualToString:urlThree]);
     XCTAssertFalse([urlOne isEqualToString:urlTwo]);
+    XCTAssertFalse([urlOne isEqualToString:urlThree]);
     XCTAssertFalse([urlTwo isEqualToString:urlThree]);
 }
 
-- (void)testChangingInstanceDisallowed {
+- (void)testChangingPatchTypeDisallowed {
     // We are boostrapped to MiniAudicle. We should not be able to change that.
     BOOL exceptionThrown1 = NO;
     @try {
         // In the setUp method we bootstrapped to MiniAudicle so this method should throw an exception.
-        [ChuckPadSocial bootstrapForInstance:Auraglyph];
+        [ChuckPadSocial bootstrapForPatchType:Auraglyph];
     } @catch (NSException *exception) {
         exceptionThrown1 = YES;
     } @finally {
@@ -107,7 +107,7 @@
     BOOL exceptionThrown2 = NO;
     @try {
         // In the setUp method we bootstrapped to MiniAudicle so this method should throw an exception.
-        [ChuckPadSocial bootstrapForInstance:MiniAudicle];
+        [ChuckPadSocial bootstrapForPatchType:MiniAudicle];
     } @catch (NSException *exception) {
         exceptionThrown2 = YES;
     } @finally {

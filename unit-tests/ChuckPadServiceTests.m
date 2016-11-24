@@ -109,8 +109,9 @@
     [NSClassFromString(@"ChuckPadSocial") performSelector:NSSelectorFromString(@"resetSharedInstanceAndBoostrap")];
 #pragma clang diagnostic pop
     
-    [ChuckPadSocial bootstrapForInstance:Local];
-    
+    [ChuckPadSocial bootstrapForPatchType:MiniAudicle];
+    [[ChuckPadSocial sharedInstance] setEnvironment:Local];
+
     // Put setup code here. This method is called before the invocation of each test method in the class.
     [[ChuckPadSocial sharedInstance] localLogOut];
 }
@@ -180,47 +181,79 @@
     }];
     [self waitForExpectations];
     
-    // Log out of our existing user
-    // 8 - Log out using the logOut API which invalidates the auth token on the service
-    XCTestExpectation *expectation8 = [self expectationWithDescription:@"logOut timed out (8)"];
+    // 5 - Log out using the logOut API which invalidates the auth token on the service
+    XCTestExpectation *expectation5 = [self expectationWithDescription:@"logOut timed out (5)"];
     [[ChuckPadSocial sharedInstance] logOut:^(BOOL succeeded, NSError *error) {
         XCTAssertTrue(succeeded);
         XCTAssertTrue(error == nil);
         [self doPostLogOutAssertChecks];
-        [expectation8 fulfill];
-    }];
-    [self waitForExpectations];
-    
-    // 5 - Try to create another user with the same email. Note we purposefully use user.email below instead of user2.email
-    ChuckPadUser *user2 = [ChuckPadUser generateUser];
-    XCTestExpectation *expectation5 = [self expectationWithDescription:@"createUser timed out (5)"];
-    [[ChuckPadSocial sharedInstance] createUser:user2.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
-        XCTAssertFalse([[error localizedDescription] containsString:@"username"]);
         [expectation5 fulfill];
     }];
     [self waitForExpectations];
     
-    // 6 - Try to create another user with the same username. Note we purposefully use user.username below instead of user2.username
+    // 6 - Try to create another user with the same email. Note we purposefully use user.email below instead of user2.email
+    ChuckPadUser *user2 = [ChuckPadUser generateUser];
     XCTestExpectation *expectation6 = [self expectationWithDescription:@"createUser timed out (6)"];
-    [[ChuckPadSocial sharedInstance] createUser:user.username email:user2.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
+    [[ChuckPadSocial sharedInstance] createUser:user2.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
-        XCTAssertFalse([[error localizedDescription] containsString:@"email"]);
+        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
+        XCTAssertFalse([[error localizedDescription] containsString:@"username"]);
         [expectation6 fulfill];
     }];
     [self waitForExpectations];
     
-    // 7 - Try to create another user with the same username and email. The returned error should mention both email and username
+    // 7 - Try to create another user with the same username. Note we purposefully use user.username below instead of user2.username
     XCTestExpectation *expectation7 = [self expectationWithDescription:@"createUser timed out (7)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user2.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
+        XCTAssertFalse([[error localizedDescription] containsString:@"email"]);
+        [expectation7 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // 8 - Try to create another user with the same username and email. The returned error should mention both email and username
+    XCTestExpectation *expectation8 = [self expectationWithDescription:@"createUser timed out (8)"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
         XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
         XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
-        [expectation7 fulfill];
+        [expectation8 fulfill];
     }];
     [self waitForExpectations];
+    
+    // 9 - Hit the forgot password API for our user. Account should be found with either email or username so exercise both
+    XCTestExpectation *expectation9 = [self expectationWithDescription:@"forgotPassword timed out (9)"];
+    [[ChuckPadSocial sharedInstance] forgotPassword:user.username callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        
+        [[ChuckPadSocial sharedInstance] forgotPassword:user.email callback:^(BOOL succeeded, NSError *error) {
+            XCTAssertTrue(succeeded);
+            [expectation9 fulfill];
+        }];
+    }];
+    [self waitForExpectations];
+}
+
+- (void)testMultiplePatchUpload {
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+        [self doPostAuthAssertChecks:user];
+        [expectation1 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    for (int i = 0; i < 10; i++) {
+        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
+        XCTestExpectation *expectation2 = [self expectationWithDescription:@"uploadPatch timed out (2)"];
+        [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+            XCTAssertTrue(succeeded);
+            [expectation2 fulfill];
+        }];
+        [self waitForExpectations];
+    }
 }
 
 - (void)testPatchAPI {

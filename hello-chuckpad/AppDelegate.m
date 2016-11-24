@@ -26,7 +26,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    [ChuckPadSocial bootstrapForInstance:Local];
+    [ChuckPadSocial bootstrapForPatchType:MiniAudicle];
     
     PatchListViewController *patchListViewController = [[PatchListViewController alloc] initWithNibName:@"PatchListViewController" bundle:nil];
     patchListViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patches" image:[self imagePreparedForTabBarItem:@"pineapple.png"] tag:1];
