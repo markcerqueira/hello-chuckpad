@@ -464,6 +464,22 @@
     [self resetChuckPadSocialForPatchType:MiniAudicle];
 }
 
+- (void)testWeakPassword {
+    // Generate a user with credentials locally and set the password to something weak
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+    user.password = @"1234";
+
+    // This createUser call should fail as the password is too weak
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        XCTAssertTrue([[error localizedDescription] containsString:@"password"]);
+        XCTAssertTrue([[error localizedDescription] containsString:@"weak"]);
+        [expectation1 fulfill];
+    }];
+    [self waitForExpectations];
+}
+
 // Helper Methods
 
 - (void)uploadMultiplePatches:(NSInteger)patchCount user:(ChuckPadUser *)user {
