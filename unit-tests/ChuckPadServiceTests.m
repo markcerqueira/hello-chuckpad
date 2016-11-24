@@ -99,9 +99,7 @@
 
 @implementation ChuckPadServiceTests
 
-- (void)setUp {
-    [super setUp];
-    
+- (void)resetChuckPadSocialForPatchType:(PatchType)patchType {
     // Before unit tests run, the code in AppDelegate.m runs that bootstraps our ChuckPadSocail class to a particular
     // instance. Call a special debug method to reset all that bootstrapping so we start tests from a clean slate.
 #pragma clang diagnostic push
@@ -109,8 +107,14 @@
     [NSClassFromString(@"ChuckPadSocial") performSelector:NSSelectorFromString(@"resetSharedInstanceAndBoostrap")];
 #pragma clang diagnostic pop
     
-    [ChuckPadSocial bootstrapForPatchType:MiniAudicle];
+    [ChuckPadSocial bootstrapForPatchType:patchType];
     [[ChuckPadSocial sharedInstance] setEnvironment:Local];
+}
+
+- (void)setUp {
+    [super setUp];
+    
+    [self resetChuckPadSocialForPatchType:MiniAudicle];
 
     // Put setup code here. This method is called before the invocation of each test method in the class.
     [[ChuckPadSocial sharedInstance] localLogOut];
@@ -135,6 +139,7 @@
     }];
 }
 
+// General exercise of the User API calls
 - (void)testUserAPI {
     // Generate a user with credentials locally. We will register a new user and log in using these credentials.
     ChuckPadUser *user = [ChuckPadUser generateUser];
@@ -235,27 +240,7 @@
     [self waitForExpectations];
 }
 
-- (void)testMultiplePatchUpload {
-    ChuckPadUser *user = [ChuckPadUser generateUser];
-
-    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
-    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
-        [self doPostAuthAssertChecks:user];
-        [expectation1 fulfill];
-    }];
-    [self waitForExpectations];
-    
-    for (int i = 0; i < 10; i++) {
-        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
-        XCTestExpectation *expectation2 = [self expectationWithDescription:@"uploadPatch timed out (2)"];
-        [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
-            XCTAssertTrue(succeeded);
-            [expectation2 fulfill];
-        }];
-        [self waitForExpectations];
-    }
-}
-
+// General exercise of the Patch API
 - (void)testPatchAPI {
     ChuckPadUser *user = [ChuckPadUser generateUser];
     
@@ -422,6 +407,75 @@
         }];
     }];
     [self waitForExpectations];
+}
+
+- (void)testMultiplePatchUpload {
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+    
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+        [self doPostAuthAssertChecks:user];
+        [expectation1 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    [self uploadMultiplePatches:20 user:user];
+}
+
+- (void)testPatchTypeSeparation {
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+    
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+        [self doPostAuthAssertChecks:user];
+        [expectation1 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // We are currently configured for MiniAudicle patches
+    NSInteger miniAudiclePatchUploadCount = 5;
+    [self uploadMultiplePatches:miniAudiclePatchUploadCount user:user];
+    
+    // We uploaded 5 patches so we expect to get 5 patches
+    XCTestExpectation *expectation2 = [self expectationWithDescription:@"getMyPatches timed out (2)"];
+    [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
+        XCTAssertTrue(patchesArray != nil);
+        XCTAssertTrue([patchesArray count] == miniAudiclePatchUploadCount);
+        [expectation2 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // Switch to Auraglyph and upload patches
+    [self resetChuckPadSocialForPatchType:Auraglyph];
+
+    NSInteger auraglyphPatchUploadCount = 10;
+    [self uploadMultiplePatches:auraglyphPatchUploadCount user:user];
+    
+    // We uploaded 10 patches so we expect to get 10 patches
+    XCTestExpectation *expectation4 = [self expectationWithDescription:@"getMyPatches timed out (3)"];
+    [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
+        XCTAssertTrue(patchesArray != nil);
+        XCTAssertTrue([patchesArray count] == auraglyphPatchUploadCount);
+        [expectation4 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // This test is done so reset back to the original MiniAudicle patch type
+    [self resetChuckPadSocialForPatchType:MiniAudicle];
+}
+
+// Helper Methods
+
+- (void)uploadMultiplePatches:(NSInteger)patchCount user:(ChuckPadUser *)user {
+    for (int i = 0; i < patchCount; i++) {
+        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
+        XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
+        [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+            XCTAssertTrue(succeeded);
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
 }
 
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {
