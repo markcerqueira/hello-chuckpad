@@ -480,7 +480,159 @@
     [self waitForExpectations];
 }
 
+- (void)testValidAndInvalidUsernames {
+    // Note - we will append a random 5 character prefix to these in the for loop below to avoid hitting the case where
+    // we are trying to create multiple users with the same username.
+    NSDictionary *usernameValidityDictionary = @{@"super-long-username" : @NO, // Too long
+                                                 @"~~$o$_/|\\" : @NO, // Invalid characters
+                                                 @"abC-._.-567$" : @NO, // Almost valid except $ is invalid character
+                                                 @"abC-._.-567" : @YES}; // Should be valid
+    
+    for (NSString *username in [usernameValidityDictionary allKeys]) {
+        ChuckPadUser *user = [ChuckPadUser generateUser];
+        
+        user.username = [NSString stringWithFormat:@"%@%@", [self randomStringWithLength:5], username];
+
+        BOOL shouldSucceed = [[usernameValidityDictionary objectForKey:username] boolValue];
+
+        XCTestExpectation *expectation = [self expectationWithDescription:@"createUser timed out"];
+        [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+            XCTAssertTrue(shouldSucceed == succeeded);
+            
+            // Need to do a localLogOut to clear credentials so we can log in again.
+            [[ChuckPadSocial sharedInstance] localLogOut];
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+}
+
+- (void)testUsernameCaseSensitivity {
+    NSString *baseUsername = [self randomStringWithLength:20];
+    NSArray *usernames = @[baseUsername, [baseUsername uppercaseString], [baseUsername lowercaseString]];
+    
+    for (int i = 0; i < [usernames count]; i++) {
+        ChuckPadUser *user = [ChuckPadUser generateUser];
+        user.username = [usernames objectAtIndex:i];
+        
+        XCTestExpectation *expectation = [self expectationWithDescription:@"createUser timed out"];
+        [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+            // Only the first call should succeed because the rest are upper/lower case variations of the first username used
+            XCTAssertTrue(succeeded == (i == 0));
+            
+            // The error message should only mention that the username is used, not the email.
+            if (i != 0) {
+                XCTAssertTrue([[error localizedDescription] containsString:@"username"]);
+                XCTAssertFalse([[error localizedDescription] containsString:@"email"]);
+            }
+            
+            // Need to do a localLogOut to clear credentials so we can log in again.
+            [[ChuckPadSocial sharedInstance] localLogOut];
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+}
+
+- (void)testEmailCaseSensitivity {
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+    for (int i = 0; i <= 2; i++) {
+        // Change username for every pass so we don't hit the duplicate username case
+        user.username = [self randomStringWithLength:20];
+        
+        // 0 pass - leave email as (should succeed)
+        
+        // 1 pass - make email upper case (should fail)
+        if (i == 1) {
+            user.email = [user.email uppercaseString];
+        }
+        
+        // 2 pass - make email lower case (should fail)
+        if (i == 2) {
+            user.email = [user.email lowercaseString];
+        }
+        
+        XCTestExpectation *expectation = [self expectationWithDescription:@"createUser timed out"];
+        [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+            // Only the first call should succeed because the rest are upper/lower case variations of the first email used
+            XCTAssertTrue(succeeded == (i == 0));
+            
+            // The error message should only mention that the email is used, NOT the username.
+            if (i != 0) {
+                XCTAssertTrue([[error localizedDescription] containsString:@"email"]);
+                XCTAssertFalse([[error localizedDescription] containsString:@"username"]);
+            }
+            
+            // Need to do a localLogOut to clear credentials so we can log in again.
+            [[ChuckPadSocial sharedInstance] localLogOut];
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+}
+
+- (void)testAuthTokenInvalidResponseCode {
+    // Create a user
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
+        [expectation1 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // Call a secret method on ChuckPadKeychain to save keychain information in memory
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [NSClassFromString(@"ChuckPadKeychain") performSelector:NSSelectorFromString(@"copyKeychainInfoToMemory")];
+#pragma clang diagnostic pop
+    
+    // Log out using the logOut API which invalidates the auth token on the service
+    XCTestExpectation *expectation2 = [self expectationWithDescription:@"logOut timed out (2)"];
+    [[ChuckPadSocial sharedInstance] logOut:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        XCTAssertTrue(error == nil);
+        [self doPostLogOutAssertChecks];
+        [expectation2 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // Our auth token should now be invalidated and our keychain has been cleared.
+    
+    // Call another secret method on ChuckPadKeychain to push our in-memory copy back into the keychain
+    // Note that we are copying an invalid auth token into the keychain.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [NSClassFromString(@"ChuckPadKeychain") performSelector:NSSelectorFromString(@"copyMemoryInfoToKeychain")];
+#pragma clang diagnostic pop
+    
+    // Try to upload a patch but this should fail because our auth token that we restored into the keychain is invalid.
+    ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
+    XCTestExpectation *expectation3 = [self expectationWithDescription:@"uploadPatch timed out (3)"];
+    [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertFalse(succeeded);
+        [expectation3 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // TODO Restore again and test more APIs for catching and responding to the invalid auth token!
+}
+
 // Helper Methods
+
+// Source: http://stackoverflow.com/a/2633948/265791
+-(NSString *)randomStringWithLength:(int)len {
+    // 66 character length string
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex:arc4random_uniform((int)[letters length])]];
+    }
+    return randomString;
+}
 
 - (void)uploadMultiplePatches:(NSInteger)patchCount user:(ChuckPadUser *)user {
     for (int i = 0; i < patchCount; i++) {
