@@ -7,16 +7,11 @@
 //  Tests classes used to support chuckpad-social-ios that don't directly interact with the chuckpad-social API
 //  service.
 
-#import <XCTest/XCTest.h>
-
-#import "ChuckPadKeychain.h"
-#import "ChuckPadSocial.h"
-#import "PatchCache.h"
-#import "User.h"
-
 #include <stdlib.h>
 
-@interface ChuckPadSupportTests : XCTestCase
+#import "ChuckPadBaseTest.h"
+
+@interface ChuckPadSupportTests : ChuckPadBaseTest
 
 @end
 
@@ -24,17 +19,6 @@
 
 - (void)setUp {
     [super setUp];
-    
-    // Before unit tests run, the code in AppDelegate.m runs that bootstraps our ChuckPadSocail class to a particular
-    // instance. Call a special debug method to reset all that bootstrapping so we start tests from a clean slate.
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [NSClassFromString(@"ChuckPadSocial") performSelector:NSSelectorFromString(@"resetSharedInstanceAndBoostrap")];
-#pragma clang diagnostic pop
-    
-    // Use MiniAudicle here because we want to test switching environment URLs and the Local instance uses the same
-    // URL (localhost:9292) for both environments.
-    [ChuckPadSocial bootstrapForPatchType:MiniAudicle];
 }
 
 - (void)tearDown {

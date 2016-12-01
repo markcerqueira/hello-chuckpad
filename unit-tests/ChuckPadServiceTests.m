@@ -6,137 +6,20 @@
 //  NOTE: These tests run against the chuckpad-social server running locally on your machine. To run the chuckpad-social
 //  server on your computer please see: https://github.com/markcerqueira/chuckpad-social
 
-#import <XCTest/XCTest.h>
+#import "ChuckPadBaseTest.h"
 
-#import "ChuckPadKeychain.h"
-#import "ChuckPadSocial.h"
-#import "NSDate+Helper.h"
-#import "Patch.h"
-#import "PatchCache.h"
-
-@interface ChuckPadUser : NSObject
-
-@property(nonatomic, strong) NSNumber *userId;
-@property(nonatomic, strong) NSString *username;
-@property(nonatomic, strong) NSString *password;
-@property(nonatomic, strong) NSString *email;
-@property(nonatomic, assign) NSInteger totalPatches;
-
-@end
-
-@implementation ChuckPadUser
-
-+ (ChuckPadUser *)generateUser {
-    ChuckPadUser *user = [[ChuckPadUser alloc] init];
-    
-    user.username = [[[[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@"iOS"] substringToIndex:12] lowercaseString];
-    user.password = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    user.email = [NSString stringWithFormat:@"%@@%@.com", user.username, user.username];
-    user.totalPatches = 0;
-    
-    return user;
-}
-
-- (void)updateUserId:(NSInteger)userId {
-    self.userId = @(userId);
-}
-
-@end
-
-
-@interface ChuckPadPatch : NSObject
-
-@property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *filename;
-@property(nonatomic, strong) NSString *patchDescription;
-@property(nonatomic, strong) NSData *fileData;
-@property(nonatomic, assign) BOOL hasParent;
-@property(nonatomic, assign) BOOL isHidden;
-@property(nonatomic, assign) NSInteger abuseReportCount;
-@property(nonatomic, assign) NSInteger downloadCount;
-
-@property(nonatomic, strong) Patch *lastServerPatch;
-
-@end
-
-@implementation ChuckPadPatch
-
-// Generates a local patch object that we can use to contact the API and then verify its contents. With this default
-// method the name of the patch will be the filename, it will have NO parent, and it will not be hidden.
-+ (ChuckPadPatch *)generatePatch:(NSString *)filename {
-    ChuckPadPatch *patch = [[ChuckPadPatch alloc] init];
-    
-    NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
-
-    patch.name = filename;
-    patch.filename = filename;
-    patch.patchDescription = [[NSUUID UUID] UUIDString];
-    patch.fileData = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename]];
-    
-    patch.hasParent = NO;
-    patch.isHidden = NO;
-    patch.downloadCount = 0;
-    patch.abuseReportCount = 0;
-    
-    return patch;
-}
-
-- (void)setHidden:(BOOL)hidden {
-    self.isHidden = hidden;
-}
-
-- (void)setNewNameAndDescription {
-    self.name = [[NSUUID UUID] UUIDString];
-    self.patchDescription = [[NSUUID UUID] UUIDString];
-}
-
-@end
-
-
-@interface ChuckPadServiceTests : XCTestCase
+@interface ChuckPadServiceTests : ChuckPadBaseTest
 
 @end
 
 @implementation ChuckPadServiceTests
 
-- (void)resetChuckPadSocialForPatchType:(PatchType)patchType {
-    // Before unit tests run, the code in AppDelegate.m runs that bootstraps our ChuckPadSocail class to a particular
-    // instance. Call a special debug method to reset all that bootstrapping so we start tests from a clean slate.
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [NSClassFromString(@"ChuckPadSocial") performSelector:NSSelectorFromString(@"resetSharedInstanceAndBoostrap")];
-#pragma clang diagnostic pop
-    
-    [ChuckPadSocial bootstrapForPatchType:patchType];
-    [[ChuckPadSocial sharedInstance] setEnvironment:Local];
-}
-
 - (void)setUp {
     [super setUp];
-    
-    [self resetChuckPadSocialForPatchType:MiniAudicle];
-
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    [[ChuckPadSocial sharedInstance] localLogOut];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [[ChuckPadSocial sharedInstance] localLogOut];
-    
     [super tearDown];
-}
-
-- (void)waitForExpectations {
-    [self waitForExpectations:5.0];
-}
-
-- (void)waitForExpectations:(NSTimeInterval)timeout {
-    [self waitForExpectationsWithTimeout:timeout handler:^(NSError *error) {
-        if (error) {
-            NSLog(@"waitForExpectations - exceptation not met with error: %@", error);
-        }
-    }];
 }
 
 // General exercise of the User API calls
@@ -463,7 +346,54 @@
     }];
     [self waitForExpectations];
     
-    [self uploadMultiplePatches:20 user:user];
+    [self uploadMultiplePatches:[ChuckPadPatch numberOfChuckFilesInSamplesDirectory] user:user];
+}
+
+- (void)testSamePatchDataUploadDisallowed {
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+    
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+        [self doPostAuthAssertChecks:user];
+        [expectation1 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    for (int i = 0; i < 2; i++) {
+        XCTestExpectation *expectation2 = [self expectationWithDescription:@"uploadPatch timed out (2)"];
+        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
+        [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+            // The call should only succeed the first time. Any subsequent uploadPatch requests with the same patch data should fail.
+            XCTAssertTrue(succeeded == (i == 0));
+            [expectation2 fulfill];
+        }];
+        [self waitForExpectations];
+    }
+    
+    [[ChuckPadSocial sharedInstance] localLogOut];
+}
+
+- (void)testSamePatchDataUploadForDifferentUsersAllowed {
+    for (int i = 0; i < 5; i++) {
+        // Log out so we can create a new user
+        [[ChuckPadSocial sharedInstance] localLogOut];
+        
+        ChuckPadUser *user = [ChuckPadUser generateUser];
+        XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+        [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+            [self doPostAuthAssertChecks:user];
+            [expectation1 fulfill];
+        }];
+        [self waitForExpectations];
+        
+        XCTestExpectation *expectation2 = [self expectationWithDescription:@"uploadPatch timed out (2)"];
+        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
+        [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+            XCTAssertTrue(succeeded);
+            [expectation2 fulfill];
+        }];
+        [self waitForExpectations];
+    }
 }
 
 - (void)testPatchTypeSeparation {
@@ -620,19 +550,10 @@
 
 - (void)testAuthTokenInvalidResponseCode {
     // Create a user
-    ChuckPadUser *user = [ChuckPadUser generateUser];
-    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
-    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
-        [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
-        [expectation1 fulfill];
-    }];
-    [self waitForExpectations];
+    ChuckPadUser *user = [self generateLocalUserAndCreate];
     
     // Call a secret method on ChuckPadKeychain to save keychain information in memory
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [NSClassFromString(@"ChuckPadKeychain") performSelector:NSSelectorFromString(@"copyKeychainInfoToMemory")];
-#pragma clang diagnostic pop
+    [self callSecretStaticMethod:@"copyKeychainInfoToMemory" class:@"ChuckPadKeychain"];
     
     // Log out using the logOut API which invalidates the auth token on the service
     XCTestExpectation *expectation2 = [self expectationWithDescription:@"logOut timed out (2)"];
@@ -648,10 +569,7 @@
     
     // Call another secret method on ChuckPadKeychain to push our in-memory copy back into the keychain
     // Note that we are copying an invalid auth token into the keychain.
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [NSClassFromString(@"ChuckPadKeychain") performSelector:NSSelectorFromString(@"copyMemoryInfoToKeychain")];
-#pragma clang diagnostic pop
+    [self callSecretStaticMethod:@"copyMemoryInfoToKeychain" class:@"ChuckPadKeychain"];
     
     // Try to upload a patch but this should fail because our auth token that we restored into the keychain is invalid.
     ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
@@ -667,20 +585,9 @@
 
 // Helper Methods
 
-// Source: http://stackoverflow.com/a/2633948/265791
--(NSString *)randomStringWithLength:(int)len {
-    // 66 character length string
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.";
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex:arc4random_uniform((int)[letters length])]];
-    }
-    return randomString;
-}
-
 - (void)uploadMultiplePatches:(NSInteger)patchCount user:(ChuckPadUser *)user {
     for (int i = 0; i < patchCount; i++) {
-        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
+        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch];
         XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
         [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
             XCTAssertTrue(succeeded);
@@ -688,70 +595,6 @@
         }];
         [self waitForExpectations];
     }
-}
-
-- (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {
-    XCTAssertTrue(patch != nil);
-    XCTAssertTrue(localPatch != nil);
-    XCTAssertTrue(user != nil);
-
-    XCTAssertTrue([localPatch.name isEqualToString:patch.name]);
-    XCTAssertTrue([localPatch.filename isEqualToString:patch.filename]);
-    XCTAssertTrue([localPatch.patchDescription isEqualToString:patch.patchDescription]);
-
-    XCTAssertTrue([patch.creatorUsername isEqualToString:user.username]);
-    
-    XCTAssertTrue(localPatch.isHidden == patch.hidden);
-    XCTAssertTrue(localPatch.hasParent == [patch hasParentPatch]);
-    
-    XCTAssertTrue(localPatch.downloadCount == patch.downloadCount);
-    XCTAssertTrue(localPatch.abuseReportCount == patch.abuseReportCount);
-    
-    XCTAssertFalse(patch.isFeatured);
-    XCTAssertFalse(patch.isDocumentation);
-    
-    // If we pass all these assertions, attach the patch as the server knows it to our local patch object so we
-    // have the option of mutating the server patch in subsequent tests. NOTE: lastServerPatch should NEVER be
-    // mutated locally. It should simply be used to pass into API calls.
-    localPatch.lastServerPatch = patch;
-    
-    // For every assert patch operation convert that patch to a dictionary and then initialize a new patch with that
-    // dictionary. Assert both patches are equal.
-    NSDictionary *patchAsDictionary = [localPatch.lastServerPatch asDictionary];
-    Patch *patchFromDictionary = [[Patch alloc] initWithDictionary:patchAsDictionary];
-    XCTAssertTrue([patchFromDictionary isEqual:localPatch.lastServerPatch]);
-}
-
-// Verifies logged in user state is consistent, logs out the user, and verifies logged out state is consistent.
-- (void)postAuthCallAssertsChecks:(BOOL)succeeded user:(ChuckPadUser *)user logOut:(BOOL)logOut {
-    XCTAssertTrue(succeeded);
-
-    [self doPostAuthAssertChecks:user];
-
-    if (logOut) {
-        [[ChuckPadSocial sharedInstance] localLogOut];
-        [self doPostLogOutAssertChecks];
-    }
-}
-
-// Once a user logs in this asserts that ChuckPadSocial is in a consistent state for the user that just logged in.
-- (void)doPostAuthAssertChecks:(ChuckPadUser *)user {
-    XCTAssertTrue([[ChuckPadSocial sharedInstance] isLoggedIn]);
-
-    XCTAssertTrue([user.username isEqualToString:[[ChuckPadSocial sharedInstance] getLoggedInUserName]]);
-    XCTAssertTrue([user.username isEqualToString:[[ChuckPadKeychain sharedInstance] getLoggedInUserName]]);
-    
-    XCTAssertTrue([user.email isEqualToString:[[ChuckPadSocial sharedInstance] getLoggedInEmail]]);
-    XCTAssertTrue([user.email isEqualToString:[[ChuckPadKeychain sharedInstance] getLoggedInEmail]]);
-}
-
-// Once a user is logged out this asserts that ChuckPadSocial and its internal keychain are in a consistent state.
-- (void)doPostLogOutAssertChecks {
-    XCTAssertFalse([[ChuckPadSocial sharedInstance] isLoggedIn]);
-
-    XCTAssertTrue([[ChuckPadKeychain sharedInstance] getLoggedInUserName] == nil);
-    XCTAssertTrue([[ChuckPadKeychain sharedInstance] getLoggedInAuthToken] == nil);
-    XCTAssertTrue([[ChuckPadKeychain sharedInstance] getLoggedInEmail] == nil);
 }
 
 @end

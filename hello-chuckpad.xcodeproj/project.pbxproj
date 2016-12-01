@@ -30,6 +30,7 @@
 		4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */; };
 		4DB1D5101D46E4D500C2F62E /* ChuckPadServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadServiceTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
+		4DBA9B701DEFF3B600D7CBF0 /* ChuckPadBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */; };
 		4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC087161D493ED9005F9F70 /* PatchCache.m */; };
 		4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */; };
 		AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */; };
@@ -90,6 +91,8 @@
 		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB1D50F1D46E4D500C2F62E /* ChuckPadServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceTests.m; sourceTree = "<group>"; };
 		4DBA017D1D1A410D00292EB9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadBaseTest.m; sourceTree = "<group>"; };
+		4DBA9B711DEFF3CB00D7CBF0 /* ChuckPadBaseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadBaseTest.h; sourceTree = "<group>"; };
 		4DC087151D493ED9005F9F70 /* PatchCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchCache.h; sourceTree = "<group>"; };
 		4DC087161D493ED9005F9F70 /* PatchCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchCache.m; sourceTree = "<group>"; };
 		4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSupportTests.m; sourceTree = "<group>"; };
@@ -218,6 +221,8 @@
 		4DB1D5061D46E4BC00C2F62E /* unit-tests */ = {
 			isa = PBXGroup;
 			children = (
+				4DBA9B711DEFF3CB00D7CBF0 /* ChuckPadBaseTest.h */,
+				4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */,
 				4DB1D50F1D46E4D500C2F62E /* ChuckPadServiceTests.m */,
 				4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */,
 				4DB1D5091D46E4BC00C2F62E /* Info.plist */,
@@ -297,7 +302,6 @@
 					};
 					ADE456581D13704A00F046DD = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 5R7XCYCEDG;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -353,8 +357,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */,
+				4DBA9B701DEFF3B600D7CBF0 /* ChuckPadBaseTest.m in Sources */,
 				4DB1D5101D46E4D500C2F62E /* ChuckPadServiceTests.m in Sources */,
+				4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,7 +514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "hello-chuckpad/hello-chuckpad.entitlements";
-				DEVELOPMENT_TEAM = 5R7XCYCEDG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -523,7 +528,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "hello-chuckpad/hello-chuckpad.entitlements";
-				DEVELOPMENT_TEAM = 5R7XCYCEDG;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
