@@ -195,49 +195,6 @@
         [expectation5 fulfill];
     }];
     [self waitForExpectations];
-    
-    // 6 - Try to create another user with the same email. Note we purposefully use user.email below instead of user2.email
-    ChuckPadUser *user2 = [ChuckPadUser generateUser];
-    XCTestExpectation *expectation6 = [self expectationWithDescription:@"createUser timed out (6)"];
-    [[ChuckPadSocial sharedInstance] createUser:user2.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
-        XCTAssertFalse([[error localizedDescription] containsString:@"username"]);
-        [expectation6 fulfill];
-    }];
-    [self waitForExpectations];
-    
-    // 7 - Try to create another user with the same username. Note we purposefully use user.username below instead of user2.username
-    XCTestExpectation *expectation7 = [self expectationWithDescription:@"createUser timed out (7)"];
-    [[ChuckPadSocial sharedInstance] createUser:user.username email:user2.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
-        XCTAssertFalse([[error localizedDescription] containsString:@"email"]);
-        [expectation7 fulfill];
-    }];
-    [self waitForExpectations];
-    
-    // 8 - Try to create another user with the same username and email. The returned error should mention both email and username
-    XCTestExpectation *expectation8 = [self expectationWithDescription:@"createUser timed out (8)"];
-    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
-        [expectation8 fulfill];
-    }];
-    [self waitForExpectations];
-    
-    // 9 - Hit the forgot password API for our user. Account should be found with either email or username so exercise both
-    XCTestExpectation *expectation9 = [self expectationWithDescription:@"forgotPassword timed out (9)"];
-    [[ChuckPadSocial sharedInstance] forgotPassword:user.username callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertTrue(succeeded);
-        
-        [[ChuckPadSocial sharedInstance] forgotPassword:user.email callback:^(BOOL succeeded, NSError *error) {
-            XCTAssertTrue(succeeded);
-            [expectation9 fulfill];
-        }];
-    }];
-    [self waitForExpectations];
 }
 
 // General exercise of the Patch API
@@ -409,9 +366,96 @@
     [self waitForExpectations];
 }
 
+- (void)testAccountCreateWithTakenUsernameEmail {
+  // Generate a user with credentials locally. We will register a new user and log in using these credentials.
+  ChuckPadUser *user = [ChuckPadUser generateUser];
+  
+  // 1 - Register a user
+  XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+  [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+    // Log out in this check so we can test logging in next
+    [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
+    [expectation1 fulfill];
+  }];
+  [self waitForExpectations];
+  
+  // 2 - Try to create another user with the same email. Note we purposefully use user.email below instead of user2.email
+  ChuckPadUser *user2 = [ChuckPadUser generateUser];
+  XCTestExpectation *expectation2 = [self expectationWithDescription:@"createUser timed out (2)"];
+  [[ChuckPadSocial sharedInstance] createUser:user2.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
+    XCTAssertFalse(succeeded);
+    XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
+    XCTAssertFalse([[error localizedDescription] containsString:@"username"]);
+    [expectation2 fulfill];
+  }];
+  [self waitForExpectations];
+  
+  // 3 - Try to create another user with the same username. Note we purposefully use user.username below instead of user2.username
+  XCTestExpectation *expectation3 = [self expectationWithDescription:@"createUser timed out (3)"];
+  [[ChuckPadSocial sharedInstance] createUser:user.username email:user2.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
+    XCTAssertFalse(succeeded);
+    XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
+    XCTAssertFalse([[error localizedDescription] containsString:@"email"]);
+    [expectation3 fulfill];
+  }];
+  [self waitForExpectations];
+  
+  // 4 - Try to create another user with the same username and email. The returned error should mention both email and username
+  XCTestExpectation *expectation4 = [self expectationWithDescription:@"createUser timed out (4)"];
+  [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
+    XCTAssertFalse(succeeded);
+    XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
+    XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
+    [expectation4 fulfill];
+  }];
+  [self waitForExpectations];
+}
+
+- (void)testForgotPassword {
+  // Generate a user with credentials locally. We will register a new user and log in using these credentials.
+  ChuckPadUser *user = [ChuckPadUser generateUser];
+  
+  // 1 - Register a user
+  XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+  [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
+    // Log out in this check so we can test logging in next
+    [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
+    [expectation1 fulfill];
+  }];
+  [self waitForExpectations];
+  
+  // 2 - Hit the forgot password API for our user. Account should be found with either email or username so exercise the
+  // API first using username and then email
+  XCTestExpectation *expectation2 = [self expectationWithDescription:@"forgotPassword timed out (2)"];
+  [[ChuckPadSocial sharedInstance] forgotPassword:user.username callback:^(BOOL succeeded, NSError *error) {
+    XCTAssertTrue(succeeded);
+    
+    [[ChuckPadSocial sharedInstance] forgotPassword:user.email callback:^(BOOL succeeded, NSError *error) {
+      XCTAssertTrue(succeeded);
+      [expectation2 fulfill];
+    }];
+  }];
+  [self waitForExpectations];
+  
+  // This is only a local user. It is not created on the service.
+  ChuckPadUser *localUser = [ChuckPadUser generateUser];
+  
+  // 3 - Hit the forgot password API for a user that does not exist with both email and username.
+  XCTestExpectation *expectation3 = [self expectationWithDescription:@"forgotPassword timed out (3)"];
+  [[ChuckPadSocial sharedInstance] forgotPassword:localUser.username callback:^(BOOL succeeded, NSError *error) {
+    XCTAssertFalse(succeeded);
+    
+    [[ChuckPadSocial sharedInstance] forgotPassword:localUser.email callback:^(BOOL succeeded, NSError *error) {
+      XCTAssertFalse(succeeded);
+      [expectation3 fulfill];
+    }];
+  }];
+  [self waitForExpectations];
+}
+
 - (void)testMultiplePatchUpload {
     ChuckPadUser *user = [ChuckPadUser generateUser];
-    
+  
     XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
         [self doPostAuthAssertChecks:user];
