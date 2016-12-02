@@ -134,7 +134,7 @@ static int sDirectoryIndex = 0;
         [expectation fulfill];
     }];
     [self waitForExpectations];
-    
+        
     return user;
 }
 
@@ -237,6 +237,10 @@ static int sDirectoryIndex = 0;
             NSLog(@"waitForExpectations - exceptation not met with error: %@", error);
         }
     }];
+}
+
+- (void)cleanUpFollowingTest {
+    [[ChuckPadSocial sharedInstance] localLogOut];
 }
 
 @end

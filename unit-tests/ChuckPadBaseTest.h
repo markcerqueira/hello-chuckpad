@@ -109,4 +109,7 @@
 // Helper method that waits the specified time (in seconds) for unfulfilled expectations.
 - (void)waitForExpectations:(NSTimeInterval)timeout;
 
+// Call this at the end of each test to clean up state (log out any currently logged in user).
+- (void)cleanUpFollowingTest;
+
 @end
