@@ -146,7 +146,7 @@
     
     // 5 - Test the update patch API. We will first mutate our local patch and then call updatePatch passing in
     // parameters from our updated localPatch and then verify the response against our localPatch.
-    [localPatch setHidden:YES];
+    localPatch.isHidden = YES;
     [localPatch setNewNameAndDescription];
     
     XCTestExpectation *expectation5 = [self expectationWithDescription:@"updatePatch timed out (5)"];
@@ -346,28 +346,15 @@
     }];
     [self waitForExpectations];
     
-    [self uploadMultiplePatches:[ChuckPadPatch numberOfChuckFilesInSamplesDirectory] user:user];
+    [self uploadMultiplePatches:[ChuckPadPatch numberOfChuckFilesInSamplesDirectory]];
 }
 
 - (void)testSamePatchDataUploadDisallowed {
-    ChuckPadUser *user = [ChuckPadUser generateUser];
-    
-    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
-    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
-        [self doPostAuthAssertChecks:user];
-        [expectation1 fulfill];
-    }];
-    [self waitForExpectations];
-    
+    ChuckPadUser *user = [self generateLocalUserAndCreate];
+  
     for (int i = 0; i < 2; i++) {
-        XCTestExpectation *expectation2 = [self expectationWithDescription:@"uploadPatch timed out (2)"];
-        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
-        [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
-            // The call should only succeed the first time. Any subsequent uploadPatch requests with the same patch data should fail.
-            XCTAssertTrue(succeeded == (i == 0));
-            [expectation2 fulfill];
-        }];
-        [self waitForExpectations];
+      // The call should only succeed the first time. Any subsequent uploadPatch requests with the same patch data should fail.
+      [self generatePatchAndUpload:@"demo0.ck" successExpected:(i == 0)];
     }
     
     [[ChuckPadSocial sharedInstance] localLogOut];
@@ -379,20 +366,15 @@
         [[ChuckPadSocial sharedInstance] localLogOut];
         
         ChuckPadUser *user = [ChuckPadUser generateUser];
-        XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
+        XCTestExpectation *expectation = [self expectationWithDescription:@"createUser timed out"];
         [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
             [self doPostAuthAssertChecks:user];
-            [expectation1 fulfill];
+            [expectation fulfill];
         }];
         [self waitForExpectations];
-        
-        XCTestExpectation *expectation2 = [self expectationWithDescription:@"uploadPatch timed out (2)"];
-        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
-        [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
-            XCTAssertTrue(succeeded);
-            [expectation2 fulfill];
-        }];
-        [self waitForExpectations];
+      
+        // This should always succeed because we are uploading it each time as a different user.
+        [self generatePatchAndUpload:@"demo0.ck" successExpected:YES];
     }
 }
 
@@ -408,7 +390,7 @@
     
     // We are currently configured for MiniAudicle patches
     NSInteger miniAudiclePatchUploadCount = 5;
-    [self uploadMultiplePatches:miniAudiclePatchUploadCount user:user];
+    [self uploadMultiplePatches:miniAudiclePatchUploadCount];
     
     // We uploaded 5 patches so we expect to get 5 patches
     XCTestExpectation *expectation2 = [self expectationWithDescription:@"getMyPatches timed out (2)"];
@@ -423,7 +405,7 @@
     [self resetChuckPadSocialForPatchType:Auraglyph];
 
     NSInteger auraglyphPatchUploadCount = 10;
-    [self uploadMultiplePatches:auraglyphPatchUploadCount user:user];
+    [self uploadMultiplePatches:auraglyphPatchUploadCount];
     
     // We uploaded 10 patches so we expect to get 10 patches
     XCTestExpectation *expectation4 = [self expectationWithDescription:@"getMyPatches timed out (3)"];
@@ -572,29 +554,9 @@
     [self callSecretStaticMethod:@"copyMemoryInfoToKeychain" class:@"ChuckPadKeychain"];
     
     // Try to upload a patch but this should fail because our auth token that we restored into the keychain is invalid.
-    ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:@"demo0.ck"];
-    XCTestExpectation *expectation3 = [self expectationWithDescription:@"uploadPatch timed out (3)"];
-    [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
-        XCTAssertFalse(succeeded);
-        [expectation3 fulfill];
-    }];
-    [self waitForExpectations];
-    
+    [self generatePatchAndUpload:NO];
+  
     // TODO Restore again and test more APIs for catching and responding to the invalid auth token!
-}
-
-// Helper Methods
-
-- (void)uploadMultiplePatches:(NSInteger)patchCount user:(ChuckPadUser *)user {
-    for (int i = 0; i < patchCount; i++) {
-        ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch];
-        XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
-        [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
-            XCTAssertTrue(succeeded);
-            [expectation fulfill];
-        }];
-        [self waitForExpectations];
-    }
 }
 
 @end

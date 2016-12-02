@@ -82,6 +82,22 @@ static int sDirectoryIndex = 0;
 
 @implementation ChuckPadBaseTest
 
+#pragma mark - XCTestCase methods
+
+- (void)setUp {
+  [self resetChuckPadSocialForPatchType:MiniAudicle];
+  
+  [super setUp];
+}
+
+- (void)tearDown {
+  [[ChuckPadSocial sharedInstance] localLogOut];
+  
+  [super tearDown];
+}
+
+#pragma mark - Helper Methods
+
 - (void)callSecretStaticMethod:(NSString *)method class:(NSString *)className {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -109,18 +125,6 @@ static int sDirectoryIndex = 0;
     [[ChuckPadSocial sharedInstance] setEnvironment:Local];
 }
 
-- (void)setUp {
-    [self resetChuckPadSocialForPatchType:MiniAudicle];
-    
-    [super setUp];
-}
-
-- (void)tearDown {
-    [[ChuckPadSocial sharedInstance] localLogOut];
-    
-    [super tearDown];
-}
-
 - (ChuckPadUser *)generateLocalUserAndCreate {
     ChuckPadUser *user = [ChuckPadUser generateUser];
     
@@ -132,6 +136,34 @@ static int sDirectoryIndex = 0;
     [self waitForExpectations];
     
     return user;
+}
+
+- (ChuckPadPatch *)generatePatchAndUpload:(BOOL)successExpected {
+  ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch];
+  [self uploadPatch:localPatch successExpected:successExpected];
+  return localPatch;
+}
+
+- (ChuckPadPatch *)generatePatchAndUpload:(NSString *)filename successExpected:(BOOL)successExpected {
+  ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:filename];
+  [self uploadPatch:localPatch successExpected:successExpected];
+  return localPatch;
+}
+
+// Internal patch uploader method
+- (void)uploadPatch:(ChuckPadPatch *)localPatch successExpected:(BOOL)successExpected {
+  XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
+  [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+    XCTAssertTrue(succeeded == successExpected);
+    [expectation fulfill];
+  }];
+  [self waitForExpectations];
+}
+
+- (void)uploadMultiplePatches:(NSInteger)patchCount {
+  for (int i = 0; i < patchCount; i++) {
+    [self generatePatchAndUpload:YES];
+  }
 }
 
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {
@@ -166,7 +198,6 @@ static int sDirectoryIndex = 0;
     XCTAssertTrue([patchFromDictionary isEqual:localPatch.lastServerPatch]);
 }
 
-// Verifies logged in user state is consistent, logs out the user, and verifies logged out state is consistent.
 - (void)postAuthCallAssertsChecks:(BOOL)succeeded user:(ChuckPadUser *)user logOut:(BOOL)logOut {
     XCTAssertTrue(succeeded);
     
@@ -178,7 +209,6 @@ static int sDirectoryIndex = 0;
     }
 }
 
-// Once a user logs in this asserts that ChuckPadSocial is in a consistent state for the user that just logged in.
 - (void)doPostAuthAssertChecks:(ChuckPadUser *)user {
     XCTAssertTrue([[ChuckPadSocial sharedInstance] isLoggedIn]);
     
@@ -189,7 +219,6 @@ static int sDirectoryIndex = 0;
     XCTAssertTrue([user.email isEqualToString:[[ChuckPadKeychain sharedInstance] getLoggedInEmail]]);
 }
 
-// Once a user is logged out this asserts that ChuckPadSocial and its internal keychain are in a consistent state.
 - (void)doPostLogOutAssertChecks {
     XCTAssertFalse([[ChuckPadSocial sharedInstance] isLoggedIn]);
     
