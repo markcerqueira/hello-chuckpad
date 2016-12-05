@@ -47,14 +47,18 @@ static int sDirectoryIndex = 0;
 }
 
 + (ChuckPadPatch *)generatePatch:(NSString *)filename {
+    return [self generatePatch:@"chuck-samples" filename:filename];
+}
+
++ (ChuckPadPatch *)generatePatch:(NSString *)folderName filename:(NSString *)filename {
     ChuckPadPatch *patch = [[ChuckPadPatch alloc] init];
     
     patch.name = filename;
     patch.filename = filename;
     patch.patchDescription = [[NSUUID UUID] UUIDString];
     
-    NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
-    patch.fileData = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename]];
+    NSString *folderPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:folderName];
+    patch.fileData = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", folderPath, filename]];
     
     patch.hasParent = NO;
     patch.isHidden = NO;

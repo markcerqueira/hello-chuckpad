@@ -51,6 +51,10 @@
 // Similar to the above generatePatch method but creates a patch with the filename specified.
 + (ChuckPadPatch *)generatePatch:(NSString *)filename;
 
+// The other versions of generatePatch use the "chuck-samples" folder but this method allows one to pull patches from
+// other folders.
++ (ChuckPadPatch *)generatePatch:(NSString *)folderName filename:(NSString *)filename;
+
 // Returns the number of files in the chuck-samples directory. Given the service disallows uploading duplicate files
 // for the same user, a single user should never upload more than this amount of patches during a test.
 + (NSInteger)numberOfChuckFilesInSamplesDirectory;

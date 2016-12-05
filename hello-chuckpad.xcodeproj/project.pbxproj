@@ -27,6 +27,7 @@
 		4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00571D46CFFE001FC755 /* FXKeychain.m */; };
 		4D4A00641D46CFFE001FC755 /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00591D46CFFE001FC755 /* Patch.m */; };
 		4D4A00651D46CFFE001FC755 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A005B1D46CFFE001FC755 /* User.m */; };
+		4D7E739B1DF56AC000426739 /* chuck-samples-xl in Resources */ = {isa = PBXBuildFile; fileRef = 4D7E739A1DF56ABF00426739 /* chuck-samples-xl */; };
 		4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */; };
 		4DB1D5101D46E4D500C2F62E /* ChuckPadServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadServiceTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
@@ -83,6 +84,7 @@
 		4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4D4AFFCD1D46CFCF001FC755 /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
 		4D4AFFCE1D46CFCF001FC755 /* pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineapple.png; sourceTree = "<group>"; };
+		4D7E739A1DF56ABF00426739 /* chuck-samples-xl */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "chuck-samples-xl"; sourceTree = "<group>"; };
 		4D80F58E1D481D82009E5346 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4D80F58F1D481D82009E5346 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4D817D5D1D4F1A67001FE6F2 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			children = (
 				4D4AFFCC1D46CFCF001FC755 /* assets */,
 				4D4A00421D46CFDB001FC755 /* chuck-samples */,
+				4D7E739A1DF56ABF00426739 /* chuck-samples-xl */,
 				4D4A00441D46CFFE001FC755 /* chuckpad-social-ios */,
 				4D4A00041D46CFD0001FC755 /* Supporting Files */,
 				4D4AFFCA1D46CFCF001FC755 /* AppDelegate.h */,
@@ -347,6 +350,7 @@
 				4D4A000A1D46CFD0001FC755 /* face.png in Resources */,
 				4D4A00431D46CFDB001FC755 /* chuck-samples in Resources */,
 				AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */,
+				4D7E739B1DF56AC000426739 /* chuck-samples-xl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -430,6 +430,19 @@
     [self resetChuckPadSocialForPatchType:MiniAudicle];
 }
 
+- (void)testPatchSizeTooLarge {
+    [self generateLocalUserAndCreate];
+    
+    ChuckPadPatch *largePatch = [ChuckPadPatch generatePatch:@"chuck-samples-xl" filename:@"demo10kb.ck"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
+    [[ChuckPadSocial sharedInstance] uploadPatch:largePatch.name description:largePatch.patchDescription parent:-1 filename:largePatch.filename fileData:largePatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertFalse(succeeded);
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+}
+
 - (void)testWeakPassword {
     // Generate a user with credentials locally and set the password to something weak
     ChuckPadUser *user = [ChuckPadUser generateUser];
