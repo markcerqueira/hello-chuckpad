@@ -156,18 +156,19 @@ static int sDirectoryIndex = 0;
 
 // Internal patch uploader method
 - (void)uploadPatch:(ChuckPadPatch *)localPatch successExpected:(BOOL)successExpected {
-  XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
-  [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
-    XCTAssertTrue(succeeded == successExpected);
-    [expectation fulfill];
-  }];
-  [self waitForExpectations];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
+    [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertTrue(succeeded == successExpected);
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
 }
 
 - (void)uploadMultiplePatches:(NSInteger)patchCount {
-  for (int i = 0; i < patchCount; i++) {
-    [self generatePatchAndUpload:YES];
-  }
+    XCTAssertTrue(patchCount <= [ChuckPadPatch numberOfChuckFilesInSamplesDirectory]);
+    for (int i = 0; i < patchCount; i++) {
+        [self generatePatchAndUpload:YES];
+    }
 }
 
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {

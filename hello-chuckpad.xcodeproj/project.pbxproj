@@ -29,7 +29,8 @@
 		4D4A00651D46CFFE001FC755 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A005B1D46CFFE001FC755 /* User.m */; };
 		4D7E739B1DF56AC000426739 /* chuck-samples-xl in Resources */ = {isa = PBXBuildFile; fileRef = 4D7E739A1DF56ABF00426739 /* chuck-samples-xl */; };
 		4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */; };
-		4DB1D5101D46E4D500C2F62E /* ChuckPadServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadServiceTests.m */; };
+		4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */; };
+		4DB1D5101D46E4D500C2F62E /* ChuckPadServicePatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
 		4DBA9B701DEFF3B600D7CBF0 /* ChuckPadBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */; };
 		4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC087161D493ED9005F9F70 /* PatchCache.m */; };
@@ -89,9 +90,10 @@
 		4D80F58F1D481D82009E5346 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4D817D5D1D4F1A67001FE6F2 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceUserTests.m; sourceTree = "<group>"; };
 		4DB1D5051D46E4BC00C2F62E /* unit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "unit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4DB1D50F1D46E4D500C2F62E /* ChuckPadServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceTests.m; sourceTree = "<group>"; };
+		4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchTests.m; sourceTree = "<group>"; };
 		4DBA017D1D1A410D00292EB9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadBaseTest.m; sourceTree = "<group>"; };
 		4DBA9B711DEFF3CB00D7CBF0 /* ChuckPadBaseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadBaseTest.h; sourceTree = "<group>"; };
@@ -226,7 +228,8 @@
 			children = (
 				4DBA9B711DEFF3CB00D7CBF0 /* ChuckPadBaseTest.h */,
 				4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */,
-				4DB1D50F1D46E4D500C2F62E /* ChuckPadServiceTests.m */,
+				4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */,
+				4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */,
 				4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */,
 				4DB1D5091D46E4BC00C2F62E /* Info.plist */,
 			);
@@ -362,7 +365,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DBA9B701DEFF3B600D7CBF0 /* ChuckPadBaseTest.m in Sources */,
-				4DB1D5101D46E4D500C2F62E /* ChuckPadServiceTests.m in Sources */,
+				4DB1D5101D46E4D500C2F62E /* ChuckPadServicePatchTests.m in Sources */,
+				4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */,
 				4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

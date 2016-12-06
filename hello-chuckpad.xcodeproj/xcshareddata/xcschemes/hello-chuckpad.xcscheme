@@ -37,6 +37,11 @@
                BlueprintName = "unit-tests"
                ReferencedContainer = "container:hello-chuckpad.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "ChuckPadBaseTest">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
