@@ -304,7 +304,7 @@
     [[ChuckPadSocial sharedInstance] localLogOut];
 
     // Create a new user.
-    ChuckPadUser *newUser = [self generateLocalUserAndCreate];
+    [self generateLocalUserAndCreate];
     
     // This new user should NOT be able to update patchOwner's patch.
     XCTestExpectation *expectation = [self expectationWithDescription:@"updatePatch timed out"];
@@ -327,6 +327,7 @@
     
     [self logInWithLocalUser:patchOwner];
     
+    // The patch owner should be able to update the patch...
     XCTestExpectation *expectation3 = [self expectationWithDescription:@"updatePatch timed out"];
     [[ChuckPadSocial sharedInstance] updatePatch:patch.lastServerPatch hidden:@(NO) name:@"Name" description:nil filename:nil fileData:nil callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertTrue(succeeded);
@@ -334,6 +335,7 @@
     }];
     [self waitForExpectations];
     
+    // ...and delete it.
     XCTestExpectation *expectation4 = [self expectationWithDescription:@"deletePatch timed out"];
     [[ChuckPadSocial sharedInstance] deletePatch:patch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
         XCTAssertTrue(succeeded);
