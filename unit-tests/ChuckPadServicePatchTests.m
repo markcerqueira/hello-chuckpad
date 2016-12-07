@@ -287,10 +287,61 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
     [[ChuckPadSocial sharedInstance] uploadPatch:largePatch.name description:largePatch.patchDescription parent:-1 filename:largePatch.filename fileData:largePatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertFalse(succeeded);
-        XCTAssertTrue([[error localizedDescription] containsString:@"10 KB"]);
+        
+        [self assertError:error descriptionContainsString:@"10 KB"];
+        
         [expectation fulfill];
     }];
     [self waitForExpectations];
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testOnlyPatchCreatorCanUpdateAndDeletePatch {
+    // Create a user, upload a patch, and log out.
+    ChuckPadUser *patchOwner = [self generateLocalUserAndCreate];
+    ChuckPadPatch *patch = [self generatePatchAndUpload:@"demo0.ck" successExpected:YES];
+    [[ChuckPadSocial sharedInstance] localLogOut];
+
+    // Create a new user.
+    ChuckPadUser *newUser = [self generateLocalUserAndCreate];
+    
+    // This new user should NOT be able to update patchOwner's patch.
+    XCTestExpectation *expectation = [self expectationWithDescription:@"updatePatch timed out"];
+    [[ChuckPadSocial sharedInstance] updatePatch:patch.lastServerPatch hidden:@(NO) name:@"Name" description:nil filename:nil fileData:nil callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertFalse(succeeded);
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // This new user should NOT be able to delete patchOwner's patch.
+    XCTestExpectation *expectation2 = [self expectationWithDescription:@"deletePatch timed out"];
+    [[ChuckPadSocial sharedInstance] deletePatch:patch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        [expectation2 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // Log out of our new user and log back in with patchOwner - the owner of the patch we uploaded earlier.
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    
+    [self logInWithLocalUser:patchOwner];
+    
+    XCTestExpectation *expectation3 = [self expectationWithDescription:@"updatePatch timed out"];
+    [[ChuckPadSocial sharedInstance] updatePatch:patch.lastServerPatch hidden:@(NO) name:@"Name" description:nil filename:nil fileData:nil callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertTrue(succeeded);
+        [expectation3 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    XCTestExpectation *expectation4 = [self expectationWithDescription:@"deletePatch timed out"];
+    [[ChuckPadSocial sharedInstance] deletePatch:patch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        [expectation4 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    [self cleanUpFollowingTest];
 }
 
 @end

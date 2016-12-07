@@ -82,6 +82,13 @@
 // returns the local object to the caller. This method asserts the createUser API succeeds.
 - (ChuckPadUser *)generateLocalUserAndCreate;
 
+// Given a local ChuckPadUser object that's been created already, this calls the createUser API using credentials stored
+// in that local ChuckPadUser object.
+- (ChuckPadUser *)createUserFromLocalUser:(ChuckPadUser *)user;
+
+// Given a local ChuckPadUser object logs in via the logIn API.
+- (void)logInWithLocalUser:(ChuckPadUser *)user;
+
 // Generates a patch with data from the given filename and checks API success against the successExpected parameter. 
 - (ChuckPadPatch *)generatePatchAndUpload:(NSString *)filename successExpected:(BOOL)successExpected;
 
@@ -115,5 +122,14 @@
 
 // Call this at the end of each test to clean up state (log out any currently logged in user).
 - (void)cleanUpFollowingTest;
+
+// Asserts that the given error is not nil and contains the string given.
+- (void)assertError:(NSError *)error descriptionContainsString:(NSString *)string;
+
+// Asserts that the given error is not nil and contains yesString and does not contain noString.
+- (void)assertError:(NSError *)error descriptionContainsString:(NSString *)yesString doesNotContainString:(NSString *)noString;
+
+// Asserts that the given error is not nil and contains all the strings given.
+- (void)assertError:(NSError *)error descriptionContainsStrings:(NSArray *)strings;
 
 @end

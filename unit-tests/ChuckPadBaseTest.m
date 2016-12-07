@@ -130,16 +130,27 @@ static int sDirectoryIndex = 0;
 }
 
 - (ChuckPadUser *)generateLocalUserAndCreate {
-    ChuckPadUser *user = [ChuckPadUser generateUser];
-    
+    return [self createUserFromLocalUser:[ChuckPadUser generateUser]];
+}
+
+- (ChuckPadUser *)createUserFromLocalUser:(ChuckPadUser *)user {
     XCTestExpectation *expectation = [self expectationWithDescription:@"createUser timed out"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
         [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
         [expectation fulfill];
     }];
     [self waitForExpectations];
-        
+    
     return user;
+}
+
+- (void)logInWithLocalUser:(ChuckPadUser *)user {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"logIn timed out"];
+    [[ChuckPadSocial sharedInstance] logIn:user.username password:user.password callback:^(BOOL succeeded, NSError *error) {
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
 }
 
 - (ChuckPadPatch *)generatePatchAndUpload:(BOOL)successExpected {
@@ -159,6 +170,7 @@ static int sDirectoryIndex = 0;
     XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
     [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertTrue(succeeded == successExpected);
+        localPatch.lastServerPatch = patch;
         [expectation fulfill];
     }];
     [self waitForExpectations];
@@ -246,6 +258,32 @@ static int sDirectoryIndex = 0;
 
 - (void)cleanUpFollowingTest {
     [[ChuckPadSocial sharedInstance] localLogOut];
+}
+
+- (void)assertError:(NSError *)error descriptionContainsString:(NSString *)string {
+    [self assertError:error descriptionContainsStrings:@[string]];
+}
+
+- (void)assertError:(NSError *)error descriptionContainsString:(NSString *)yesString doesNotContainString:(NSString *)noString {
+    [self assertError:error descriptionContainsStrings:@[yesString] doesNotContainStrings:@[noString]];
+}
+
+- (void)assertError:(NSError *)error descriptionContainsStrings:(NSArray *)strings {
+    [self assertError:error descriptionContainsStrings:strings doesNotContainStrings:nil];
+}
+
+- (void)assertError:(NSError *)error descriptionContainsStrings:(NSArray *)strings doesNotContainStrings:(NSArray *)noStrings {
+    XCTAssertTrue(error != nil);
+    
+    NSString *errorDescription = [error.localizedDescription lowercaseString];
+    
+    for (NSString *string in strings) {
+        XCTAssertTrue([errorDescription containsString:[string lowercaseString]]);
+    }
+    
+    for (NSString *noString in noStrings) {
+        XCTAssertFalse([errorDescription containsString:[noString lowercaseString]]);
+    }
 }
 
 @end

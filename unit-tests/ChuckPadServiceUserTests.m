@@ -100,8 +100,9 @@
     XCTestExpectation *expectation2 = [self expectationWithDescription:@"createUser timed out"];
     [[ChuckPadSocial sharedInstance] createUser:user2.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
-        XCTAssertFalse([[error localizedDescription] containsString:@"username"]);
+        
+        [self assertError:error descriptionContainsString:@"email" doesNotContainString:@"username"];
+
         [expectation2 fulfill];
     }];
     [self waitForExpectations];
@@ -110,8 +111,9 @@
     XCTestExpectation *expectation3 = [self expectationWithDescription:@"createUser timed out"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user2.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
-        XCTAssertFalse([[error localizedDescription] containsString:@"email"]);
+
+        [self assertError:error descriptionContainsString:@"username" doesNotContainString:@"email"];
+
         [expectation3 fulfill];
     }];
     [self waitForExpectations];
@@ -120,8 +122,9 @@
     XCTestExpectation *expectation4 = [self expectationWithDescription:@"createUser timed out"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user2.password callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"username"]);
-        XCTAssertTrue(error != nil && [[error localizedDescription] containsString:@"email"]);
+        
+        [self assertError:error descriptionContainsStrings:@[@"username", @"email"]];
+
         [expectation4 fulfill];
     }];
     [self waitForExpectations];
@@ -182,12 +185,33 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"createUser timed out"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
-        XCTAssertTrue([[error localizedDescription] containsString:@"password"]);
-        XCTAssertTrue([[error localizedDescription] containsString:@"weak"]);
+        
+        [self assertError:error descriptionContainsStrings:@[@"password", @"weak"]];
+
         [expectation fulfill];
     }];
     [self waitForExpectations];
     
+    [self cleanUpFollowingTest];
+}
+
+- (void)testChangePasswordWithWeakPassword {
+    ChuckPadUser *user = [self generateLocalUserAndCreate];
+    
+    NSArray *weakPasswords = @[@"abc", @"123", @"_", @"ab12"];
+    
+    for (NSString * weakPassword in weakPasswords) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"changePassword timed out"];
+        [[ChuckPadSocial sharedInstance] changePassword:weakPassword callback:^(BOOL succeeded, NSError *error) {
+            XCTAssertFalse(succeeded);
+            
+            [self assertError:error descriptionContainsStrings:@[@"password", @"weak"]];
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+
     [self cleanUpFollowingTest];
 }
 
@@ -221,7 +245,7 @@
     [self cleanUpFollowingTest];
 }
 
-- (void)testUsernameCaseSensitivity {
+- (void)testUsernameCaseSensitivityForCreateUser {
     NSString *baseUsername = [self randomStringWithLength:20];
     NSArray *usernames = @[baseUsername, [baseUsername uppercaseString], [baseUsername lowercaseString]];
     
@@ -236,8 +260,7 @@
             
             // The error message should only mention that the username is used, not the email.
             if (i != 0) {
-                XCTAssertTrue([[error localizedDescription] containsString:@"username"]);
-                XCTAssertFalse([[error localizedDescription] containsString:@"email"]);
+                [self assertError:error descriptionContainsString:@"username" doesNotContainString:@"email"];
             }
             
             // Need to do a localLogOut to clear credentials so we can log in again.
@@ -251,7 +274,31 @@
     [self cleanUpFollowingTest];
 }
 
-- (void)testEmailCaseSensitivity {
+- (void)testUsernameCaseInsensitivityForLogIn {
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+    user.username = [self randomStringWithLength:20];
+    
+    [self createUserFromLocalUser:user];
+    
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    
+    NSArray *usernames = @[[user.username uppercaseString], [user.username lowercaseString]];
+    for (NSString *username in usernames) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"logIn timed out"];
+        [[ChuckPadSocial sharedInstance] logIn:username password:user.password callback:^(BOOL succeeded, NSError *error) {
+            XCTAssertTrue(succeeded);
+            
+            [[ChuckPadSocial sharedInstance] localLogOut];
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testEmailCaseSensitivityForCreateUser {
     ChuckPadUser *user = [ChuckPadUser generateUser];
     for (int i = 0; i <= 2; i++) {
         // Change username for every pass so we don't hit the duplicate username case
@@ -276,11 +323,33 @@
             
             // The error message should only mention that the email is used, NOT the username.
             if (i != 0) {
-                XCTAssertTrue([[error localizedDescription] containsString:@"email"]);
-                XCTAssertFalse([[error localizedDescription] containsString:@"username"]);
+                [self assertError:error descriptionContainsString:@"email" doesNotContainString:@"username"];
             }
             
             // Need to do a localLogOut to clear credentials so we can log in again.
+            [[ChuckPadSocial sharedInstance] localLogOut];
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testEmailCaseInsensitivityForLogIn {
+    ChuckPadUser *user = [ChuckPadUser generateUser];
+    
+    [self createUserFromLocalUser:user];
+    
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    
+    NSArray *emails = @[[user.email uppercaseString], [user.email lowercaseString]];
+    for (NSString *email in emails) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"logIn timed out"];
+        [[ChuckPadSocial sharedInstance] logIn:email password:user.password callback:^(BOOL succeeded, NSError *error) {
+            XCTAssertTrue(succeeded);
+            
             [[ChuckPadSocial sharedInstance] localLogOut];
             
             [expectation fulfill];
