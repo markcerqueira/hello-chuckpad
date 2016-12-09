@@ -22,60 +22,70 @@
     [super tearDown];
 }
 
-// General exercise of the User API calls
-- (void)testUserAPI {
-    // Generate a user with credentials locally. We will register a new user and log in using these credentials.
-    ChuckPadUser *user = [ChuckPadUser generateUser];
+- (void)testCreateUser {
+    [self generateLocalUserAndCreate];
     
-    // 1 - Register a user
-    XCTestExpectation *expectation1 = [self expectationWithDescription:@"createUser timed out (1)"];
-    [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
-        // Log out in this check so we can test logging in next
-        [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
-        [expectation1 fulfill];
-    }];
-    [self waitForExpectations];
+    [self cleanUpFollowingTest];
+}
+
+- (void)testCreateUserAndLogIn {
+    ChuckPadUser *user = [self generateLocalUserAndCreate];
     
-    // 2 - Log in as the user we created
-    XCTestExpectation *expectation2 = [self expectationWithDescription:@"logIn timed out (2)"];
+    // Log out so we can log in below
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"logIn timed out"];
     [[ChuckPadSocial sharedInstance] logIn:user.username password:user.password callback:^(BOOL succeeded, NSError *error) {
-        // Do not log in because we are going to change the password in the next call
-        [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
-        [expectation2 fulfill];
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
+        [expectation fulfill];
     }];
     [self waitForExpectations];
     
-    // 3 - Change the user's password
+    [self cleanUpFollowingTest];
+}
+
+- (void)testChangePassword {
+    ChuckPadUser *user = [self generateLocalUserAndCreate];
+    
+    NSString *oldPassword = user.password;
     NSString *newPassword = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    XCTestExpectation *expectation3 = [self expectationWithDescription:@"changePassword timed out (3)"];
+    
+    // Change the password
+    XCTestExpectation *expectation = [self expectationWithDescription:@"changePassword timed out"];
     [[ChuckPadSocial sharedInstance] changePassword:newPassword callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertTrue(succeeded);
-        
-        // Update the local user
-        user.password = newPassword;
-        
         [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
-        
-        [expectation3 fulfill];
+        [expectation fulfill];
     }];
     [self waitForExpectations];
     
-    // 4 - Log in again with the updated password and stay logged in after the test
-    XCTestExpectation *expectation4 = [self expectationWithDescription:@"logIn timed out (4)"];
-    [[ChuckPadSocial sharedInstance] logIn:user.username password:user.password callback:^(BOOL succeeded, NSError *error) {
-        // Do not log in because we are going to change the password in the next call
-        [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
-        [expectation4 fulfill];
+    // Check to see we can log in with the updated credentials
+    expectation = [self expectationWithDescription:@"logIn timed out"];
+    [[ChuckPadSocial sharedInstance] logIn:user.username password:newPassword callback:^(BOOL succeeded, NSError *error) {
+        [self postAuthCallAssertsChecks:succeeded user:user logOut:YES];
+        [expectation fulfill];
     }];
     [self waitForExpectations];
     
-    // 5 - Log out using the logOut API which invalidates the auth token on the service
-    XCTestExpectation *expectation5 = [self expectationWithDescription:@"logOut timed out (5)"];
+    // Check to make sure we cannot log in with the old password
+    expectation = [self expectationWithDescription:@"logIn timed out"];
+    [[ChuckPadSocial sharedInstance] logIn:user.username password:oldPassword callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testLogOut {
+    [self generateLocalUserAndCreate];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"logOut timed out"];
     [[ChuckPadSocial sharedInstance] logOut:^(BOOL succeeded, NSError *error) {
         XCTAssertTrue(succeeded);
         XCTAssertTrue(error == nil);
         [self doPostLogOutAssertChecks];
-        [expectation5 fulfill];
+        [expectation fulfill];
     }];
     [self waitForExpectations];
     
@@ -196,7 +206,7 @@
 }
 
 - (void)testChangePasswordWithWeakPassword {
-    ChuckPadUser *user = [self generateLocalUserAndCreate];
+    [self generateLocalUserAndCreate];
     
     NSArray *weakPasswords = @[@"abc", @"123", @"_", @"ab12"];
     

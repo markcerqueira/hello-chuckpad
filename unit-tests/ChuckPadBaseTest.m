@@ -8,6 +8,9 @@
 
 #import "ChuckPadBaseTest.h"
 
+NSInteger const NUMBER_PATCHES_RECENT_API = 20;
+NSInteger const MAX_SIZE_FOR_DATA = 10;
+
 @implementation ChuckPadUser
 
 + (ChuckPadUser *)generateUser {
@@ -54,7 +57,6 @@ static int sDirectoryIndex = 0;
     ChuckPadPatch *patch = [[ChuckPadPatch alloc] init];
     
     patch.name = filename;
-    patch.filename = filename;
     patch.patchDescription = [[NSUUID UUID] UUIDString];
     
     NSString *folderPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:folderName];
@@ -66,6 +68,15 @@ static int sDirectoryIndex = 0;
     patch.abuseReportCount = 0;
     
     return patch;
+}
+
+- (void)addExtraData:(NSString *)filename {
+    [self addExtraData:@"chuck-samples" filename:filename];
+}
+
+- (void)addExtraData:(NSString *)folder filename:(NSString *)filename {
+    NSString *folderPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:folder];
+    self.extraData = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", folderPath, filename]];
 }
 
 + (NSInteger)numberOfChuckFilesInSamplesDirectory {
@@ -113,9 +124,9 @@ static int sDirectoryIndex = 0;
 - (NSString *)randomStringWithLength:(int)len {
     // 66 character length string
     NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.";
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex:arc4random_uniform((int)[letters length])]];
+    NSMutableString *randomString = [NSMutableString stringWithCapacity:len];
+    for (int i = 0; i < len; i++) {
+        [randomString appendFormat:@"%C", [letters characterAtIndex:arc4random_uniform((int)[letters length])]];
     }
     return randomString;
 }
@@ -130,6 +141,10 @@ static int sDirectoryIndex = 0;
 }
 
 - (ChuckPadUser *)generateLocalUserAndCreate {
+    if ([[ChuckPadSocial sharedInstance] isLoggedIn]) {
+        [[ChuckPadSocial sharedInstance] localLogOut];
+    }
+    
     return [self createUserFromLocalUser:[ChuckPadUser generateUser]];
 }
 
@@ -154,25 +169,46 @@ static int sDirectoryIndex = 0;
 }
 
 - (ChuckPadPatch *)generatePatchAndUpload:(BOOL)successExpected {
-  ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch];
-  [self uploadPatch:localPatch successExpected:successExpected];
-  return localPatch;
+    return [self generatePatch:NO andUpload:successExpected];
+}
+
+- (ChuckPadPatch *)generatePatch:(BOOL)hidden andUpload:(BOOL)successExpected {
+    ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch];
+    localPatch.isHidden = hidden;
+    
+    [self uploadPatch:localPatch successExpected:successExpected];
+    
+    return localPatch;
 }
 
 - (ChuckPadPatch *)generatePatchAndUpload:(NSString *)filename successExpected:(BOOL)successExpected {
-  ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:filename];
-  [self uploadPatch:localPatch successExpected:successExpected];
-  return localPatch;
+    ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch:filename];
+    [self uploadPatch:localPatch successExpected:successExpected callback:nil];
+    return localPatch;
 }
 
-// Internal patch uploader method
 - (void)uploadPatch:(ChuckPadPatch *)localPatch successExpected:(BOOL)successExpected {
+    [self uploadPatch:localPatch successExpected:successExpected callback:nil];
+}
+
+- (void)uploadPatch:(ChuckPadPatch *)localPatch successExpected:(BOOL)successExpected callback:(CreatePatchCallback)callback {
     XCTestExpectation *expectation = [self expectationWithDescription:@"uploadPatch timed out"];
-    [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:-1 filename:localPatch.filename fileData:localPatch.fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+    [[ChuckPadSocial sharedInstance] uploadPatch:localPatch.name description:localPatch.patchDescription parent:localPatch.parentGUID hidden:@(localPatch.isHidden) patchData:localPatch.fileData extraMetaData:localPatch.extraData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertTrue(succeeded == successExpected);
+        
+        if (successExpected) {
+            [self assertPatch:patch localPatch:localPatch isConsistentForUser:nil];
+        }
+        
         localPatch.lastServerPatch = patch;
+        
+        if (callback != nil) {
+            callback(succeeded, patch, error);
+        }
+        
         [expectation fulfill];
     }];
+    
     [self waitForExpectations];
 }
 
@@ -186,13 +222,22 @@ static int sDirectoryIndex = 0;
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {
     XCTAssertTrue(patch != nil);
     XCTAssertTrue(localPatch != nil);
-    XCTAssertTrue(user != nil);
+    
+    // The service does this for us so update localPatch if we passed nil names or descriptions
+    if (localPatch.name == nil) {
+        localPatch.name = @"";
+    }
+    
+    if (localPatch.patchDescription == nil) {
+        localPatch.patchDescription = @"";
+    }
     
     XCTAssertTrue([localPatch.name isEqualToString:patch.name]);
-    XCTAssertTrue([localPatch.filename isEqualToString:patch.filename]);
     XCTAssertTrue([localPatch.patchDescription isEqualToString:patch.patchDescription]);
     
-    XCTAssertTrue([patch.creatorUsername isEqualToString:user.username]);
+    if (user != nil) {
+        XCTAssertTrue([patch.creatorUsername isEqualToString:user.username]);
+    }
     
     XCTAssertTrue(localPatch.isHidden == patch.hidden);
     XCTAssertTrue(localPatch.hasParent == [patch hasParentPatch]);

@@ -11,6 +11,14 @@
 
 #import "ChuckPadSocial.h"
 
+// These constants should be kept in sync with the values on the service, otherwise some tests will likely fail.
+
+// The maximum number of patches that can be returned by the getRecents API.
+extern NSInteger const NUMBER_PATCHES_RECENT_API;
+
+// The maximum size (in KB) for data uploaded for a patch.
+extern NSInteger const MAX_SIZE_FOR_DATA;
+
 @interface ChuckPadUser : NSObject
 
 @property(nonatomic, strong) NSNumber *userId;
@@ -31,9 +39,10 @@
 @interface ChuckPadPatch : NSObject
 
 @property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *filename;
 @property(nonatomic, strong) NSString *patchDescription;
 @property(nonatomic, strong) NSData *fileData;
+@property(nonatomic, strong) NSData *extraData;
+@property(nonatomic, retain) NSString *parentGUID;
 @property(nonatomic, assign) BOOL hasParent;
 @property(nonatomic, assign) BOOL isHidden;
 @property(nonatomic, assign) NSInteger abuseReportCount;
@@ -61,6 +70,12 @@
 
 // Generates a new random name and description on the local ChuckPadPatch object.
 - (void)setNewNameAndDescription;
+
+// Loads data from filename (in the chuck-samples folder) and attaches it to the extraData property.
+- (void)addExtraData:(NSString *)filename;
+
+// Loads data from filename (in the specified folder) and attaches it to the extraData property.
+- (void)addExtraData:(NSString *)folder filename:(NSString *)filename;
 
 @end
 
@@ -94,6 +109,15 @@
 
 // Generates a patch and calls the uploadPatch API. Cases expected to fail can pass NO for the BOOL parameter.
 - (ChuckPadPatch *)generatePatchAndUpload:(BOOL)successExpected;
+
+// Generates a patch and calls the uploadPatch API with the visibility requested.
+- (ChuckPadPatch *)generatePatch:(BOOL)hidden andUpload:(BOOL)successExpected;
+
+// Uploads the given local ChuckPadPatch object.
+- (void)uploadPatch:(ChuckPadPatch *)localPatch successExpected:(BOOL)successExpected;
+
+// Uploads the given local ChuckPadPatch object and calls back to callback with CreatePatchCallback parameters.
+- (void)uploadPatch:(ChuckPadPatch *)localPatch successExpected:(BOOL)successExpected callback:(CreatePatchCallback)callback;
 
 // Uploads multiple patches. Note that for a single user, the number of patches uploaded should not exceed
 // [ChuckPadPatch numberOfChuckFilesInSamplesDirectory] as this will cause duplicate data to be attempted to be uploaded

@@ -98,7 +98,7 @@
 }
 
 - (IBAction)uploadOneDemo:(id)sender {
-    NSString *filename = @"demo0.ck";
+    /* NSString *filename = @"demo0.ck";
     
     NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
     NSString *filePath = [NSString stringWithFormat:@"%@/%@", chuckSamplesPath, filename];
@@ -106,7 +106,7 @@
 
     [[ChuckPadSocial sharedInstance] uploadPatch:filename description:nil parent:0 filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
 
-    }];
+    }]; */
 }
 
 - (IBAction)uploadAllDemos:(id)sender {
@@ -125,9 +125,9 @@
         
         NSLog(@"Filename = %@; data length = %lu", filename, (unsigned long)[fileData length]);
 
-        [[ChuckPadSocial sharedInstance] uploadPatch:filename description:nil parent:0 filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        /* [[ChuckPadSocial sharedInstance] uploadPatch:filename description:nil parent:0 filename:filename fileData:fileData callback:^(BOOL succeeded, Patch *patch, NSError *error) {
 
-        }];
+        }]; */
     }
 }
 
