@@ -45,10 +45,14 @@
     [self cleanUpFollowingTest];
 }
 
-- (void)testFreshnessOfGetRecentPatches {
+
+- (void)testGetRecentPatchesReturnsMostRecent {
     NSMutableDictionary *guidToTimesSeen = [[NSMutableDictionary alloc] init];
     
     int TIMES_TO_LOOP = 5;
+    
+    // This is so our uploadPatch in the second for loop below always succeeds.
+    XCTAssertTrue([ChuckPadPatch numberOfChuckFilesInSamplesDirectory] > NUMBER_PATCHES_RECENT_API);
     
     // For 5 times, upload the number of patches the getRecent API call returns and track how often we see each GUID.
     // Since we're uploading the number we expect returned, we should see each of the patches exactly once.
@@ -79,6 +83,61 @@
     for (NSString *guid in guidToTimesSeen) {
         XCTAssertTrue([guidToTimesSeen[guid] intValue] == 1);
     }
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testGetRecentReturnsOnlyVisible {
+    [self generateLocalUserAndCreate];
+    
+    NSMutableSet *hiddenPatchesGUIDs = [[NSMutableSet alloc] init];
+    
+    for (int j = 0 ; j < NUMBER_PATCHES_RECENT_API; j++) {
+        BOOL uploadAsHidden = j % 2 == 0;
+        
+        ChuckPadPatch *patch = [self generatePatch:uploadAsHidden andUpload:YES];
+        
+        if (uploadAsHidden) {
+            [hiddenPatchesGUIDs addObject:patch.lastServerPatch.guid];
+        }
+    }
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getRecentPatches timed out"];
+    [[ChuckPadSocial sharedInstance] getRecentPatches:^(NSArray *patchesArray, NSError *error) {
+        XCTAssertTrue(patchesArray != nil);
+        
+        for (Patch *patch in patchesArray) {
+            XCTAssertFalse([hiddenPatchesGUIDs containsObject:patch.guid]);
+        }
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+}
+
+- (void)testGetRecentReturnsInOrder {
+    [self generateLocalUserAndCreate];
+    
+    NSMutableArray *uploadedPatchGUIDs = [[NSMutableArray alloc] init];
+    
+    for (int j = 0 ; j < NUMBER_PATCHES_RECENT_API; j++) {
+        ChuckPadPatch *patch = [self generatePatchAndUpload:YES];
+        
+        // Always insert at the front of the array because we want the most recent at the front of the list.
+        [uploadedPatchGUIDs insertObject:patch.lastServerPatch.guid atIndex:0];
+    }
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getRecentPatches timed out"];
+    [[ChuckPadSocial sharedInstance] getRecentPatches:^(NSArray *patchesArray, NSError *error) {
+        XCTAssertTrue(patchesArray != nil);
+        
+        for (int i = 0; i < NUMBER_PATCHES_RECENT_API; i++) {
+            XCTAssertTrue([((Patch *)[patchesArray objectAtIndex:0]).guid isEqualToString:[uploadedPatchGUIDs objectAtIndex:0]]);
+        }
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
 }
 
 - (void)testReportAbuse {
@@ -414,9 +473,30 @@
         XCTAssertTrue([patch.parentGUID isEqualToString:parentPatch.lastServerPatch.guid]);
     }];
     
-    // Not needed but this will stop the compiler complaining about unused variables. We want them named to keep things
-    // nice and clear for the reader.
-    parent = child = nil;
+    [[ChuckPadSocial sharedInstance] localLogOut];
+
+    [self logInWithLocalUser:parent];
+    
+    // Set the parent patch to hidden
+    XCTestExpectation *expectation = [self expectationWithDescription:@"updatePatch timed out"];
+    [[ChuckPadSocial sharedInstance] updatePatch:parentPatch.lastServerPatch hidden:@(YES) name:nil description:nil patchData:nil extraMetaData:nil callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertTrue(succeeded);
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    
+    [self logInWithLocalUser:child];
+    
+    // This patch should now say it does not have a parent because the owner of the parent set it to hidden above.
+    expectation = [self expectationWithDescription:@"updatePatch timed out"];
+    [[ChuckPadSocial sharedInstance] getPatchInfo:childPatch.lastServerPatch.guid callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertTrue(succeeded);
+        XCTAssertFalse([patch hasParentPatch]);
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
     
     [self cleanUpFollowingTest];
 }
