@@ -113,11 +113,19 @@ static int sDirectoryIndex = 0;
 
 #pragma mark - Helper Methods
 
-- (void)callSecretStaticMethod:(NSString *)method class:(NSString *)className {
+- (void)callSecretStaticMethod:(NSString *)method class:(NSString *)className argument:(id)object {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [NSClassFromString(className) performSelector:NSSelectorFromString(method)];
+    if (object != nil) {
+        [NSClassFromString(className) performSelector:NSSelectorFromString(method) withObject:object];
+    } else {
+        [NSClassFromString(className) performSelector:NSSelectorFromString(method)];
+    }
 #pragma clang diagnostic pop
+}
+
+- (void)callSecretStaticMethod:(NSString *)method class:(NSString *)className {
+    [self callSecretStaticMethod:method class:className argument:nil];
 }
 
 // Source: http://stackoverflow.com/a/2633948/265791

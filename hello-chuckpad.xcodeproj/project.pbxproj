@@ -36,6 +36,7 @@
 		4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC087161D493ED9005F9F70 /* PatchCache.m */; };
 		4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */; };
 		AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */; };
+		ADE6E9EC1E047DA100F58ABC /* ChuckPadServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE6E9EB1E047DA100F58ABC /* ChuckPadServiceTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ADD984B11DA898F50060B761 /* hello-chuckpad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "hello-chuckpad.entitlements"; path = "../hello-chuckpad.entitlements"; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* hello-chuckpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-chuckpad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE6E9EB1E047DA100F58ABC /* ChuckPadServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 				4DBA9B711DEFF3CB00D7CBF0 /* ChuckPadBaseTest.h */,
 				4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */,
 				4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */,
+				ADE6E9EB1E047DA100F58ABC /* ChuckPadServiceTests.m */,
 				4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */,
 				4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */,
 				4DB1D5091D46E4BC00C2F62E /* Info.plist */,
@@ -368,6 +371,7 @@
 				4DB1D5101D46E4D500C2F62E /* ChuckPadServicePatchTests.m in Sources */,
 				4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */,
 				4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */,
+				ADE6E9EC1E047DA100F58ABC /* ChuckPadServiceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

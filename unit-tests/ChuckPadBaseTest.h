@@ -5,6 +5,9 @@
 //  Created by Mark Cerqueira on 11/30/16.
 //
 //  Subclass of XCTestCase with helper methods that can be used by subclass implementations.
+//
+//  NOTE: Tests run against the chuckpad-social server running locally on your machine. To run the
+//  chuckpad-social server locally please see: https://github.com/markcerqueira/chuckpad-social
 
 #import <Foundation/Foundation.h>
 #import <XCTest/XCTest.h>
@@ -83,6 +86,7 @@ extern NSInteger const MAX_SIZE_FOR_DATA;
 
 // There are some special methods in ChuckPadSocial and ChuckPadKeychain that are not exposed in header files because
 // they should only be used by unit tests. These methods allow you to call those methods without getting compiler warnings.
+- (void)callSecretStaticMethod:(NSString *)method class:(NSString *)className argument:(id)object;
 - (void)callSecretStaticMethod:(NSString *)method class:(NSString *)className;
 
 // Returns a random string (using lowercase letters, upper case letters, numbers, period, hyphen, and underscore) with

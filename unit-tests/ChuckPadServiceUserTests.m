@@ -3,8 +3,6 @@
 //  hello-chuckpad
 //  Created by Mark Cerqueira on 7/25/16.
 //
-//  NOTE: These tests run against the chuckpad-social server running locally on your machine. To run the chuckpad-social
-//  server on your computer please see: https://github.com/markcerqueira/chuckpad-social
 
 #import "ChuckPadBaseTest.h"
 
