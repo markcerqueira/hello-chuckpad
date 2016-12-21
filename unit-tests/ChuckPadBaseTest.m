@@ -25,7 +25,7 @@ NSInteger const MAX_SIZE_FOR_DATA = 10;
 }
 
 - (void)updateUserId:(NSInteger)userId {
-    self.userId = @(userId);
+    self.userId = userId;
 }
 
 @end
@@ -160,6 +160,9 @@ static int sDirectoryIndex = 0;
     XCTestExpectation *expectation = [self expectationWithDescription:@"createUser timed out"];
     [[ChuckPadSocial sharedInstance] createUser:user.username email:user.email password:user.password callback:^(BOOL succeeded, NSError *error) {
         [self postAuthCallAssertsChecks:succeeded user:user logOut:NO];
+      
+        user.userId = [[ChuckPadKeychain sharedInstance] getLoggedInUserId];
+      
         [expectation fulfill];
     }];
     [self waitForExpectations];

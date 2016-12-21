@@ -245,6 +245,24 @@
     [self cleanUpFollowingTest];
 }
 
+- (void)testGetMyPatchesReturnsOnlyMyPatches {
+    for (int i = 0; i < 5; i++) {
+        [self generateLocalUserAndCreate];
+        ChuckPadPatch *patch = [self generatePatchAndUpload:YES];
+        
+        XCTestExpectation *expectation = [self expectationWithDescription:@"getMyPatches timed out"];
+        [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
+            XCTAssertTrue([patchesArray count] == 1);
+            XCTAssertTrue([[patchesArray objectAtIndex:0] isEqual:patch.lastServerPatch]);
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+    
+    [self cleanUpFollowingTest];
+}
+
 - (void)testPatchUploadAndUpdate {
     ChuckPadUser *user = [self generateLocalUserAndCreate];
     
@@ -307,7 +325,7 @@
     // user has to hidden. But since we are the owning user, we should get back 1 patch because patch owners can see
     // patches even if they are hidden.
     expectation = [self expectationWithDescription:@"getPatchesForUserId timed out"];
-    [[ChuckPadSocial sharedInstance] getPatchesForUserId:[user.userId integerValue] callback:^(NSArray *patchesArray, NSError *error) {
+    [[ChuckPadSocial sharedInstance] getPatchesForUserId:user.userId callback:^(NSArray *patchesArray, NSError *error) {
         XCTAssertTrue(patchesArray != nil);
         XCTAssertTrue([patchesArray count] == user.totalPatches);
         
@@ -316,11 +334,74 @@
         [expectation fulfill];
     }];
     [self waitForExpectations];
+  
+    [self cleanUpFollowingTest];
 }
 
 - (void)testMultiplePatchUpload {
     [self generateLocalUserAndCreate];
     [self uploadMultiplePatches:[ChuckPadPatch numberOfChuckFilesInSamplesDirectory]];
+    [self cleanUpFollowingTest];
+}
+
+- (void)testGetPatchesForUser {
+    ChuckPadUser *user = [self generateLocalUserAndCreate];
+    
+    NSInteger patchesToUpload = 12;
+    
+    NSMutableSet *patchGUIDsUploaded = [NSMutableSet new];
+    for (int i = 0; i < patchesToUpload; i++) {
+        ChuckPadPatch * patch = [self generatePatchAndUpload:YES];
+        [patchGUIDsUploaded addObject:patch.lastServerPatch.guid];
+    }
+    
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getPatchesForUserId timed out"];
+    [[ChuckPadSocial sharedInstance] getPatchesForUserId:user.userId callback:^(NSArray *patchesArray, NSError *error) {
+        XCTAssertTrue([patchesArray count] == patchesToUpload);
+        
+        for (Patch *patch in patchesArray) {
+            XCTAssertTrue([patchGUIDsUploaded containsObject:patch.guid]);
+            [patchGUIDsUploaded removeObject:patch.guid];
+        }
+        
+        XCTAssertTrue([patchGUIDsUploaded count] == 0);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testGetPatchesForUserWithNoPatches {
+    ChuckPadUser *user = [self generateLocalUserAndCreate];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getPatchesForUserId timed out"];
+    [[ChuckPadSocial sharedInstance] getPatchesForUserId:user.userId callback:^(NSArray *patchesArray, NSError *error) {
+        XCTAssertTrue(error == nil);
+        XCTAssertTrue([patchesArray count] == 0);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testGetPatchesForNonexistentUser {
+    ChuckPadUser *user = [self generateLocalUserAndCreate];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getPatchesForUserId timed out"];
+    [[ChuckPadSocial sharedInstance] getPatchesForUserId:(user.userId + 1) callback:^(NSArray *patchesArray, NSError *error) {
+        XCTAssertTrue(error != nil);
+        XCTAssertTrue(patchesArray == nil);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
     [self cleanUpFollowingTest];
 }
 
@@ -667,6 +748,35 @@
     [[ChuckPadSocial sharedInstance] deletePatch:patch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
         XCTAssertTrue(succeeded);
         [expectation4 fulfill];
+    }];
+    [self waitForExpectations];
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testDownloadDataCallsWithBadGUID {
+    Patch *patch = [[Patch alloc] init];
+    
+    // Set a random GUID for resource and extra resource URLs. Below we expect these downloads to fail.
+    NSString *randomGUID = [self randomStringWithLength:20];
+    patch.resourceUrl = [NSString stringWithFormat:@"/patch/download/%@", randomGUID];
+    patch.extraResourceUrl = [NSString stringWithFormat:@"/patch/download/extra/%@", randomGUID];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"downloadPatchResource timed out"];
+    [[ChuckPadSocial sharedInstance] downloadPatchResource:patch callback:^(NSData *resourceData, NSError *error) {
+        XCTAssertTrue(resourceData == nil);
+        XCTAssertTrue(error != nil);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+    expectation = [self expectationWithDescription:@"downloadPatchExtraData timed out"];
+    [[ChuckPadSocial sharedInstance] downloadPatchExtraData:patch callback:^(NSData *resourceData, NSError *error) {
+        XCTAssertTrue(resourceData == nil);
+        XCTAssertTrue(error != nil);
+        
+        [expectation fulfill];
     }];
     [self waitForExpectations];
     

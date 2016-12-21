@@ -24,7 +24,7 @@ extern NSInteger const MAX_SIZE_FOR_DATA;
 
 @interface ChuckPadUser : NSObject
 
-@property(nonatomic, strong) NSNumber *userId;
+@property(nonatomic, assign) NSInteger userId;
 @property(nonatomic, strong) NSString *username;
 @property(nonatomic, strong) NSString *password;
 @property(nonatomic, strong) NSString *email;
