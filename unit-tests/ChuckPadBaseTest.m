@@ -100,19 +100,29 @@ static int sDirectoryIndex = 0;
 #pragma mark - XCTestCase methods
 
 - (void)setUp {
-  [self resetChuckPadSocialForPatchType:MiniAudicle];
-  
-  [super setUp];
+    // We expect all network calls to succeed (as in the service accepts the call and successfully return a response
+    // even if that response indicates something did not succeed). If a network call fails it likely means we hit
+    // an exception/error on the server.
+    [self callSecretStaticMethod:@"setNetworkErrorCallback:" class:@"ChuckPadSocial" argument:^void (void) {
+        XCTAssertTrue(false);
+    }];
+    
+    [self resetChuckPadSocialForPatchType:MiniAudicle];
+    
+    [super setUp];
 }
 
 - (void)tearDown {
-  [[ChuckPadSocial sharedInstance] localLogOut];
-  
-  [super tearDown];
+    [self callSecretStaticMethod:@"clearNetworkErrorCallback" class:@"ChuckPadSocial"];
+    
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    
+    [super tearDown];
 }
 
 #pragma mark - Helper Methods
 
+// If calling with an argument be sure to add a ":" to the end of the method name!
 - (void)callSecretStaticMethod:(NSString *)method class:(NSString *)className argument:(id)object {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
