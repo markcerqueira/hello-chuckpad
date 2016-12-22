@@ -139,10 +139,14 @@
 }
 
 - (void)testReportAbuse {
-    ChuckPadUser *user = [self generateLocalUserAndCreate];
+    ChuckPadUser *patchOwner = [self generateLocalUserAndCreate];
     
     ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
-    user.totalPatches++;
+    patchOwner.totalPatches++;
+    
+    // A user cannot report their own patches so log out and create a new user
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    [self generateLocalUserAndCreate];
 
     // Report a patch as abusive
     XCTestExpectation *expectation = [self expectationWithDescription:@"reportAbuse timed out"];
@@ -160,7 +164,7 @@
     [[ChuckPadSocial sharedInstance] getPatchInfo:localPatch.lastServerPatch.guid callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertTrue(succeeded);
         
-        [self assertPatch:patch localPatch:localPatch isConsistentForUser:user];
+        [self assertPatch:patch localPatch:localPatch isConsistentForUser:patchOwner];
         
         [expectation fulfill];
     }];
@@ -182,27 +186,98 @@
     [[ChuckPadSocial sharedInstance] getPatchInfo:localPatch.lastServerPatch.guid callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertTrue(succeeded);
         
-        [self assertPatch:patch localPatch:localPatch isConsistentForUser:user];
+        [self assertPatch:patch localPatch:localPatch isConsistentForUser:patchOwner];
         
         [expectation fulfill];
     }];
     [self waitForExpectations];
     
-    // Delete the patch we uploaded earlier
-    expectation = [self expectationWithDescription:@"deletePatch timed out"];
-    [[ChuckPadSocial sharedInstance] deletePatch:localPatch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertTrue(succeeded);
+    [self cleanUpFollowingTest];
+}
+
+- (void)testMultipleReportAbuse {
+    ChuckPadUser *patchOwner = [self generateLocalUserAndCreate];
+    
+    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    
+    NSMutableArray *reportingUsers = [NSMutableArray new];
+    
+    NSInteger numberReportingUsers = 10;
+    
+    // Generate a bunch of users
+    for (int i = 0; i < numberReportingUsers; i++) {
+        [reportingUsers addObject:[self generateLocalUserAndCreate]];
+    }
+    
+    for (ChuckPadUser *user in reportingUsers) {
+        [[ChuckPadSocial sharedInstance] localLogOut];
         
-        // We deleted a patch so decrease our local count of our total patch count
-        user.totalPatches--;
+        [self logInWithLocalUser:user];
         
-        // Assert our patch count is correct
-        [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
-            XCTAssertTrue(patchesArray != nil);
-            XCTAssertTrue([patchesArray count] == user.totalPatches);
+        // Report the patch as abusive
+        XCTestExpectation *expectation = [self expectationWithDescription:@"reportAbuse timed out"];
+        [[ChuckPadSocial sharedInstance] reportAbuse:localPatch.lastServerPatch isAbuse:YES callback:^(BOOL succeeded, NSError *error) {
+            XCTAssertTrue(succeeded);
+            
+            localPatch.abuseReportCount++;
             
             [expectation fulfill];
         }];
+        [self waitForExpectations];
+    }
+    
+    // Check patch metadata to make sure abuse report count is correct
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getPatchInfo timed out"];
+    [[ChuckPadSocial sharedInstance] getPatchInfo:localPatch.lastServerPatch.guid callback:^(BOOL succeeded, Patch *patch, NSError *error) {
+        XCTAssertTrue(succeeded);
+        
+        [self assertPatch:patch localPatch:localPatch isConsistentForUser:patchOwner];
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+    [self cleanUpFollowingTest];
+}
+
+- (void)testReportAbuseOnDeletedPatch {
+    [self generateLocalUserAndCreate];
+    
+    ChuckPadPatch *patch = [self generatePatchAndUpload:YES];
+    
+    // Delete the patch we just uploaded
+    XCTestExpectation *expectation = [self expectationWithDescription:@"deletePatch timed out"];
+    [[ChuckPadSocial sharedInstance] deletePatch:patch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+    // Switch to a new user
+    [[ChuckPadSocial sharedInstance] localLogOut];
+    [self generateLocalUserAndCreate];
+    
+    // Report a patch as abusive. We expect this to fail because we deleted the patch right after uploading it.
+    expectation = [self expectationWithDescription:@"reportAbuse timed out"];
+    [[ChuckPadSocial sharedInstance] reportAbuse:patch.lastServerPatch isAbuse:YES callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+}
+
+- (void)testReportAbuseOnOwnPatchNotAllowed {
+    [self generateLocalUserAndCreate];
+    
+    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"reportAbuse timed out"];
+    [[ChuckPadSocial sharedInstance] reportAbuse:localPatch.lastServerPatch isAbuse:YES callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertFalse(succeeded);
+        
+        [expectation fulfill];
     }];
     [self waitForExpectations];
     
