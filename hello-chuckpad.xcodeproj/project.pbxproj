@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		247AE4399FC5BB10FEF710CA /* ChuckPadKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */; };
+		4D422B101E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */; };
+		4D422B131E17AE8600B2F7B2 /* PatchResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D422B121E17AE8600B2F7B2 /* PatchResource.m */; };
 		4D433FD01E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */; };
 		4D4A00091D46CFD0001FC755 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */; };
 		4D4A000A1D46CFD0001FC755 /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCD1D46CFCF001FC755 /* face.png */; };
@@ -53,6 +55,9 @@
 /* Begin PBXFileReference section */
 		247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadKeychain.m; sourceTree = "<group>"; };
 		247AEA5395F87953FB3F1A7A /* ChuckPadKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadKeychain.h; sourceTree = "<group>"; };
+		4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchVersioningTests.m; sourceTree = "<group>"; };
+		4D422B111E17AE8600B2F7B2 /* PatchResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchResource.h; sourceTree = "<group>"; };
+		4D422B121E17AE8600B2F7B2 /* PatchResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchResource.m; sourceTree = "<group>"; };
 		4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchFetchTests.m; sourceTree = "<group>"; };
 		4D4A00001D46CFCF001FC755 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D4A00011D46CFD0001FC755 /* PatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
@@ -151,6 +156,8 @@
 				4D4A00591D46CFFE001FC755 /* Patch.m */,
 				4DC087151D493ED9005F9F70 /* PatchCache.h */,
 				4DC087161D493ED9005F9F70 /* PatchCache.m */,
+				4D422B111E17AE8600B2F7B2 /* PatchResource.h */,
+				4D422B121E17AE8600B2F7B2 /* PatchResource.m */,
 				4D4A005A1D46CFFE001FC755 /* User.h */,
 				4D4A005B1D46CFFE001FC755 /* User.m */,
 			);
@@ -233,6 +240,7 @@
 				4DBA9B711DEFF3CB00D7CBF0 /* ChuckPadBaseTest.h */,
 				4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */,
 				4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */,
+				4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */,
 				4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */,
 				ADE6E9EB1E047DA100F58ABC /* ChuckPadServiceTests.m */,
 				4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */,
@@ -376,6 +384,7 @@
 				4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */,
 				4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */,
 				ADE6E9EC1E047DA100F58ABC /* ChuckPadServiceTests.m in Sources */,
+				4D422B101E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +404,7 @@
 				4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */,
 				4D4A003F1D46CFD0001FC755 /* main.m in Sources */,
 				4D4A005D1D46CFFE001FC755 /* AFNetworkReachabilityManager.m in Sources */,
+				4D422B131E17AE8600B2F7B2 /* PatchResource.m in Sources */,
 				4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */,
 				4D4A003D1D46CFD0001FC755 /* PatchListViewController.m in Sources */,
 				4D4A00641D46CFFE001FC755 /* Patch.m in Sources */,
