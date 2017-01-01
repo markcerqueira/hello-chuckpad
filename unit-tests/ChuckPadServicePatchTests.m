@@ -136,20 +136,14 @@
     ChuckPadPatch *patch = [self generatePatchAndUpload:YES];
     
     // Delete the patch we just uploaded
-    XCTestExpectation *expectation = [self expectationWithDescription:@"deletePatch timed out"];
-    [[ChuckPadSocial sharedInstance] deletePatch:patch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertTrue(succeeded);
-        
-        [expectation fulfill];
-    }];
-    [self waitForExpectations];
+    [self deletePatch:patch];
     
     // Switch to a new user
     [[ChuckPadSocial sharedInstance] localLogOut];
     [self generateLocalUserAndCreate];
     
     // Report a patch as abusive. We expect this to fail because we deleted the patch right after uploading it.
-    expectation = [self expectationWithDescription:@"reportAbuse timed out"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"reportAbuse timed out"];
     [[ChuckPadSocial sharedInstance] reportAbuse:patch.lastServerPatch isAbuse:YES callback:^(BOOL succeeded, NSError *error) {
         XCTAssertFalse(succeeded);
         
@@ -370,14 +364,9 @@
 
     ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
     
-    XCTestExpectation *expectation = [self expectationWithDescription:@"deletePatch timed out"];
-    [[ChuckPadSocial sharedInstance] deletePatch:localPatch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertTrue(succeeded);
-        [expectation fulfill];
-    }];
-    [self waitForExpectations];
+    [self deletePatch:localPatch];
     
-    expectation = [self expectationWithDescription:@"updatePatch timed out"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"updatePatch timed out"];
     [[ChuckPadSocial sharedInstance] updatePatch:localPatch.lastServerPatch hidden:@(YES) name:@"n" description:@"d" patchData:nil extraMetaData:nil callback:^(BOOL succeeded, Patch *patch, NSError *error) {
         XCTAssertFalse(succeeded);
         [expectation fulfill];

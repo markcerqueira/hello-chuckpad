@@ -149,14 +149,9 @@
     
     ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
     
-    XCTestExpectation *expectation = [self expectationWithDescription:@"deletePatch timed out"];
-    [[ChuckPadSocial sharedInstance] deletePatch:localPatch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertTrue(succeeded);
-        [expectation fulfill];
-    }];
-    [self waitForExpectations];
+    [self deletePatch:localPatch];
     
-    expectation = [self expectationWithDescription:@"getPatchVersions timed out"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getPatchVersions timed out"];
     [[ChuckPadSocial sharedInstance] getPatchVersions:localPatch.lastServerPatch callback:^(BOOL succeeded, NSArray *versions, NSError *error) {
         XCTAssertFalse(succeeded);
         [expectation fulfill];
@@ -169,14 +164,9 @@
     
     ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
     
-    XCTestExpectation *expectation = [self expectationWithDescription:@"deletePatch timed out"];
-    [[ChuckPadSocial sharedInstance] deletePatch:localPatch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
-        XCTAssertTrue(succeeded);
-        [expectation fulfill];
-    }];
-    [self waitForExpectations];
+    [self deletePatch:localPatch];
     
-    expectation = [self expectationWithDescription:@"getPatchVersions timed out"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getPatchVersions timed out"];
     [[ChuckPadSocial sharedInstance] downloadPatchVersion:localPatch.lastServerPatch version:0 callback:^(NSData *resourceData, NSError *error) {
         XCTAssertTrue(resourceData == nil);
         XCTAssertTrue(error != nil);

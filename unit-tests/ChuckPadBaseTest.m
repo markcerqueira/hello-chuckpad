@@ -240,6 +240,20 @@ static int sDirectoryIndex = 0;
     }
 }
 
+- (void)deletePatch:(ChuckPadPatch *)localPatch {
+    XCTAssertTrue(localPatch != nil);
+    XCTAssertTrue(localPatch.lastServerPatch != nil);
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"deletePatch timed out"];
+    [[ChuckPadSocial sharedInstance] deletePatch:localPatch.lastServerPatch callback:^(BOOL succeeded, NSError *error) {
+        XCTAssertTrue(succeeded);
+        XCTAssertTrue(error == nil);
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+}
+
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user {
     XCTAssertTrue(patch != nil);
     XCTAssertTrue(localPatch != nil);

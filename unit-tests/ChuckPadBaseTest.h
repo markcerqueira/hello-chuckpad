@@ -128,6 +128,9 @@ extern NSInteger const MAX_SIZE_FOR_DATA;
 // which the service forbids.
 - (void)uploadMultiplePatches:(NSInteger)patchCount;
 
+// Given a ChuckPadPatch with an associated lastServerPatch, this calls the deletePatch API.
+- (void)deletePatch:(ChuckPadPatch *)localPatch;
+
 // Given a Patch from the service, a local ChuckPadPatch that was used to create it, and the user the patch belongs to,
 // this method asserts state is consistent all parameters.
 - (void)assertPatch:(Patch *)patch localPatch:(ChuckPadPatch *)localPatch isConsistentForUser:(ChuckPadUser *)user;
