@@ -30,6 +30,7 @@
 		4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00571D46CFFE001FC755 /* FXKeychain.m */; };
 		4D4A00641D46CFFE001FC755 /* Patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00591D46CFFE001FC755 /* Patch.m */; };
 		4D4A00651D46CFFE001FC755 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A005B1D46CFFE001FC755 /* User.m */; };
+		4D57F71D1E19D69C00FB6188 /* ChuckPadServiceStressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D57F71C1E19D69C00FB6188 /* ChuckPadServiceStressTests.m */; };
 		4D7E739B1DF56AC000426739 /* chuck-samples-xl in Resources */ = {isa = PBXBuildFile; fileRef = 4D7E739A1DF56ABF00426739 /* chuck-samples-xl */; };
 		4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */; };
 		4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */; };
@@ -93,6 +94,7 @@
 		4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4D4AFFCD1D46CFCF001FC755 /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
 		4D4AFFCE1D46CFCF001FC755 /* pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineapple.png; sourceTree = "<group>"; };
+		4D57F71C1E19D69C00FB6188 /* ChuckPadServiceStressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceStressTests.m; sourceTree = "<group>"; };
 		4D7E739A1DF56ABF00426739 /* chuck-samples-xl */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "chuck-samples-xl"; sourceTree = "<group>"; };
 		4D80F58E1D481D82009E5346 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4D80F58F1D481D82009E5346 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */,
 				4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */,
 				4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */,
+				4D57F71C1E19D69C00FB6188 /* ChuckPadServiceStressTests.m */,
 				ADE6E9EB1E047DA100F58ABC /* ChuckPadServiceTests.m */,
 				4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */,
 				4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */,
@@ -380,6 +383,7 @@
 			files = (
 				4D433FD01E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m in Sources */,
 				4DBA9B701DEFF3B600D7CBF0 /* ChuckPadBaseTest.m in Sources */,
+				4D57F71D1E19D69C00FB6188 /* ChuckPadServiceStressTests.m in Sources */,
 				4DB1D5101D46E4D500C2F62E /* ChuckPadServicePatchTests.m in Sources */,
 				4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */,
 				4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */,
