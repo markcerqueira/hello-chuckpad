@@ -42,6 +42,9 @@
                <Test
                   Identifier = "ChuckPadBaseTest">
                </Test>
+               <Test
+                  Identifier = "ChuckPadSeedTests">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
