@@ -392,7 +392,7 @@
     [self callSecretStaticMethod:@"copyMemoryInfoToKeychain" class:@"ChuckPadKeychain"];
     
     // Try to upload a patch but this should fail because our auth token that we restored into the keychain is invalid.
-    [self generatePatchAndUpload:NO];
+    [self generatePatch:NO];
     
     [self callSecretStaticMethod:@"copyMemoryInfoToKeychain" class:@"ChuckPadKeychain"];
     

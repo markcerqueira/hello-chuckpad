@@ -51,7 +51,7 @@
         [self generateLocalUserAndCreate];
         
         for (int j = 0 ; j < NUMBER_PATCHES_RECENT_API; j++) {
-            ChuckPadPatch *patch = [self generatePatchAndUpload:YES];
+            ChuckPadPatch *patch = [self generatePatch:YES];
             [guidToTimesSeen setObject:@(0) forKey:patch.lastServerPatch.guid];
         }
         
@@ -85,7 +85,7 @@
     for (int j = 0 ; j < NUMBER_PATCHES_RECENT_API; j++) {
         BOOL uploadAsHidden = j % 2 == 0;
         
-        ChuckPadPatch *patch = [self generatePatch:uploadAsHidden andUpload:YES];
+        ChuckPadPatch *patch = [self generatePatch:uploadAsHidden successExpected:YES];
         
         if (uploadAsHidden) {
             [hiddenPatchesGUIDs addObject:patch.lastServerPatch.guid];
@@ -111,7 +111,7 @@
     NSMutableArray *uploadedPatchGUIDs = [[NSMutableArray alloc] init];
     
     for (int j = 0 ; j < NUMBER_PATCHES_RECENT_API; j++) {
-        ChuckPadPatch *patch = [self generatePatchAndUpload:YES];
+        ChuckPadPatch *patch = [self generatePatch:YES];
         
         // Always insert at the front of the array because we want the most recent at the front of the list.
         [uploadedPatchGUIDs insertObject:patch.lastServerPatch.guid atIndex:0];
@@ -133,7 +133,7 @@
 - (void)testGetMyPatches {
     ChuckPadUser *user = [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     user.totalPatches++;
     
     // Test get my patches API. This should return one patch for the new user we created and uploaded a patch for.
@@ -149,7 +149,7 @@
     [self waitForExpectations];
     
     for (int i = 0; i < 10; i++) {
-        [self generatePatchAndUpload:YES];
+        [self generatePatch:YES];
         user.totalPatches++;
     }
     
@@ -169,7 +169,7 @@
 - (void)testGetMyPatchesReturnsOnlyMyPatches {
     for (int i = 0; i < 5; i++) {
         [self generateLocalUserAndCreate];
-        ChuckPadPatch *patch = [self generatePatchAndUpload:YES];
+        ChuckPadPatch *patch = [self generatePatch:YES];
         
         XCTestExpectation *expectation = [self expectationWithDescription:@"getMyPatches timed out"];
         [[ChuckPadSocial sharedInstance] getMyPatches:^(NSArray *patchesArray, NSError *error) {
@@ -191,7 +191,7 @@
     
     NSMutableSet *patchGUIDsUploaded = [NSMutableSet new];
     for (int i = 0; i < patchesToUpload; i++) {
-        ChuckPadPatch * patch = [self generatePatchAndUpload:YES];
+        ChuckPadPatch * patch = [self generatePatch:YES];
         [patchGUIDsUploaded addObject:patch.lastServerPatch.guid];
     }
     

@@ -27,15 +27,15 @@
     
     // This should succeed because it's the first time we are using the random value.
     [self callSecretStaticMethod:@"overrideRandomValueForNextRequest:" class:@"ChuckPadSocial" argument:randomString];
-    [self generatePatchAndUpload:YES];
+    [self generatePatch:YES];
     
     // This should fail because we are re-using the random value we used in the above request.
     [self callSecretStaticMethod:@"overrideRandomValueForNextRequest:" class:@"ChuckPadSocial" argument:randomString];
-    [self generatePatchAndUpload:NO];
+    [self generatePatch:NO];
     
     // This should succeed because we are now using a newly generated random value. Note the random value override is cleared
     // after it is used so this will use a properly generated (and new) random value.
-    [self generatePatchAndUpload:YES];
+    [self generatePatch:YES];
     
     [self cleanUpFollowingTest];
 }
@@ -45,10 +45,10 @@
     
     // This should fail because we are setting an incorrect value for the digest.
     [self callSecretStaticMethod:@"overrideDigestValueForNextRequest:" class:@"ChuckPadSocial" argument:@"bad-digest-value-1"];
-    [self generatePatchAndUpload:NO];
+    [self generatePatch:NO];
     
     // Now we use a proper digest and this should succeed.
-    [self generatePatchAndUpload:YES];
+    [self generatePatch:YES];
     
     [self cleanUpFollowingTest];
 }

@@ -23,7 +23,7 @@
 - (void)testSinglePatchUpload {
     [self generateLocalUserAndCreate];
     
-    [self generatePatchAndUpload:YES];
+    [self generatePatch:YES];
     
     [self cleanUpFollowingTest];
 }
@@ -31,7 +31,7 @@
 - (void)testReportAbuse {
     ChuckPadUser *patchOwner = [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     patchOwner.totalPatches++;
     
     // A user cannot report their own patches so log out and create a new user
@@ -88,7 +88,7 @@
 - (void)testMultipleReportAbuse {
     ChuckPadUser *patchOwner = [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     
     NSMutableArray *reportingUsers = [NSMutableArray new];
     
@@ -133,7 +133,7 @@
 - (void)testReportAbuseOnDeletedPatch {
     [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *patch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *patch = [self generatePatch:YES];
     
     // Delete the patch we just uploaded
     [self deletePatch:patch];
@@ -155,7 +155,7 @@
 - (void)testReportAbuseOnOwnPatchNotAllowed {
     [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"reportAbuse timed out"];
     [[ChuckPadSocial sharedInstance] reportAbuse:localPatch.lastServerPatch isAbuse:YES callback:^(BOOL succeeded, NSError *error) {
@@ -313,7 +313,7 @@
 - (void)testUpdatePatchWithZeroLengthData {
     [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     
     localPatch.fileData = [[NSData alloc] init];
     
@@ -362,7 +362,7 @@
 - (void)testUpdatingDeletedPatch {
     [self generateLocalUserAndCreate];
 
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     
     [self deletePatch:localPatch];
     
@@ -378,7 +378,7 @@
 
 - (void)testParentPatch {
     ChuckPadUser *parent = [self generateLocalUserAndCreate];
-    ChuckPadPatch *parentPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *parentPatch = [self generatePatch:YES];
     
     [[ChuckPadSocial sharedInstance] localLogOut];
     

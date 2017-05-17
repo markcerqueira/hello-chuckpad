@@ -39,8 +39,8 @@ static int sDirectoryIndex = 0;
 // method the name of the patch will be the filename, it will have NO parent, and it will not be hidden.
 + (ChuckPadPatch *)generatePatch {
     NSString *chuckSamplesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
-    NSArray * dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:chuckSamplesPath error:nil];
-    NSString * filename = [dirContents objectAtIndex:sDirectoryIndex];
+    NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:chuckSamplesPath error:nil];
+    NSString *filename = [dirContents objectAtIndex:sDirectoryIndex];
     
     if (++sDirectoryIndex == [dirContents count]) {
         sDirectoryIndex = 0;
@@ -189,11 +189,11 @@ static int sDirectoryIndex = 0;
     [self waitForExpectations];
 }
 
-- (ChuckPadPatch *)generatePatchAndUpload:(BOOL)successExpected {
-    return [self generatePatch:NO andUpload:successExpected];
+- (ChuckPadPatch *)generatePatch:(BOOL)successExpected {
+    return [self generatePatch:NO successExpected:successExpected];
 }
 
-- (ChuckPadPatch *)generatePatch:(BOOL)hidden andUpload:(BOOL)successExpected {
+- (ChuckPadPatch *)generatePatch:(BOOL)hidden successExpected:(BOOL)successExpected {
     ChuckPadPatch *localPatch = [ChuckPadPatch generatePatch];
     localPatch.isHidden = hidden;
     
@@ -236,7 +236,7 @@ static int sDirectoryIndex = 0;
 - (void)uploadMultiplePatches:(NSInteger)patchCount {
     XCTAssertTrue(patchCount <= [ChuckPadPatch numberOfChuckFilesInSamplesDirectory]);
     for (int i = 0; i < patchCount; i++) {
-        [self generatePatchAndUpload:YES];
+        [self generatePatch:YES];
     }
 }
 

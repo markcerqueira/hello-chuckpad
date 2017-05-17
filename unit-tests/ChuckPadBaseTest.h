@@ -112,10 +112,10 @@ extern NSInteger const MAX_SIZE_FOR_DATA;
 - (ChuckPadPatch *)generatePatchAndUpload:(NSString *)filename successExpected:(BOOL)successExpected;
 
 // Generates a patch and calls the uploadPatch API. Cases expected to fail can pass NO for the BOOL parameter.
-- (ChuckPadPatch *)generatePatchAndUpload:(BOOL)successExpected;
+- (ChuckPadPatch *)generatePatch:(BOOL)successExpected;
 
 // Generates a patch and calls the uploadPatch API with the visibility requested.
-- (ChuckPadPatch *)generatePatch:(BOOL)hidden andUpload:(BOOL)successExpected;
+- (ChuckPadPatch *)generatePatch:(BOOL)hidden successExpected:(BOOL)successExpected;
 
 // Uploads the given local ChuckPadPatch object.
 - (void)uploadPatch:(ChuckPadPatch *)localPatch successExpected:(BOOL)successExpected;

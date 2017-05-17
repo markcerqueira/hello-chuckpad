@@ -23,7 +23,7 @@
 - (void)testGetVersions {
     [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     __block PatchResource *patchResource = nil;
     __block NSData *patchVersionData = nil;
     __block NSData *patchResourceData = nil;
@@ -65,7 +65,7 @@
 - (void)testGetVersionsForUpdatedPatch {
     [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     
     for (int i = 0; i < 5; i++) {
         ChuckPadPatch *newPatch = [ChuckPadPatch generatePatch];
@@ -126,7 +126,7 @@
 - (void)testGetVersionResourceBeyondLatestVersion {
     [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"downloadPatchVersion timed out"];
     [[ChuckPadSocial sharedInstance] downloadPatchVersion:localPatch.lastServerPatch version:0 callback:^(NSData *resourceData, NSError *error) {
@@ -147,7 +147,7 @@
 - (void)testGetVersionsOnDeletedPatch {
     [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     
     [self deletePatch:localPatch];
     
@@ -162,7 +162,7 @@
 - (void)testDownloadVersionOnDeletedPatch {
     [self generateLocalUserAndCreate];
     
-    ChuckPadPatch *localPatch = [self generatePatchAndUpload:YES];
+    ChuckPadPatch *localPatch = [self generatePatch:YES];
     
     [self deletePatch:localPatch];
     
