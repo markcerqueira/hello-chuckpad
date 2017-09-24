@@ -48,6 +48,8 @@ extern NSInteger const MAX_SIZE_FOR_DATA;
 @property(nonatomic, retain) NSString *parentGUID;
 @property(nonatomic, assign) BOOL hasParent;
 @property(nonatomic, assign) BOOL isHidden;
+@property(nonatomic, retain) NSNumber *latitude;
+@property(nonatomic, retain) NSNumber *longitude;
 @property(nonatomic, assign) NSInteger abuseReportCount;
 @property(nonatomic, assign) NSInteger downloadCount;
 
@@ -79,6 +81,15 @@ extern NSInteger const MAX_SIZE_FOR_DATA;
 
 // Loads data from filename (in the specified folder) and attaches it to the extraData property.
 - (void)addExtraData:(NSString *)folder filename:(NSString *)filename;
+
+@end
+
+@interface LocationPoint : NSObject
+
+@property(nonatomic, retain) NSNumber *latitude;
+@property(nonatomic, retain) NSNumber *longitude;
+
++ (LocationPoint *)generateRandomLocationPoint;
 
 @end
 

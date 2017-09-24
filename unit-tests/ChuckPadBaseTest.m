@@ -67,6 +67,11 @@ static int sDirectoryIndex = 0;
     patch.downloadCount = 0;
     patch.abuseReportCount = 0;
     
+    LocationPoint *randomLocation = [LocationPoint generateRandomLocationPoint];
+    
+    patch.latitude = randomLocation.latitude;
+    patch.longitude = randomLocation.longitude;
+    
     return patch;
 }
 
@@ -91,6 +96,19 @@ static int sDirectoryIndex = 0;
 - (void)setNewNameAndDescription {
     self.name = [[NSUUID UUID] UUIDString];
     self.patchDescription = [[NSUUID UUID] UUIDString];
+}
+
+@end
+
+@implementation LocationPoint
+
+#define ARC4RANDOM_MAX 0x100000000
+
++ (LocationPoint *)generateRandomLocationPoint {
+    LocationPoint *locationPoint = [LocationPoint new];
+    locationPoint.latitude = [NSNumber numberWithFloat:(((float)arc4random() / ARC4RANDOM_MAX) * (90 - -90) + -90)];
+    locationPoint.longitude = [NSNumber numberWithFloat:(((float)arc4random() / ARC4RANDOM_MAX) * (180 - -180) + -180)];
+    return locationPoint;
 }
 
 @end
