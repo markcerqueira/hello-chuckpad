@@ -39,6 +39,7 @@
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
 		4DBA9B701DEFF3B600D7CBF0 /* ChuckPadBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */; };
 		4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC087161D493ED9005F9F70 /* PatchCache.m */; };
+		4DD9EDBD1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */; };
 		4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */; };
 		A10610491ECC3296008A659D /* ChuckPadSeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A10610481ECC3296008A659D /* ChuckPadSeedTests.m */; };
 		AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */; };
@@ -112,6 +113,7 @@
 		4DBA9B711DEFF3CB00D7CBF0 /* ChuckPadBaseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadBaseTest.h; sourceTree = "<group>"; };
 		4DC087151D493ED9005F9F70 /* PatchCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchCache.h; sourceTree = "<group>"; };
 		4DC087161D493ED9005F9F70 /* PatchCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchCache.m; sourceTree = "<group>"; };
+		4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchWorldTests.m; sourceTree = "<group>"; };
 		4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSupportTests.m; sourceTree = "<group>"; };
 		A10610481ECC3296008A659D /* ChuckPadSeedTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSeedTests.m; sourceTree = "<group>"; };
 		AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */,
 				4D5DACD41F74DD5E00692B07 /* ChuckPadServicePatchLocationTests.m */,
 				4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */,
+				4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */,
 				4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */,
 				A10610481ECC3296008A659D /* ChuckPadSeedTests.m */,
 				4D57F71C1E19D69C00FB6188 /* ChuckPadServiceStressTests.m */,
@@ -396,6 +399,7 @@
 				4D5DACD51F74DD5E00692B07 /* ChuckPadServicePatchLocationTests.m in Sources */,
 				ADE6E9EC1E047DA100F58ABC /* ChuckPadServiceTests.m in Sources */,
 				A10610491ECC3296008A659D /* ChuckPadSeedTests.m in Sources */,
+				4DD9EDBD1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m in Sources */,
 				4D422B101E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
