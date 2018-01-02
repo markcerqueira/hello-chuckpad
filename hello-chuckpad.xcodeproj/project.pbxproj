@@ -42,6 +42,9 @@
 		4DD9EDBD1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */; };
 		4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */; };
 		A10610491ECC3296008A659D /* ChuckPadSeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A10610481ECC3296008A659D /* ChuckPadSeedTests.m */; };
+		A19D14C11FFC4D2700FAFBC9 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; };
+		A19D14C21FFC4D4400FAFBC9 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; };
+		A19D14C31FFC4D4400FAFBC9 /* PubNub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */; };
 		ADE6E9EC1E047DA100F58ABC /* ChuckPadServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE6E9EB1E047DA100F58ABC /* ChuckPadServiceTests.m */; };
 /* End PBXBuildFile section */
@@ -55,6 +58,20 @@
 			remoteInfo = "chuckpad-social-ios-test";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A19D14C41FFC4D4400FAFBC9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A19D14C31FFC4D4400FAFBC9 /* PubNub.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadKeychain.m; sourceTree = "<group>"; };
@@ -116,6 +133,7 @@
 		4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchWorldTests.m; sourceTree = "<group>"; };
 		4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSupportTests.m; sourceTree = "<group>"; };
 		A10610481ECC3296008A659D /* ChuckPadSeedTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSeedTests.m; sourceTree = "<group>"; };
+		A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
 		AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ADD984B11DA898F50060B761 /* hello-chuckpad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "hello-chuckpad.entitlements"; path = "../hello-chuckpad.entitlements"; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* hello-chuckpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-chuckpad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,7 +152,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A19D14C11FFC4D2700FAFBC9 /* PubNub.framework in Frameworks */,
 				4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */,
+				A19D14C21FFC4D4400FAFBC9 /* PubNub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +176,7 @@
 				4D4A00451D46CFFE001FC755 /* AFNetworking */,
 				4D4A00551D46CFFE001FC755 /* FXKeychain */,
 				4D817D5B1D4F1A67001FE6F2 /* NSDate+Helper */,
+				A19D14BF1FFC4D2700FAFBC9 /* PubNub */,
 				4D4A00531D46CFFE001FC755 /* ChuckPadSocial.h */,
 				4D4A00541D46CFFE001FC755 /* ChuckPadSocial.m */,
 				247AEA5395F87953FB3F1A7A /* ChuckPadKeychain.h */,
@@ -262,6 +283,14 @@
 			path = "unit-tests";
 			sourceTree = "<group>";
 		};
+		A19D14BF1FFC4D2700FAFBC9 /* PubNub */ = {
+			isa = PBXGroup;
+			children = (
+				A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */,
+			);
+			path = PubNub;
+			sourceTree = "<group>";
+		};
 		ADE456501D13704A00F046DD = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +339,7 @@
 				ADE456551D13704A00F046DD /* Sources */,
 				ADE456561D13704A00F046DD /* Frameworks */,
 				ADE456571D13704A00F046DD /* Resources */,
+				A19D14C41FFC4D4400FAFBC9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -557,6 +587,10 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "hello-chuckpad/hello-chuckpad.entitlements";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/hello-chuckpad/chuckpad-social-ios/PubNub",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -571,6 +605,10 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "hello-chuckpad/hello-chuckpad.entitlements";
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/hello-chuckpad/chuckpad-social-ios/PubNub",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
