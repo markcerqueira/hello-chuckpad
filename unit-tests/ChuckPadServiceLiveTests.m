@@ -45,7 +45,7 @@
     // Create a new live session and hold onto it so we can close it later
     __block LiveSession *myLiveSession = nil;
     XCTestExpectation *expectation = [self expectationWithDescription:@"createLiveSession timed out"];
-    [[ChuckPadSocial sharedInstance] createLiveSession:@"LiveSession710" callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+    [[ChuckPadSocial sharedInstance] createLiveSession:@"SessionAboutToClose" callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
         XCTAssertTrue(succeeded);
         XCTAssertTrue([liveSession isSessionOpen]);
         XCTAssertFalse([liveSession isSessionClosed]);
@@ -67,4 +67,78 @@
     [self waitForExpectations];
 }
 
+- (void)testGetRecentlyCreatedOpenLiveSessions {
+    [self generateLocalUserAndCreate];
+
+    // Create a bunch of live sessions
+    __block NSMutableSet<NSString *> *liveSessionGUIDSet = [NSMutableSet new];
+    for (int i = 0; i < 20; i++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"createLiveSession timed out"];
+        [[ChuckPadSocial sharedInstance] createLiveSession:[self randomStringWithLength:20] callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+            [liveSessionGUIDSet addObject:liveSession.sessionGUID];
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+    
+    // Ensure that getRecentlyCreatedOpenLiveSessions all those sessions
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getRecentlyCreatedOpenLiveSessions timed out"];
+    [[ChuckPadSocial sharedInstance] getRecentlyCreatedOpenLiveSessions:^(BOOL succeeded, NSArray<LiveSession *> *liveSessionsArray, NSError *error) {
+        for (LiveSession *liveSession in liveSessionsArray) {
+            XCTAssertTrue([liveSession isSessionOpen]);
+            XCTAssertTrue([liveSessionGUIDSet containsObject:liveSession.sessionGUID]);
+            [liveSessionGUIDSet removeObject:liveSession.sessionGUID];
+        }
+        
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+}
+
+- (void)testGetRecentlyCreatedOpenLiveSessionsReturnsOnlyOpenSessions {
+    [self generateLocalUserAndCreate];
+    
+    // Create a bunch of live sessions and close half of them
+    __block NSMutableSet<LiveSession *> *sessionsToKeepOpen = [NSMutableSet new];
+    __block NSMutableSet<LiveSession *> *sessionsToClose = [NSMutableSet new];
+    __block NSMutableSet<NSString *> *sessionGUIDsToClose = [NSMutableSet new];
+    for (int i = 0; i < 20; i++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"createLiveSession timed out"];
+        [[ChuckPadSocial sharedInstance] createLiveSession:[self randomStringWithLength:20] callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+            if (i % 2 == 0) {
+                [sessionsToClose addObject:liveSession];
+                [sessionGUIDsToClose addObject:liveSession.sessionGUID];
+            } else {
+                [sessionsToKeepOpen addObject:liveSession];
+            }
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+    
+    for (LiveSession *sessionToClose in sessionsToClose) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"closeLiveSession timed out"];
+        [[ChuckPadSocial sharedInstance] closeLiveSession:sessionToClose callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+            XCTAssertTrue(succeeded);
+            
+            [expectation fulfill];
+        }];
+        [self waitForExpectations];
+    }
+    
+    // Ensure that getRecentlyCreatedOpenLiveSessions returns only open sessions
+    XCTestExpectation *expectation = [self expectationWithDescription:@"getRecentlyCreatedOpenLiveSessions timed out"];
+    [[ChuckPadSocial sharedInstance] getRecentlyCreatedOpenLiveSessions:^(BOOL succeeded, NSArray<LiveSession *> *liveSessionsArray, NSError *error) {
+        for (LiveSession *liveSession in liveSessionsArray) {
+            XCTAssertTrue([liveSession isSessionOpen]);
+            XCTAssertFalse([sessionGUIDsToClose containsObject:liveSession.sessionGUID]);
+        }
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+    
+}
+
+    
 @end
