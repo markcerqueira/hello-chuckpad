@@ -9,18 +9,13 @@
 /* Begin PBXBuildFile section */
 		247AE4399FC5BB10FEF710CA /* ChuckPadKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */; };
 		4D064EDA20020816006AEE14 /* elephant.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D064ED920020815006AEE14 /* elephant.png */; };
-		4D064EDC20020823006AEE14 /* LiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D064EDB20020823006AEE14 /* LiveViewController.xib */; };
 		4D422B101E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */; };
 		4D422B131E17AE8600B2F7B2 /* PatchResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D422B121E17AE8600B2F7B2 /* PatchResource.m */; };
 		4D433FD01E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */; };
 		4D4A00091D46CFD0001FC755 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */; };
 		4D4A000A1D46CFD0001FC755 /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCD1D46CFCF001FC755 /* face.png */; };
 		4D4A000B1D46CFD0001FC755 /* pineapple.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCE1D46CFCF001FC755 /* pineapple.png */; };
-		4D4A003D1D46CFD0001FC755 /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00021D46CFD0001FC755 /* PatchListViewController.m */; };
-		4D4A003E1D46CFD0001FC755 /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A00031D46CFD0001FC755 /* PatchListViewController.xib */; };
 		4D4A003F1D46CFD0001FC755 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00051D46CFD0001FC755 /* main.m */; };
-		4D4A00401D46CFD0001FC755 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00071D46CFD0001FC755 /* UserViewController.m */; };
-		4D4A00411D46CFD0001FC755 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A00081D46CFD0001FC755 /* UserViewController.xib */; };
 		4D4A00431D46CFDB001FC755 /* chuck-samples in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A00421D46CFDB001FC755 /* chuck-samples */; };
 		4D4A005C1D46CFFE001FC755 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00471D46CFFE001FC755 /* AFHTTPSessionManager.m */; };
 		4D4A005D1D46CFFE001FC755 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A004A1D46CFFE001FC755 /* AFNetworkReachabilityManager.m */; };
@@ -39,6 +34,12 @@
 		4D5E537F1FFDF13500300762 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; };
 		4D7E739B1DF56AC000426739 /* chuck-samples-xl in Resources */ = {isa = PBXBuildFile; fileRef = 4D7E739A1DF56ABF00426739 /* chuck-samples-xl */; };
 		4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */; };
+		4D930A9020022C8700716952 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A8820022C8700716952 /* LiveViewController.swift */; };
+		4D930A9120022C8700716952 /* LiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D930A8920022C8700716952 /* LiveViewController.xib */; };
+		4D930A9220022C8700716952 /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A8B20022C8700716952 /* PatchListViewController.m */; };
+		4D930A9320022C8700716952 /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D930A8C20022C8700716952 /* PatchListViewController.xib */; };
+		4D930A9420022C8700716952 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A8E20022C8700716952 /* UserViewController.m */; };
+		4D930A9520022C8700716952 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D930A8F20022C8700716952 /* UserViewController.xib */; };
 		4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */; };
 		4DB1D5101D46E4D500C2F62E /* ChuckPadServicePatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
@@ -46,7 +47,6 @@
 		4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC087161D493ED9005F9F70 /* PatchCache.m */; };
 		4DD9EDBD1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */; };
 		4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */; };
-		4DF80665200205EA006664BB /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF80664200205EA006664BB /* LiveViewController.swift */; };
 		A10610491ECC3296008A659D /* ChuckPadSeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A10610481ECC3296008A659D /* ChuckPadSeedTests.m */; };
 		A19D14C11FFC4D2700FAFBC9 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; };
 		A19D14C31FFC4D4400FAFBC9 /* PubNub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -82,19 +82,12 @@
 		247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadKeychain.m; sourceTree = "<group>"; };
 		247AEA5395F87953FB3F1A7A /* ChuckPadKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadKeychain.h; sourceTree = "<group>"; };
 		4D064ED920020815006AEE14 /* elephant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elephant.png; sourceTree = "<group>"; };
-		4D064EDB20020823006AEE14 /* LiveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveViewController.xib; sourceTree = "<group>"; };
 		4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchVersioningTests.m; sourceTree = "<group>"; };
 		4D422B111E17AE8600B2F7B2 /* PatchResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchResource.h; sourceTree = "<group>"; };
 		4D422B121E17AE8600B2F7B2 /* PatchResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchResource.m; sourceTree = "<group>"; };
 		4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchFetchTests.m; sourceTree = "<group>"; };
 		4D4A00001D46CFCF001FC755 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D4A00011D46CFD0001FC755 /* PatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
-		4D4A00021D46CFD0001FC755 /* PatchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchListViewController.m; sourceTree = "<group>"; };
-		4D4A00031D46CFD0001FC755 /* PatchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatchListViewController.xib; sourceTree = "<group>"; };
 		4D4A00051D46CFD0001FC755 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4D4A00061D46CFD0001FC755 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
-		4D4A00071D46CFD0001FC755 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
-		4D4A00081D46CFD0001FC755 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		4D4A00421D46CFDB001FC755 /* chuck-samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "chuck-samples"; sourceTree = "<group>"; };
 		4D4A00461D46CFFE001FC755 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		4D4A00471D46CFFE001FC755 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
@@ -131,6 +124,14 @@
 		4D80F58F1D481D82009E5346 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4D817D5D1D4F1A67001FE6F2 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		4D930A8820022C8700716952 /* LiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
+		4D930A8920022C8700716952 /* LiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveViewController.xib; sourceTree = "<group>"; };
+		4D930A8A20022C8700716952 /* PatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
+		4D930A8B20022C8700716952 /* PatchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchListViewController.m; sourceTree = "<group>"; };
+		4D930A8C20022C8700716952 /* PatchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatchListViewController.xib; sourceTree = "<group>"; };
+		4D930A8D20022C8700716952 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		4D930A8E20022C8700716952 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		4D930A8F20022C8700716952 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceUserTests.m; sourceTree = "<group>"; };
 		4DB1D5051D46E4BC00C2F62E /* unit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "unit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,7 +144,6 @@
 		4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchWorldTests.m; sourceTree = "<group>"; };
 		4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSupportTests.m; sourceTree = "<group>"; };
 		4DF80663200205EA006664BB /* HelloChuckPad-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HelloChuckPad-Bridging-Header.h"; sourceTree = "<group>"; };
-		4DF80664200205EA006664BB /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		A10610481ECC3296008A659D /* ChuckPadSeedTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSeedTests.m; sourceTree = "<group>"; };
 		A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
 		AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -244,17 +244,10 @@
 				4D7E739A1DF56ABF00426739 /* chuck-samples-xl */,
 				4D4A00441D46CFFE001FC755 /* chuckpad-social-ios */,
 				4D4A00041D46CFD0001FC755 /* Supporting Files */,
+				4D930A8720022C8700716952 /* View Controllers */,
 				4D4AFFCA1D46CFCF001FC755 /* AppDelegate.h */,
 				4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */,
 				4D4A00001D46CFCF001FC755 /* Info.plist */,
-				4DF80664200205EA006664BB /* LiveViewController.swift */,
-				4D064EDB20020823006AEE14 /* LiveViewController.xib */,
-				4D4A00011D46CFD0001FC755 /* PatchListViewController.h */,
-				4D4A00021D46CFD0001FC755 /* PatchListViewController.m */,
-				4D4A00031D46CFD0001FC755 /* PatchListViewController.xib */,
-				4D4A00061D46CFD0001FC755 /* UserViewController.h */,
-				4D4A00071D46CFD0001FC755 /* UserViewController.m */,
-				4D4A00081D46CFD0001FC755 /* UserViewController.xib */,
 				4D80F58E1D481D82009E5346 /* LICENSE */,
 				4D80F58F1D481D82009E5346 /* README.md */,
 				4DF80663200205EA006664BB /* HelloChuckPad-Bridging-Header.h */,
@@ -279,6 +272,21 @@
 				4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */,
 			);
 			path = "NSDate+Helper";
+			sourceTree = "<group>";
+		};
+		4D930A8720022C8700716952 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4D930A8820022C8700716952 /* LiveViewController.swift */,
+				4D930A8920022C8700716952 /* LiveViewController.xib */,
+				4D930A8A20022C8700716952 /* PatchListViewController.h */,
+				4D930A8B20022C8700716952 /* PatchListViewController.m */,
+				4D930A8C20022C8700716952 /* PatchListViewController.xib */,
+				4D930A8D20022C8700716952 /* UserViewController.h */,
+				4D930A8E20022C8700716952 /* UserViewController.m */,
+				4D930A8F20022C8700716952 /* UserViewController.xib */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		4DB1D5061D46E4BC00C2F62E /* unit-tests */ = {
@@ -423,14 +431,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D930A9320022C8700716952 /* PatchListViewController.xib in Resources */,
+				4D930A9520022C8700716952 /* UserViewController.xib in Resources */,
 				4D064EDA20020816006AEE14 /* elephant.png in Resources */,
-				4D064EDC20020823006AEE14 /* LiveViewController.xib in Resources */,
-				4D4A003E1D46CFD0001FC755 /* PatchListViewController.xib in Resources */,
-				4D4A00411D46CFD0001FC755 /* UserViewController.xib in Resources */,
 				4D4A000B1D46CFD0001FC755 /* pineapple.png in Resources */,
 				4D4A000A1D46CFD0001FC755 /* face.png in Resources */,
 				4D4A00431D46CFDB001FC755 /* chuck-samples in Resources */,
 				AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */,
+				4D930A9120022C8700716952 /* LiveViewController.xib in Resources */,
 				4D7E739B1DF56AC000426739 /* chuck-samples-xl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,7 +472,6 @@
 				4D4A005E1D46CFFE001FC755 /* AFSecurityPolicy.m in Sources */,
 				4D4A00601D46CFFE001FC755 /* AFURLResponseSerialization.m in Sources */,
 				4D4A00091D46CFD0001FC755 /* AppDelegate.m in Sources */,
-				4D4A00401D46CFD0001FC755 /* UserViewController.m in Sources */,
 				4D4A005C1D46CFFE001FC755 /* AFHTTPSessionManager.m in Sources */,
 				4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */,
 				4D4A00611D46CFFE001FC755 /* AFURLSessionManager.m in Sources */,
@@ -475,10 +482,11 @@
 				4D4A005D1D46CFFE001FC755 /* AFNetworkReachabilityManager.m in Sources */,
 				4D5E537B1FFDEBF500300762 /* LiveSession.m in Sources */,
 				4D422B131E17AE8600B2F7B2 /* PatchResource.m in Sources */,
-				4DF80665200205EA006664BB /* LiveViewController.swift in Sources */,
 				4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */,
-				4D4A003D1D46CFD0001FC755 /* PatchListViewController.m in Sources */,
+				4D930A9420022C8700716952 /* UserViewController.m in Sources */,
+				4D930A9020022C8700716952 /* LiveViewController.swift in Sources */,
 				4D4A00641D46CFFE001FC755 /* Patch.m in Sources */,
+				4D930A9220022C8700716952 /* PatchListViewController.m in Sources */,
 				4D4A005F1D46CFFE001FC755 /* AFURLRequestSerialization.m in Sources */,
 				247AE4399FC5BB10FEF710CA /* ChuckPadKeychain.m in Sources */,
 			);
