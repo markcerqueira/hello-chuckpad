@@ -11,6 +11,8 @@
 #import "UserViewController.h"
 #import "ChuckPadSocial.h"
 
+#import "HelloChuckPad-Swift.h"
+
 @interface AppDelegate ()
 
 @end
@@ -29,13 +31,16 @@
     [ChuckPadSocial bootstrapForPatchType:MiniAudicle];
     
     PatchListViewController *patchListViewController = [[PatchListViewController alloc] initWithNibName:@"PatchListViewController" bundle:nil];
-    patchListViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patches" image:[self imagePreparedForTabBarItem:@"pineapple.png"] tag:1];
+    patchListViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patches" image:[self imagePreparedForTabBarItem:@"pineapple.png"] tag:0];
 
     UserViewController *userViewController = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
     userViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"User" image:[self imagePreparedForTabBarItem:@"face.png"] tag:1];
+    
+    LiveViewController *liveViewController = [[LiveViewController alloc] initWithNibName:@"LiveViewController" bundle:nil];
+    liveViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Live" image:[self imagePreparedForTabBarItem:@"elephant.png"] tag:2];
 
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:patchListViewController, userViewController, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:patchListViewController, userViewController, liveViewController, nil];
 
     self.window = [UIWindow new];
 
