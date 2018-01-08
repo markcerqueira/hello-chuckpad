@@ -40,6 +40,7 @@
 		4D930A9320022C8700716952 /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D930A8C20022C8700716952 /* PatchListViewController.xib */; };
 		4D930A9420022C8700716952 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A8E20022C8700716952 /* UserViewController.m */; };
 		4D930A9520022C8700716952 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D930A8F20022C8700716952 /* UserViewController.xib */; };
+		4D930A972002BF9D00716952 /* ChuckPadLive.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A962002BF9D00716952 /* ChuckPadLive.m */; };
 		4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */; };
 		4DB1D5101D46E4D500C2F62E /* ChuckPadServicePatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
@@ -132,6 +133,8 @@
 		4D930A8D20022C8700716952 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		4D930A8E20022C8700716952 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		4D930A8F20022C8700716952 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
+		4D930A962002BF9D00716952 /* ChuckPadLive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChuckPadLive.m; sourceTree = "<group>"; };
+		4D930A992002BFAF00716952 /* ChuckPadLive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChuckPadLive.h; sourceTree = "<group>"; };
 		4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceUserTests.m; sourceTree = "<group>"; };
 		4DB1D5051D46E4BC00C2F62E /* unit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "unit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -189,6 +192,8 @@
 				4D4A00551D46CFFE001FC755 /* FXKeychain */,
 				4D817D5B1D4F1A67001FE6F2 /* NSDate+Helper */,
 				A19D14BF1FFC4D2700FAFBC9 /* PubNub */,
+				4D930A992002BFAF00716952 /* ChuckPadLive.h */,
+				4D930A962002BF9D00716952 /* ChuckPadLive.m */,
 				4D4A00531D46CFFE001FC755 /* ChuckPadSocial.h */,
 				4D4A00541D46CFFE001FC755 /* ChuckPadSocial.m */,
 				247AEA5395F87953FB3F1A7A /* ChuckPadKeychain.h */,
@@ -474,6 +479,7 @@
 				4D4A00091D46CFD0001FC755 /* AppDelegate.m in Sources */,
 				4D4A005C1D46CFFE001FC755 /* AFHTTPSessionManager.m in Sources */,
 				4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */,
+				4D930A972002BF9D00716952 /* ChuckPadLive.m in Sources */,
 				4D4A00611D46CFFE001FC755 /* AFURLSessionManager.m in Sources */,
 				4D4A00621D46CFFE001FC755 /* ChuckPadSocial.m in Sources */,
 				4D4A00651D46CFFE001FC755 /* User.m in Sources */,
