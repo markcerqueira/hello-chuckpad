@@ -26,7 +26,7 @@
     
     // Create a new live session
     XCTestExpectation *expectation = [self expectationWithDescription:@"createLiveSession timed out"];
-    [[ChuckPadSocial sharedInstance] createLiveSession:@"My First Live Session" callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+    [[ChuckPadSocial sharedInstance] createLiveSession:@"My First Live Session" sessionData:nil callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
         XCTAssertTrue(succeeded);
         XCTAssertTrue([liveSession isSessionOpen]);
         XCTAssertFalse([liveSession isSessionClosed]);
@@ -39,13 +39,29 @@
     [self waitForExpectations];
 }
 
+- (void)testCreateLiveSessionWithData {
+    [self generateLocalUserAndCreate];
+    
+    NSString *folderPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"chuck-samples"];
+    NSData *data = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", folderPath, @"adc.ck"]];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"createLiveSession timed out"];
+    [[ChuckPadSocial sharedInstance] createLiveSession:@"My First Data" sessionData:data callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+        XCTAssertTrue(succeeded);
+        XCTAssertTrue([liveSession.sessionData isEqualToData:data]);
+
+        [expectation fulfill];
+    }];
+    [self waitForExpectations];
+}
+
 - (void)testCloseLiveSession {
     [self generateLocalUserAndCreate];
     
     // Create a new live session and hold onto it so we can close it later
     __block LiveSession *myLiveSession = nil;
     XCTestExpectation *expectation = [self expectationWithDescription:@"createLiveSession timed out"];
-    [[ChuckPadSocial sharedInstance] createLiveSession:@"SessionAboutToClose" callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+    [[ChuckPadSocial sharedInstance] createLiveSession:@"SessionAboutToClose" sessionData:nil callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
         XCTAssertTrue(succeeded);
         XCTAssertTrue([liveSession isSessionOpen]);
         XCTAssertFalse([liveSession isSessionClosed]);
@@ -74,7 +90,7 @@
     __block NSMutableSet<NSString *> *liveSessionGUIDSet = [NSMutableSet new];
     for (int i = 0; i < 20; i++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"createLiveSession timed out"];
-        [[ChuckPadSocial sharedInstance] createLiveSession:[self randomStringWithLength:20] callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+        [[ChuckPadSocial sharedInstance] createLiveSession:[self randomStringWithLength:20] sessionData:nil  callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
             [liveSessionGUIDSet addObject:liveSession.sessionGUID];
             [expectation fulfill];
         }];
@@ -104,7 +120,7 @@
     __block NSMutableSet<NSString *> *sessionGUIDsToClose = [NSMutableSet new];
     for (int i = 0; i < 20; i++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"createLiveSession timed out"];
-        [[ChuckPadSocial sharedInstance] createLiveSession:[self randomStringWithLength:20] callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
+        [[ChuckPadSocial sharedInstance] createLiveSession:[self randomStringWithLength:20] sessionData:nil callback:^(BOOL succeeded, LiveSession *liveSession, NSError *error) {
             if (i % 2 == 0) {
                 [sessionsToClose addObject:liveSession];
                 [sessionGUIDsToClose addObject:liveSession.sessionGUID];

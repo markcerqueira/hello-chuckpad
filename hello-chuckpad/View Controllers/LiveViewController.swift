@@ -14,7 +14,7 @@ final class LiveViewController: UIViewController, ChuckPadLiveDelegate {
     @IBOutlet private var publishMessageButton: UIButton!
     
     private var liveSession: LiveSession?
-    private var firstChuckPadLive: ChuckPadLive?
+    private var chuckPadLive: ChuckPadLive = ChuckPadLive.sharedInstance()
 
     // MARK: - View Controller
     
@@ -29,7 +29,7 @@ final class LiveViewController: UIViewController, ChuckPadLiveDelegate {
     // MARK: - IBActions
     
     @IBAction func createNewLiveSessionPressed() {
-        ChuckPadSocial.sharedInstance().createLiveSession("My Live Session") { [weak self] (succeeded, liveSession, error) in
+        ChuckPadSocial.sharedInstance().createLiveSession("My Live Session", sessionData: nil) { [weak self] (succeeded, liveSession, error) in
             self?.liveSession = liveSession
             self?.sessionGUIDLabel.text = liveSession?.sessionGUID
             
@@ -42,24 +42,24 @@ final class LiveViewController: UIViewController, ChuckPadLiveDelegate {
         let demoLiveSession = LiveSession()
         demoLiveSession.sessionGUID = "demo_channel"
         
-        let chuckPadLive = ChuckPadLive.initWith(demoLiveSession, chuckPadLiveDelegate: self)
+        chuckPadLive.connect(liveSession, chuckPadLiveDelegate: self)
         
         sessionGUIDLabel.text = "\(demoLiveSession.sessionGUID!) - Connected"
             
         publishMessageButton.isHidden = false
-        
-        if firstChuckPadLive == nil {
-            firstChuckPadLive = chuckPadLive
-        }
     }
     
     @IBAction func publishMessagePressed() {
-        firstChuckPadLive?.publish("Hello Spencer!")
+        chuckPadLive.publish("Hello Spencer2!")
     }
     
     // MARK: - ChuckPadLiveDelegate
     
     func chuckPadLive(_ chuckPadLive: ChuckPadLive!, didReceive liveStatus: LiveStatus) {
         print("didReceive - \(liveStatus)")
+    }
+    
+    func chuckPadLive(_ chuckPadLive: ChuckPadLive!, didReceiveData data: Any) {
+        print("didReceive - \(data)")
     }
 }
