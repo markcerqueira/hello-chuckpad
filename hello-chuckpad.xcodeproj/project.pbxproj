@@ -8,17 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		247AE4399FC5BB10FEF710CA /* ChuckPadKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */; };
+		4D064EDA20020816006AEE14 /* elephant.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D064ED920020815006AEE14 /* elephant.png */; };
 		4D422B101E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */; };
 		4D422B131E17AE8600B2F7B2 /* PatchResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D422B121E17AE8600B2F7B2 /* PatchResource.m */; };
 		4D433FD01E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */; };
 		4D4A00091D46CFD0001FC755 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */; };
 		4D4A000A1D46CFD0001FC755 /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCD1D46CFCF001FC755 /* face.png */; };
 		4D4A000B1D46CFD0001FC755 /* pineapple.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4AFFCE1D46CFCF001FC755 /* pineapple.png */; };
-		4D4A003D1D46CFD0001FC755 /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00021D46CFD0001FC755 /* PatchListViewController.m */; };
-		4D4A003E1D46CFD0001FC755 /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A00031D46CFD0001FC755 /* PatchListViewController.xib */; };
 		4D4A003F1D46CFD0001FC755 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00051D46CFD0001FC755 /* main.m */; };
-		4D4A00401D46CFD0001FC755 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00071D46CFD0001FC755 /* UserViewController.m */; };
-		4D4A00411D46CFD0001FC755 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A00081D46CFD0001FC755 /* UserViewController.xib */; };
 		4D4A00431D46CFDB001FC755 /* chuck-samples in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A00421D46CFDB001FC755 /* chuck-samples */; };
 		4D4A005C1D46CFFE001FC755 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A00471D46CFFE001FC755 /* AFHTTPSessionManager.m */; };
 		4D4A005D1D46CFFE001FC755 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A004A1D46CFFE001FC755 /* AFNetworkReachabilityManager.m */; };
@@ -32,8 +29,18 @@
 		4D4A00651D46CFFE001FC755 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A005B1D46CFFE001FC755 /* User.m */; };
 		4D57F71D1E19D69C00FB6188 /* ChuckPadServiceStressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D57F71C1E19D69C00FB6188 /* ChuckPadServiceStressTests.m */; };
 		4D5DACD51F74DD5E00692B07 /* ChuckPadServicePatchLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5DACD41F74DD5E00692B07 /* ChuckPadServicePatchLocationTests.m */; };
+		4D5E537B1FFDEBF500300762 /* LiveSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E537A1FFDEBF500300762 /* LiveSession.m */; };
+		4D5E537E1FFDF03E00300762 /* ChuckPadServiceLiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E537D1FFDF03E00300762 /* ChuckPadServiceLiveTests.m */; };
+		4D5E537F1FFDF13500300762 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; };
 		4D7E739B1DF56AC000426739 /* chuck-samples-xl in Resources */ = {isa = PBXBuildFile; fileRef = 4D7E739A1DF56ABF00426739 /* chuck-samples-xl */; };
 		4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */; };
+		4D930A9020022C8700716952 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A8820022C8700716952 /* LiveViewController.swift */; };
+		4D930A9120022C8700716952 /* LiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D930A8920022C8700716952 /* LiveViewController.xib */; };
+		4D930A9220022C8700716952 /* PatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A8B20022C8700716952 /* PatchListViewController.m */; };
+		4D930A9320022C8700716952 /* PatchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D930A8C20022C8700716952 /* PatchListViewController.xib */; };
+		4D930A9420022C8700716952 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A8E20022C8700716952 /* UserViewController.m */; };
+		4D930A9520022C8700716952 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D930A8F20022C8700716952 /* UserViewController.xib */; };
+		4D930A972002BF9D00716952 /* ChuckPadLive.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D930A962002BF9D00716952 /* ChuckPadLive.m */; };
 		4DA3806E1DF681E900B74289 /* ChuckPadServiceUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */; };
 		4DB1D5101D46E4D500C2F62E /* ChuckPadServicePatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1D50F1D46E4D500C2F62E /* ChuckPadServicePatchTests.m */; };
 		4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBA017D1D1A410D00292EB9 /* Security.framework */; };
@@ -42,6 +49,8 @@
 		4DD9EDBD1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */; };
 		4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */; };
 		A10610491ECC3296008A659D /* ChuckPadSeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A10610481ECC3296008A659D /* ChuckPadSeedTests.m */; };
+		A19D14C11FFC4D2700FAFBC9 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; };
+		A19D14C31FFC4D4400FAFBC9 /* PubNub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */; };
 		ADE6E9EC1E047DA100F58ABC /* ChuckPadServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE6E9EB1E047DA100F58ABC /* ChuckPadServiceTests.m */; };
 /* End PBXBuildFile section */
@@ -56,21 +65,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A19D14C41FFC4D4400FAFBC9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A19D14C31FFC4D4400FAFBC9 /* PubNub.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadKeychain.m; sourceTree = "<group>"; };
 		247AEA5395F87953FB3F1A7A /* ChuckPadKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChuckPadKeychain.h; sourceTree = "<group>"; };
+		4D064ED920020815006AEE14 /* elephant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elephant.png; sourceTree = "<group>"; };
 		4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchVersioningTests.m; sourceTree = "<group>"; };
 		4D422B111E17AE8600B2F7B2 /* PatchResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchResource.h; sourceTree = "<group>"; };
 		4D422B121E17AE8600B2F7B2 /* PatchResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchResource.m; sourceTree = "<group>"; };
 		4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchFetchTests.m; sourceTree = "<group>"; };
 		4D4A00001D46CFCF001FC755 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D4A00011D46CFD0001FC755 /* PatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
-		4D4A00021D46CFD0001FC755 /* PatchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchListViewController.m; sourceTree = "<group>"; };
-		4D4A00031D46CFD0001FC755 /* PatchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatchListViewController.xib; sourceTree = "<group>"; };
 		4D4A00051D46CFD0001FC755 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4D4A00061D46CFD0001FC755 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
-		4D4A00071D46CFD0001FC755 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
-		4D4A00081D46CFD0001FC755 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		4D4A00421D46CFDB001FC755 /* chuck-samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "chuck-samples"; sourceTree = "<group>"; };
 		4D4A00461D46CFFE001FC755 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		4D4A00471D46CFFE001FC755 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
@@ -99,11 +117,24 @@
 		4D4AFFCE1D46CFCF001FC755 /* pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineapple.png; sourceTree = "<group>"; };
 		4D57F71C1E19D69C00FB6188 /* ChuckPadServiceStressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceStressTests.m; sourceTree = "<group>"; };
 		4D5DACD41F74DD5E00692B07 /* ChuckPadServicePatchLocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchLocationTests.m; sourceTree = "<group>"; };
+		4D5E537A1FFDEBF500300762 /* LiveSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveSession.m; sourceTree = "<group>"; };
+		4D5E537C1FFDEC0F00300762 /* LiveSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveSession.h; sourceTree = "<group>"; };
+		4D5E537D1FFDF03E00300762 /* ChuckPadServiceLiveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceLiveTests.m; sourceTree = "<group>"; };
 		4D7E739A1DF56ABF00426739 /* chuck-samples-xl */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "chuck-samples-xl"; sourceTree = "<group>"; };
 		4D80F58E1D481D82009E5346 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4D80F58F1D481D82009E5346 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4D817D5D1D4F1A67001FE6F2 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		4D817D5E1D4F1A67001FE6F2 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		4D930A8820022C8700716952 /* LiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
+		4D930A8920022C8700716952 /* LiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveViewController.xib; sourceTree = "<group>"; };
+		4D930A8A20022C8700716952 /* PatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchListViewController.h; sourceTree = "<group>"; };
+		4D930A8B20022C8700716952 /* PatchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchListViewController.m; sourceTree = "<group>"; };
+		4D930A8C20022C8700716952 /* PatchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatchListViewController.xib; sourceTree = "<group>"; };
+		4D930A8D20022C8700716952 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		4D930A8E20022C8700716952 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		4D930A8F20022C8700716952 /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
+		4D930A962002BF9D00716952 /* ChuckPadLive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChuckPadLive.m; sourceTree = "<group>"; };
+		4D930A992002BFAF00716952 /* ChuckPadLive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChuckPadLive.h; sourceTree = "<group>"; };
 		4DA3806D1DF681E900B74289 /* ChuckPadServiceUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServiceUserTests.m; sourceTree = "<group>"; };
 		4DB1D5051D46E4BC00C2F62E /* unit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "unit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DB1D5091D46E4BC00C2F62E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,7 +146,9 @@
 		4DC087161D493ED9005F9F70 /* PatchCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchCache.m; sourceTree = "<group>"; };
 		4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChuckPadServicePatchWorldTests.m; sourceTree = "<group>"; };
 		4DDAE2701D50642B003194EC /* ChuckPadSupportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSupportTests.m; sourceTree = "<group>"; };
+		4DF80663200205EA006664BB /* HelloChuckPad-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HelloChuckPad-Bridging-Header.h"; sourceTree = "<group>"; };
 		A10610481ECC3296008A659D /* ChuckPadSeedTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChuckPadSeedTests.m; sourceTree = "<group>"; };
+		A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
 		AD8EB8F31DCAFB9900953B6B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ADD984B11DA898F50060B761 /* hello-chuckpad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "hello-chuckpad.entitlements"; path = "../hello-chuckpad.entitlements"; sourceTree = "<group>"; };
 		ADE456591D13704A00F046DD /* hello-chuckpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-chuckpad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D5E537F1FFDF13500300762 /* PubNub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A19D14C11FFC4D2700FAFBC9 /* PubNub.framework in Frameworks */,
 				4DBA017E1D1A410D00292EB9 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,10 +191,15 @@
 				4D4A00451D46CFFE001FC755 /* AFNetworking */,
 				4D4A00551D46CFFE001FC755 /* FXKeychain */,
 				4D817D5B1D4F1A67001FE6F2 /* NSDate+Helper */,
+				A19D14BF1FFC4D2700FAFBC9 /* PubNub */,
+				4D930A992002BFAF00716952 /* ChuckPadLive.h */,
+				4D930A962002BF9D00716952 /* ChuckPadLive.m */,
 				4D4A00531D46CFFE001FC755 /* ChuckPadSocial.h */,
 				4D4A00541D46CFFE001FC755 /* ChuckPadSocial.m */,
 				247AEA5395F87953FB3F1A7A /* ChuckPadKeychain.h */,
 				247AE2D5DB75B1B24B0FFC6D /* ChuckPadKeychain.m */,
+				4D5E537C1FFDEC0F00300762 /* LiveSession.h */,
+				4D5E537A1FFDEBF500300762 /* LiveSession.m */,
 				4D4A00581D46CFFE001FC755 /* Patch.h */,
 				4D4A00591D46CFFE001FC755 /* Patch.m */,
 				4DC087151D493ED9005F9F70 /* PatchCache.h */,
@@ -209,17 +249,13 @@
 				4D7E739A1DF56ABF00426739 /* chuck-samples-xl */,
 				4D4A00441D46CFFE001FC755 /* chuckpad-social-ios */,
 				4D4A00041D46CFD0001FC755 /* Supporting Files */,
+				4D930A8720022C8700716952 /* View Controllers */,
 				4D4AFFCA1D46CFCF001FC755 /* AppDelegate.h */,
 				4D4AFFCB1D46CFCF001FC755 /* AppDelegate.m */,
 				4D4A00001D46CFCF001FC755 /* Info.plist */,
-				4D4A00011D46CFD0001FC755 /* PatchListViewController.h */,
-				4D4A00021D46CFD0001FC755 /* PatchListViewController.m */,
-				4D4A00031D46CFD0001FC755 /* PatchListViewController.xib */,
-				4D4A00061D46CFD0001FC755 /* UserViewController.h */,
-				4D4A00071D46CFD0001FC755 /* UserViewController.m */,
-				4D4A00081D46CFD0001FC755 /* UserViewController.xib */,
 				4D80F58E1D481D82009E5346 /* LICENSE */,
 				4D80F58F1D481D82009E5346 /* README.md */,
+				4DF80663200205EA006664BB /* HelloChuckPad-Bridging-Header.h */,
 			);
 			path = "hello-chuckpad";
 			sourceTree = "<group>";
@@ -227,6 +263,7 @@
 		4D4AFFCC1D46CFCF001FC755 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				4D064ED920020815006AEE14 /* elephant.png */,
 				4D4AFFCD1D46CFCF001FC755 /* face.png */,
 				4D4AFFCE1D46CFCF001FC755 /* pineapple.png */,
 			);
@@ -242,12 +279,28 @@
 			path = "NSDate+Helper";
 			sourceTree = "<group>";
 		};
+		4D930A8720022C8700716952 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4D930A8820022C8700716952 /* LiveViewController.swift */,
+				4D930A8920022C8700716952 /* LiveViewController.xib */,
+				4D930A8A20022C8700716952 /* PatchListViewController.h */,
+				4D930A8B20022C8700716952 /* PatchListViewController.m */,
+				4D930A8C20022C8700716952 /* PatchListViewController.xib */,
+				4D930A8D20022C8700716952 /* UserViewController.h */,
+				4D930A8E20022C8700716952 /* UserViewController.m */,
+				4D930A8F20022C8700716952 /* UserViewController.xib */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		4DB1D5061D46E4BC00C2F62E /* unit-tests */ = {
 			isa = PBXGroup;
 			children = (
 				4DBA9B711DEFF3CB00D7CBF0 /* ChuckPadBaseTest.h */,
 				4DBA9B6F1DEFF3B600D7CBF0 /* ChuckPadBaseTest.m */,
 				4D433FCF1E1756590064BFB6 /* ChuckPadServicePatchFetchTests.m */,
+				4D5E537D1FFDF03E00300762 /* ChuckPadServiceLiveTests.m */,
 				4D5DACD41F74DD5E00692B07 /* ChuckPadServicePatchLocationTests.m */,
 				4D422B0F1E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m */,
 				4DD9EDBC1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m */,
@@ -260,6 +313,14 @@
 				4DB1D5091D46E4BC00C2F62E /* Info.plist */,
 			);
 			path = "unit-tests";
+			sourceTree = "<group>";
+		};
+		A19D14BF1FFC4D2700FAFBC9 /* PubNub */ = {
+			isa = PBXGroup;
+			children = (
+				A19D14C01FFC4D2700FAFBC9 /* PubNub.framework */,
+			);
+			path = PubNub;
 			sourceTree = "<group>";
 		};
 		ADE456501D13704A00F046DD = {
@@ -310,6 +371,7 @@
 				ADE456551D13704A00F046DD /* Sources */,
 				ADE456561D13704A00F046DD /* Frameworks */,
 				ADE456571D13704A00F046DD /* Resources */,
+				A19D14C41FFC4D4400FAFBC9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -326,7 +388,7 @@
 		ADE456511D13704A00F046DD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0920;
 				TargetAttributes = {
 					4DB1D5041D46E4BC00C2F62E = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -334,6 +396,8 @@
 					};
 					ADE456581D13704A00F046DD = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -373,12 +437,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D4A003E1D46CFD0001FC755 /* PatchListViewController.xib in Resources */,
-				4D4A00411D46CFD0001FC755 /* UserViewController.xib in Resources */,
+				4D930A9320022C8700716952 /* PatchListViewController.xib in Resources */,
+				4D930A9520022C8700716952 /* UserViewController.xib in Resources */,
+				4D064EDA20020816006AEE14 /* elephant.png in Resources */,
 				4D4A000B1D46CFD0001FC755 /* pineapple.png in Resources */,
 				4D4A000A1D46CFD0001FC755 /* face.png in Resources */,
 				4D4A00431D46CFDB001FC755 /* chuck-samples in Resources */,
 				AD8EB8F41DCAFB9900953B6B /* Default-568h@2x.png in Resources */,
+				4D930A9120022C8700716952 /* LiveViewController.xib in Resources */,
 				4D7E739B1DF56AC000426739 /* chuck-samples-xl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +464,7 @@
 				4DDAE2711D50642B003194EC /* ChuckPadSupportTests.m in Sources */,
 				4D5DACD51F74DD5E00692B07 /* ChuckPadServicePatchLocationTests.m in Sources */,
 				ADE6E9EC1E047DA100F58ABC /* ChuckPadServiceTests.m in Sources */,
+				4D5E537E1FFDF03E00300762 /* ChuckPadServiceLiveTests.m in Sources */,
 				A10610491ECC3296008A659D /* ChuckPadSeedTests.m in Sources */,
 				4DD9EDBD1F8190260004FD8D /* ChuckPadServicePatchWorldTests.m in Sources */,
 				4D422B101E179DEC00B2F7B2 /* ChuckPadServicePatchVersioningTests.m in Sources */,
@@ -411,19 +478,22 @@
 				4D4A005E1D46CFFE001FC755 /* AFSecurityPolicy.m in Sources */,
 				4D4A00601D46CFFE001FC755 /* AFURLResponseSerialization.m in Sources */,
 				4D4A00091D46CFD0001FC755 /* AppDelegate.m in Sources */,
-				4D4A00401D46CFD0001FC755 /* UserViewController.m in Sources */,
 				4D4A005C1D46CFFE001FC755 /* AFHTTPSessionManager.m in Sources */,
 				4D4A00631D46CFFE001FC755 /* FXKeychain.m in Sources */,
+				4D930A972002BF9D00716952 /* ChuckPadLive.m in Sources */,
 				4D4A00611D46CFFE001FC755 /* AFURLSessionManager.m in Sources */,
 				4D4A00621D46CFFE001FC755 /* ChuckPadSocial.m in Sources */,
 				4D4A00651D46CFFE001FC755 /* User.m in Sources */,
 				4D817D601D4F1A67001FE6F2 /* NSDate+Helper.m in Sources */,
 				4D4A003F1D46CFD0001FC755 /* main.m in Sources */,
 				4D4A005D1D46CFFE001FC755 /* AFNetworkReachabilityManager.m in Sources */,
+				4D5E537B1FFDEBF500300762 /* LiveSession.m in Sources */,
 				4D422B131E17AE8600B2F7B2 /* PatchResource.m in Sources */,
 				4DC087171D493ED9005F9F70 /* PatchCache.m in Sources */,
-				4D4A003D1D46CFD0001FC755 /* PatchListViewController.m in Sources */,
+				4D930A9420022C8700716952 /* UserViewController.m in Sources */,
+				4D930A9020022C8700716952 /* LiveViewController.swift in Sources */,
 				4D4A00641D46CFFE001FC755 /* Patch.m in Sources */,
+				4D930A9220022C8700716952 /* PatchListViewController.m in Sources */,
 				4D4A005F1D46CFFE001FC755 /* AFURLRequestSerialization.m in Sources */,
 				247AE4399FC5BB10FEF710CA /* ChuckPadKeychain.m in Sources */,
 			);
@@ -443,7 +513,12 @@
 		4DB1D50C1D46E4BC00C2F62E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/hello-chuckpad/chuckpad-social-ios/PubNub",
+				);
 				INFOPLIST_FILE = "unit-tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "gg.unit-tests";
@@ -455,7 +530,12 @@
 		4DB1D50D1D46E4BC00C2F62E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/hello-chuckpad/chuckpad-social-ios/PubNub",
+				);
 				INFOPLIST_FILE = "unit-tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "gg.unit-tests";
@@ -473,14 +553,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -507,6 +593,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "HelloChuckPad-Swift.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -520,14 +608,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -547,6 +641,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "HelloChuckPad-Swift.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -555,13 +651,24 @@
 		ADE456711D13704A00F046DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "hello-chuckpad/hello-chuckpad.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/hello-chuckpad/chuckpad-social-ios/PubNub",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios-test";
 				PRODUCT_NAME = "hello-chuckpad";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "hello-chuckpad/HelloChuckPad-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -569,13 +676,23 @@
 		ADE456721D13704A00F046DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "hello-chuckpad/hello-chuckpad.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/hello-chuckpad/chuckpad-social-ios/PubNub",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/hello-chuckpad/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chuckpad-social-ios-test";
 				PRODUCT_NAME = "hello-chuckpad";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "hello-chuckpad/HelloChuckPad-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
